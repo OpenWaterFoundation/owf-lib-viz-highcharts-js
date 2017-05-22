@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Example</title>
+    <!-- Javascript -->
+    <script src="javascript/highstock.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="container" style="width:100%; height:400px;"></div>
+    <script>
+    var myChart = Highcharts.chart('container', {
+        chart: {    // generate line chart
+            type: 'line'
+        },
+        title: {    // Title of chart
+            text: 'Simple Chart Example'
+        },
+        legend: {   // show legend
+            enabled: true
+        },
+        navigator: {    // update chart based on zoom
+            adapToUpdatedData: true,
+            enabled: true
+        },
+        tooltip: {
+            split: true // allow tooltip to show all series data when hovering over data point
+        },
+        xAxis: {
+            title: {    // X-AXIS Label
+                text: 'X-AXIS'
+            }
+        },
+        yAxis: {
+            title: {    // Y-AXIS Label
+                text: 'Y-AXIS'
+            }
+        },
+        series: [{      // data points
+            name: 'Series 1',
+            data: [90,40,50,120,80,90,110]
+        }, {
+            name: 'Series 2',
+            data: [120,160,200,null,130,220,160]
+        },{
+            name: 'Series 3',
+            data: [300,240,290,230,300,320,330]
+        }]
+    });
+</script>
+</body>
+</html>
