@@ -1,124 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Page Title</title>
+    <title>TS Tool Small Data Example</title>
     <!-- Javascript -->
-    <script src="javascript/highstock.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="javascript/highstock.src.js"></script>
+    <script src="javascript/data.js"></script>
+    <script>
+    $(function(){
+        $.get('data-files/small-precip-data.csv', function(csv) {
+            Highcharts.stockChart('container', {
+                chart: {
+                    zoomType: 'x',
+                },
+                title: {
+                    text: 'Precipitation'
+                },
+                xAxis: {
+                    type: 'datetime',
+                    title: {
+                        text: 'Date'
+                    },
+                    gridLineWidth: 1
+                },
+                yAxis: {
+                    title: {
+                        text: 'inches'
+                    }
+                },
+                tooltip: {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>',
+                    valueDecimals: 2,
+                    split: true
+                },
+                legend: {
+                    enabled: true
+                },
+                data: {
+                    csv: csv
+                },
+                navigator: {
+                    adapToUpdatedData: true,
+                    enabled: true
+                },
+            });
+        });
+    });
+</script>
 </head>
 <body>
-<div id="container" style="width:100%; height:400px;"></div>
-<script>
-
-    var options = {
-        chart: {
-        	renderTo: 'container',
-        	zoomType: 'x',
-        	// resetZoomButton: {	// only works if there is not a navigator 
-         //    position: {
-         //        align: 'right', // by default
-         //        verticalAlign: 'top', // by default
-         //    }
-        // }
-        },
-        // rangeSelector: {
-        //     allButtonsEnabled: true,
-        //     buttons: [{
-        //         type: 'month',
-        //         count: 3,
-        //         text: 'Day',
-        //         dataGrouping: {
-        //             forced: true,
-        //             units: [['day', [1]]]
-        //         }
-        //     }, {
-        //         type: 'year',
-        //         count: 1,
-        //         text: 'Week',
-        //         dataGrouping: {
-        //             forced: true,
-        //             units: [['week', [1]]]
-        //         }
-        //     }, {
-        //         type: 'all',
-        //         text: 'Month',
-        //         dataGrouping: {
-        //             forced: true,
-        //             units: [['month', [1]]]
-        //         }
-        //     }],
-        //     buttonTheme: {
-        //         width: 60
-        //     },
-        //     selected: 2
-        // },
-        title: {
-            text: 'Precipitation'
-        },
-        xAxis: {
-            type: 'datetime',
-            categories: []
-        },
-        yAxis: {
-            title: {
-                text: 'inches'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>',
-            valueDecimals: 2,
-            split: true
-        },
-        legend: {
-            enabled: true
-        },
-        navigator: {
-        	adapToUpdatedData: true,
-        	enabled: true
-        },
-        series: []
-    };
-    $.get('data-files/small-precip-data.csv', function(data) {
-    // Split the lines
-    var lines = data.split('\n');
-    
-    // Iterate over the lines and add categories or series
-    $.each(lines, function(lineNo, line) {
-        var items = line.split(',');
-        
-        // header line containes categories
-        if (lineNo == 0) {
-            $.each(items, function(itemNo, item) {
-                if (itemNo > 0) options.xAxis.categories.push(item);
-            });
-        }
-        
-        // the rest of the lines contain data with their name in the first 
-        // position
-        else {
-            var series = {
-                data: [],
-                turboThreshold: 0,
-                pointStart: Date.UTC(2000,0,1),
-                pointInterval: 24 * 3600 * 1000 //one day
-            };
-            $.each(items, function(itemNo, item) {
-                if (itemNo == 0) {
-                    series.name = item;
-                } else {
-                    series.data.push(parseFloat(item));
-                }
-            });
-            
-            options.series.push(series);
-    
-        }
-        
-    });
-    
-    // Create the chart
-    var chart = new Highcharts.stockChart(options);
-});
-</script>
+    <div id="container"></div>
 </body>
 </html>
