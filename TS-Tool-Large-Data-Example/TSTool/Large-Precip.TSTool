@@ -19,4 +19,4 @@ TimeSeriesToTable(TSList=AllMatchingTSID,TSID="*",TableID="PrecipitationStations
 FormatTableDateTime(TableID="PrecipitationStations",InputColumn="Date",DateTimeFormat="%s",OutputColumn="Date Seconds")
 
 # Write Table To Delimited File
-WriteTableToDelimitedFile(TableID="PrecipitationStations",OutputFile="C:\Users\intern3\Highcharts-JS\git-repos\owf-lib-viz-highcharts-js\TS-Tool-Large-Data-Example\data-files\Test.csv",WriteHeaderComments=False,AlwaysQuoteStrings=False)
+WriteTableToDelimitedFile(TableID="PrecipitationStations",OutputFile="../data-files\Test.csv",WriteHeaderComments=False,AlwaysQuoteStrings=False)
