@@ -12,7 +12,7 @@ A standard development folder structure is recommended. The website development 
 > cd Highchart-JS
 > mkdir git-repos
 > cd git-repos
-> git clone (URL)
+> git clone https://github.com/OpenWaterFoundation/owf-lib-viz-highcharts-js
 ``` 
 The repository contains multiple folders that include time series examples using different sets of data.
 ## Additional Documentation
