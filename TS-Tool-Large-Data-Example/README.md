@@ -23,3 +23,4 @@ See also:
 * [Highchart API Reference](http://api.highcharts.com/highcharts)
 * [Highstock API Reference](http://api.highcharts.com/highstock/)
 * [Highmaps API Reference](http://api.highcharts.com/highmaps/)
+* [TSTool](http://openwaterfoundation.org/software-tools/tstool)
