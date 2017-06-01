@@ -30,7 +30,17 @@ See also:
 |1/02/2000   |0.5   |1.73   |0.2   |precipitation amount   |
 |1/03/2000   |0.26   |0.84   |0.64   |precipitation amount   |
 
-** **Note** the data below each station is the amount of precipitation that occured that day. 
+** **Note** the data below each station is the amount of precipitation that occured that day.
+
+## NOTES
+
+* Requires small amount of code to implement 
+* Provides examples and documentation
+* Open Source
+* Free for non-profit and personal use
+* Has a good release history
+* Actively developed
+* Handles large datasets extremely well
 
 ## What is a Timeseries Graph
 
