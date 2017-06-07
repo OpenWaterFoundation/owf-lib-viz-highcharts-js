@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Example</title>
+    <!-- Javascript -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="container" style="width:100%; height:400px;"></div>
+    <script>
+    Highcharts.chart('container', {
+
+  chart: {
+    type: 'heatmap',
+  },
+
+  xAxis: {
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  },
+
+  yAxis: {
+    type: 'datetime',
+    labels: {
+        format: '{value:%Y}'
+    }
+   },
+   colorAxis: {
+        stops: [
+            [0, '#3060cf'],
+            [0.5, '#fffbbc'],
+            [0.9, '#c4463a'],
+            [1, '#c4463a']
+        ],
+        labels: {
+            format: '{value}℃'
+        }
+    },
+
+    legend: {
+        align: 'right',
+        layout: 'vertical',
+        margin: 0,
+        verticalAlign: 'top',
+        y: 25,
+        symbolHeight: 280
+    },
+
+  series: [{
+    name: 'Sales per employee',
+    borderWidth: 1,
+    data: [
+      [0, Date.UTC(2016,0), 10],
+      [1, Date.UTC(2015,0), 20],
+      [2, Date.UTC(2015,0), 19],
+      [3, Date.UTC(2014,0), 8],
+      [4, Date.UTC(2013,0), 24],
+      [5, Date.UTC(2012,0), 67],
+      [6, Date.UTC(2012,0), 67],
+      [7, Date.UTC(2012,0), 67],
+      [8, Date.UTC(2012,0), 67],
+      [9, Date.UTC(2012,0), 67],
+      [10, Date.UTC(2012,0), 67],
+      [11, Date.UTC(2012,0), 67],
+
+
+    ],
+    dataLabels: {
+      enabled: true,
+      color: '#000000'
+    }
+  }]
+
+});
+
+
+</script>
+</body>
+</html>

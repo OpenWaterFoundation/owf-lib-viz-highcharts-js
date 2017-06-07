@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Example</title>
+    <!-- Javascript -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+<div id="container" style="width:100%; height:400px;"></div>
+<script>
+  Highcharts.chart('container', {
+
+    chart: {
+      type: 'heatmap',
+    },
+
+    title: {
+      text: 'Dry Periods by River Basin'
+    },
+
+    xAxis: {
+      categories: ['Jan','Feb','Mar','Apr','May']
+    },
+
+    yAxis: {
+      categories: ['Upper South Platte River Basin','Lower South Platte River Basin','Upper Arkansas River Basin','Lower Arkansas River Basin','Rio Grande Basin','San Miguel-Dolores-San Juan', 'Gunnison-Uncompahgre','Mainstream Colorado River Basin','Yampa-White River Basins'],
+      reversed: true,
+      minPadding: 0,
+      maxPadding: 0,
+     },
+
+     colorAxis: {
+          stops: [
+              [0, '#3060cf'],
+              [0.5, '#fffbbc'],
+              [0.9, '#c4463a'],
+              [1, '#c4463a']
+          ],
+          labels: {
+              format: '{value} in'
+          }
+      },
+
+      legend: {
+          align: 'right',
+          layout: 'vertical',
+          margin: 0,
+          verticalAlign: 'top',
+          y: 25,
+          symbolHeight: 280
+      },
+
+    series: [{
+      name: 'Sales per employee',
+      borderWidth: 1,
+      data: [
+          [0,0,1.5],
+          [0,1,2.5],
+          [0,2,0.5],
+          [0,3,3.5],
+          [0,4,4.5],
+          [0,5,5.5],
+          [0,6,6.5],
+          [0,7,7.5],
+          [0,8,8.5],
+          [1,8,1.5],
+          [1,7,2.5],
+          [1,6,0.5],
+          [1,5,3.5],
+          [1,4,4.5],
+          [1,3,5.5],
+          [1,2,6.5],
+          [1,1,7.5],
+          [1,0,8.5],
+      ],
+    }]
+  });
+</script>
+
+</body>
+</html>
