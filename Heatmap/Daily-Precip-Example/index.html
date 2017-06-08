@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Monthly Precipitation Streamflow Example</title>
+  <title>Daily Precipitation Streamflow Example</title>
   <!-- Javascript -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="http://code.highcharts.com/highcharts.js"></script>
@@ -10,52 +10,58 @@
 </head>
 
 <body>
+
 <div id="container" style="width:100%; height:400px;"></div>
 <script>
   $.get("mock-data.csv",function(data) {
-    // Array containing list of years (YYYY)
-    var years = new Array();
-    
+    // Array containing list of dates (0-31)
+    var dates = new Array();
+
     var lines = data.split('\n'),
       series = {
         turboThreshold: 0,
-        data: [],
-        borderWidth: 0,
+        //colsize: 1000 * 3600 * 24 * 365,
+        data: []
       };
     
-      // Iterate over the lines and add categories or series
-      $.each(lines, function(lineNo, line) {  
-        if (lineNo > 0) 
+    // Iterate over the lines and add categories or series
+    $.each(lines, function(lineNo, line) {
+      if(lineNo > 0) 
+      {
+        var items = line.split(',');
+        var date = items[1].split('/');
+        if(dates.length == 0)
+        {
+          dates.push(date[1]);
+        }
+        else
+        {
+          if(!dates.includes(date[1]))
+          {
+            dates.push(date[1]);
+          }
+        }              
+      }   
+    });
+
+    $.each(lines, function(lineNo, line) {
+      if(lineNo > 0)
+      {
+        for(var index = 0; index < dates.length; index++)
         {
           var items = line.split(',');
-          if(years.length == 0)
+              
+          var date = items[1].split('/');
+          
+          if(date[1] == dates[index])
           {
-            years.push(items[1]);
-          }
-          else
-          {
-                if(!years.includes(items[1]))
-                {
-                  years.push(items[1]);
-                }
-              }              
-          }   
-      });
-    
-      $.each(lines, function(lineNo, line) {
-        if(lineNo > 0)
-        {
-          for(var index = 0; index < years.length; index++)
-          {
-            var items = line.split(',');   
-            if(items[1] == years[index])
-            {
               series.data.push([parseFloat(items[0]),index,parseFloat(items[2])]);
-            }
           }
         }
-      });
-    $('#container').highcharts({
+        
+      }
+    });
+  $('#container').highcharts({
 
     chart: {
       type: 'heatmap'
@@ -68,8 +74,9 @@
           [0.9, '#c4463a'],
           [1, '#c4463a']
       ],
-      endOnTick: false,
-      startOnTick: false
+      labels: {
+          format: '{value} in'
+      }
     },
     
     legend: {
@@ -81,28 +88,27 @@
           symbolHeight: 280
       },
 
-    title: {
-      text: 'Monthly Precipitation-Streamflow'
-    },
-
     tooltip: {
-      formatter: function()
-      {
+      formatter: function(){
         return '<b>' + this.series.xAxis.categories[this.point.x] + ' ' + this.series.yAxis.categories[this.point.y] + '</b><br>' + this.point.value + ' inches';
       }
     },
 
+    title: {
+      text: 'Daily Precipitation-Streamflow'
+    },
+
     yAxis: {
-      categories: years,
+      categories: dates,
       title: {
-        text: 'Year'
+        text: 'Day'
       }
     },
 
     xAxis: {
       categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'],
       title: {
-        text: 'Month'
+        text: 'Month',
       }
      },
     series: [series]
