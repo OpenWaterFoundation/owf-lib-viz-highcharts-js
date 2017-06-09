@@ -34,7 +34,10 @@ See also:
 
 ## Data Format Heatmap
 |X   |Y   |Value   |
-|:-:|---|---|---|
+|:-:|---|---|
+|0   |0   |5   |   |
+|1/1/2017   |0   |5   |   |
+|0   |1/1/2017   |5   |   |
 
 ** **Note** X or Y values can be of type 'datetime' (A valid date of the calendar EX: 017-01-01).
 
