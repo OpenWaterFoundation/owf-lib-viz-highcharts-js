@@ -32,6 +32,12 @@ See also:
 
 ** **Note** the data below each station is the amount of precipitation that occured that day.
 
+## Data Format Heatmap
+|X   |Y   |Value   |
+|:-:|---|---|---|
+
+** **Note** X or Y values can be of type 'datetime' (A valid date of the calendar EX: 017-01-01).
+
 ## NOTES
 
 * Requires small amount of code to implement 
@@ -41,14 +47,3 @@ See also:
 * Has a good release history
 * Actively developed
 * Handles large datasets extremely well
-
-## What is a Timeseries Graph
-
-Timeseries, also known as Line Graphs, are used to display quantitative value over a continuous interval or time span. It is most frequently used to show trends and relationships (when grouped with other lines). Line Graphs also help to give a "big picture" over an interval, to see how it has developed over that period.
-
-Line Graphs are drawn by first plotting data points on a Cartesian coordinate grid, then connecting a line between these points. Typically, the y-axis has a quantitative value, while the x-axis has either a category or sequenced scale. Negative values can be displayed below the x-axis.
-
-For more information refer to the links below:
-
-* [Timeseries Graph](http://www.datavizcatalogue.com/methods/line_graph.html)
-* [Timeseries Documenation](https://developers.google.com/chart/interactive/docs/gallery/linechart)
