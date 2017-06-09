@@ -3,17 +3,19 @@
 <head>
   <title>Daily Precipitation Streamflow Example</title>
   <!-- Javascript -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="javascript/highcharts.js"></script>
   <script src="javascript/heatmap.js"></script>
   <script src="javascript/exporting.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 </head>
 
 <body>
 
 <div id="container" style="width:100%; height:400px;"></div>
 <script>
-  $.get("data-files/mock-data.csv",function(data) {
+  var min = 0;
+  var max = 0;
+  $.get("data-files/small-precip-data.csv",function(data) {
     // Array containing list of dates (0-31)
     var dates = new Array();
 
@@ -30,15 +32,19 @@
       {
         var items = line.split(',');
         var date = items[1].split('/');
+        if(items[2] > max)
+        {
+          max = items[2];
+        }
         if(dates.length == 0)
         {
-          dates.push(date[1]);
+          dates.push(date[2]);
         }
         else
         {
-          if(!dates.includes(date[1]))
+          if(!dates.includes(date[2]))
           {
-            dates.push(date[1]);
+            dates.push(date[2]);
           }
         }              
       }   
@@ -53,14 +59,16 @@
               
           var date = items[1].split('/');
           
-          if(date[1] == dates[index])
+          if(date[2] == dates[index])
           {
-              series.data.push([parseFloat(items[0]),index,parseFloat(items[2])]);
+              series.data.push([date[1]-1,index,parseFloat(items[2])]);
           }
         }
         
       }
     });
+
+    console.log(min + " " + max);
   $('#container').highcharts({
 
     chart: {
@@ -68,11 +76,15 @@
     },
 
     colorAxis: {
+      min: min,
+      max: max,
+      minColor: '#3060cf',
+      maxColor: '#c4463a',
       stops: [
-          [0, '#3060cf'],
-          [0.5, '#fffbbc'],
-          [0.9, '#c4463a'],
-          [1, '#c4463a']
+          [min, '#3060cf'],
+          [(max * 1/4), '#fffbbc'],
+          [(max * 2/4), '#c4463a'],
+          [max, '#c4463a']
       ],
       labels: {
           format: '{value} in'

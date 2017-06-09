@@ -13,7 +13,9 @@
 <body>
 <div id="container" style="width:100%; height:400px;"></div>
 <script>
-  $.get("data-files/mock-data.csv",function(data) {
+    var min = 0;
+    var max = 0;
+  $.get("data-files/small-precip-data.csv",function(data) {
     // Array containing list of years (YYYY)
     var years = new Array();
     
@@ -29,29 +31,37 @@
         if (lineNo > 0) 
         {
           var items = line.split(',');
+          var date = items[0].split('/');
+
+          if(items[1] > max)
+          {
+            max = items[1];
+          }
+
           if(years.length == 0)
           {
-            years.push(items[1]);
+            years.push(date[0]);
           }
           else
           {
-                if(!years.includes(items[1]))
-                {
-                  years.push(items[1]);
-                }
-              }              
-          }   
+            if(!years.includes(date[0]))
+            {
+              years.push(date[0]);
+            }
+          }              
+        }   
       });
-    
+    console.log(max);
       $.each(lines, function(lineNo, line) {
         if(lineNo > 0)
         {
           for(var index = 0; index < years.length; index++)
           {
-            var items = line.split(',');   
-            if(items[1] == years[index])
+            var items = line.split(',');
+            var date = items[0].split('/');   
+            if(date[0] == years[index])
             {
-              series.data.push([parseFloat(items[0]),index,parseFloat(items[2])]);
+              series.data.push([date[1]-1,index,parseFloat(items[1])]);
             }
           }
         }
@@ -63,12 +73,12 @@
     },
 
     colorAxis: {
-      stops: [
-          [0, '#3060cf'],
-          [0.5, '#fffbbc'],
-          [0.9, '#c4463a'],
-          [1, '#c4463a']
-      ],
+      // stops: [
+      //     [min, '#3060cf'],
+      //     [500, '#fffbbc'],
+      //     [(max * 2/4), '#c4463a'],
+      //     [max, '#c4463a']
+      // ],
       endOnTick: false,
       startOnTick: false
     },
