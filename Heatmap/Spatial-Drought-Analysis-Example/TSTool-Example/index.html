@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drought Analysis</title>
+    <!-- Javascript -->
+  <script src="javascript/highcharts.js"></script>
+  <script src="javascript/heatmap.js"></script>
+  <script src="javascript/exporting.js"></script>
+  <script src="javascript/data.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+<div id="container" style="width:100%; height:400px;"></div>
+<script>
+  $.get("data-files/spatial-data.csv",function(csv) {
+
+  Highcharts.chart('container', {
+
+    chart: {
+      type: 'heatmap',
+    },
+
+    data: {
+      csv: csv
+    },
+
+    title: {
+      text: 'Dry Periods by River Basin'
+    },
+
+    xAxis: {
+      type: 'datetime',
+      title: {
+        text: 'Date'
+      }
+    },
+
+    yAxis: {
+      categories: ['VIRGINIA DALE 7 ENE','FT COLLINS','WATERDALE'],
+      reversed: true,
+      minPadding: 0,
+      maxPadding: 0,
+      title: {
+        text: 'River Basin'
+      }
+     },
+
+     colorAxis: {
+          stops: [
+              [0, '#3060cf'],
+              [0.5, '#fffbbc'],
+              [0.9, '#c4463a'],
+              [1, '#c4463a']
+          ],
+          labels: {
+              format: '{value} in'
+          }
+      },
+
+      legend: {
+          align: 'right',
+          layout: 'vertical',
+          margin: 0,
+          verticalAlign: 'top',
+          y: 25,
+          symbolHeight: 280
+      },
+
+      tooltip: {
+        headerFormat: 'Precipitation<br>',
+        pointFormat: '{point.x:%e %b, %Y} {point.value} in',
+        style: {
+        }
+      },
+
+
+      series: [{
+        turboThreshold: 0,
+        colsize: 24 * 36e5
+      }]
+
+  });
+});
+</script>
+
+</body>
+</html>
