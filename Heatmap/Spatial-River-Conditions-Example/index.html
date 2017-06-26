@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Drought Analysis</title>
+  <!-- CSS  -->
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Javascript -->
+  <script src="javascript/highcharts.js"></script>
+  <script src="javascript/grouped-categories.js"></script>
+  <script src="javascript/data.js"></script>
+  <script src="javascript/heatmap.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+<div id="container" style="width:100%; height:100%;"></div>
+<script>
+  $.get("data-files/test-data.csv",function(csv) {
+
+    var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: "container",
+            type: "heatmap",
+            // marginTop: 40,
+            // marginBottom: 80,
+            height: 800,
+        },
+        title: {
+          text: 'Daily Streamflow Map - Poudre River Point Flow Model'
+        },
+        colorAxis: {
+          stops: [
+              [0, '#3060cf'],
+              [0.5, '#fffbbc'],
+              [0.9, '#c4463a'],
+              [1, '#c4463a']
+          ],
+          labels: {
+              format: '{value} in'
+          }
+      },
+        data: {
+          csv: csv
+        },
+
+        yAxis:
+        {
+          title: {
+            text: '2002'
+          },
+          reversed: true,
+          categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        },
+        
+        xAxis: 
+        {
+          gridLineWidth: 2,
+          opposite: true,
+          labels: 
+          {
+            groupedOptions: 
+            [
+              {
+                rotation: 0
+              },
+              {
+                rotation: 0,
+              }
+            ],
+              rotation: -90
+            },
+            categories: 
+            [
+              {
+                name: "Segment A",
+                categories: 
+                [
+                  {
+                    name: "Nov-Mar=85 cfs / Apr-Oct=130cfs",
+                    categories: ["Canyon Mouth Gage","Greeley Filters Pipeline","Hansen Supply Canal","Pleasant valley Lake Canal","Larimer County Ditch","Watson Lake","Watson Lake Return", "Dry Creek Ditch (aka Jackson)","Southside Ditches","Claymore Lake Return","Arthur Ditch","Larimer Weld Canal"]
+                  }
+                ]
+              },
+              {
+                name: "B",
+                categories:
+                [
+                  {
+                    name: "85 cfs / 130 cfs",
+                    categories: ["Lake Canal Ditch","John G Coy Ditch", "Near Fort Collins Gage", "Mulberry WWTF", "CLP Reservoir Inlet Canal","Spring Creek Confluence"]
+                  }
+                ]
+              },
+              {
+                name: "C",
+                categories: 
+                [
+                  {
+                    name: "30 cfs / 54 cfs",
+                    categories: ["Boxelder Ditch", "Fossil Creek Inlet Ditch","Above Boxelder Creek Gage","Boxelder Sanitation WWTF", "Fossil Creek Reservoir Return","New CLP Irrigation Co"]
+                  }
+                ]
+              },
+              {
+                name : "D",
+                categories:
+                [
+                  {
+                    name: "35 cfs/ 35 cfs",
+                    categories: ["Below New Cache Gage","La Poudre Reservoir #4","Whitney Irrigation Ditch","B H Eaton Ditch"]
+                  }
+                ]
+              },
+              {
+                name: "E",
+                categories:
+                [
+                  {
+                    name: "30 cfs / 30 cfs",
+                    categories: ["Windosr Outfall","Kodak Outfall","William R Jones Ditch","William R Jones Ditch Return","Whitney West Return","Siebring Reservoir Return","Canal No. 3 (aka Greeley No. 3)","Whitney East Return"]
+                  }
+                ]
+              },
+              {
+                name: "F",
+                categories:
+                [
+                  {
+                    name: "30 cfs / 30 cfs",
+                    categories: ["F Street Return","Boyd Freeman Ditch","Seeley Lake Return","Graham Seep Dtich","23rd Avenue Return", "Swift Packing Plant Return","Greeley WWTF","Ogilvy Ditch","16th Street Return","At S. Platte Confluence Gage"]
+                  }
+                ]
+              }
+            ]
+        }
+    });
+});
+</script>
+
+</body>
+</html>
