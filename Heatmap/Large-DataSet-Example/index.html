@@ -15,16 +15,20 @@
 
 <div id="container" style="height: 300px; min-width: 310px; max-width: 1000px; margin: 0 auto"></div>
 <script>
+
+// jQuery command to get/read file from data.csv
 $.get("data-files/data.csv",function(csv) {
+
+// create a new highcharts heatmap
 Highcharts.chart('container', {
 
     data: {
-        csv: csv
+        csv: csv    // data to be plotted
       },
 
     chart: {
-        type: 'heatmap',
-        margin: [60, 10, 80, 50]
+        type: 'heatmap',    // type of chart
+        margin: [60, 10, 80, 50]    // margins of chart (left, right, top, bottom)
     },
 
     boost: {
@@ -32,73 +36,73 @@ Highcharts.chart('container', {
     },
 
     title: {
-        text: 'Highcharts heat map',
-        align: 'left',
-        x: 40
+        text: 'Highcharts heat map',    // title of chart
+        align: 'left',  // alignment of title
+        x: 40   // x positioning
     },
 
     subtitle: {
-        text: 'Temperature variation by day and hour through 2013',
-        align: 'left',
-        x: 40
+        text: 'Temperature variation by day and hour through 2013', // subtitle of chart
+        align: 'left',  // alignment of subtitle
+        x: 40   // x positioning
     },
 
     xAxis: {
-        type: 'datetime',
-        min: Date.UTC(2013, 0, 1),
-        max: Date.UTC(2014, 0, 1),
+        type: 'datetime',   // data type of x axis (datetime format YYYY-MM-DD, MM-DD-YYYY, DD-MM-YYYY, etc.)
+        min: Date.UTC(2013, 0, 1),  // min date
+        max: Date.UTC(2014, 0, 1),  // max date
         labels: {
-            align: 'left',
-            x: 5,
-            y: 14,
+            align: 'left',  // label position
+            x: 5,   // x positioning
+            y: 14,  // y positioning
             format: '{value:%B}' // long month
         },
-        showLastLabel: false,
-        tickLength: 16
+        showLastLabel: false,   // do not show the last label (last date)
+        tickLength: 16  // length between ticks
     },
 
     yAxis: {
         title: {
-            text: null
+            text: null  // title of y axis (in this case there is none)
         },
         labels: {
-            format: '{value}:00'
+            format: '{value}:00'    // format of label for y axis
         },
-        minPadding: 0,
-        maxPadding: 0,
-        startOnTick: false,
-        endOnTick: false,
-        tickPositions: [0, 6, 12, 18, 24],
-        tickWidth: 1,
-        min: 0,
-        max: 23,
-        reversed: true
+        minPadding: 0,  // min padding between labels
+        maxPadding: 0,  // max padding between labels
+        startOnTick: false, // start on specified tick false
+        endOnTick: false,   // end on tick false
+        tickPositions: [0, 6, 12, 18, 24],  // different positions of ticks
+        tickWidth: 1,   // width of tick
+        min: 0, // min y axis value
+        max: 23, // max y axis value
+        reversed: true // reverse the order of y axis labels
     },
 
     colorAxis: {
         stops: [
-            [0, '#3060cf'],
-            [0.5, '#fffbbc'],
-            [0.9, '#c4463a'],
-            [1, '#c4463a']
+            [0, '#3060cf'], // color that data points with 0 will be plotted with
+            [0.5, '#fffbbc'], // color that data points between 0.1 and 0.5 will be plotted with
+            [0.9, '#c4463a'], // color that data points between 0.51 and 0.9 will be plotted with
+            [1, '#c4463a'] // color that data points greater than or equal to 1 will be plotted with
         ],
-        min: -15,
-        max: 25,
-        startOnTick: false,
-        endOnTick: false,
+        min: -15, // minimum value shown on color axis (legend)
+        max: 25,  // maximum value shown on color axis (legend)
+        startOnTick: false, // start on tick false
+        endOnTick: false,   // end on tick false
         labels: {
-            format: '{value}℃'
+            format: '{value}℃' // format of color axis labels 
         }
     },
 
     series: [{
         boostThreshold: 100,
-        borderWidth: 0,
-        nullColor: '#EFEFEF',
-        colsize: 24 * 36e5, // one day
+        borderWidth: 0, // series border width
+        nullColor: '#EFEFEF',   // color if values are null
+        colsize: 24 * 36e5, // clumn size will be one day
         tooltip: {
-            headerFormat: 'Temperature<br/>',
-            pointFormat: '{point.x:%e %b, %Y} {point.y}:00: <b>{point.value} ℃</b>'
+            headerFormat: 'Temperature<br/>',   // format tooltip (what is displayed when a user hovers over a data point)
+            pointFormat: '{point.x:%e %b, %Y} {point.y}:00: <b>{point.value} ℃</b>' // point format shown in tooltip
         },
         turboThreshold: Number.MAX_VALUE // #3404, remove after 4.0.5 release
     }]

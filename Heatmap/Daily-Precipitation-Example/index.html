@@ -13,12 +13,16 @@
 
 <div id="container" style="width:100%; height:400px;"></div>
 <script>
+  // Global Variables used to set colors for legend
   var min = 0;
   var max = 0;
+
+  // jQuery command to get/read file from small-precip-data.csv
   $.get("data-files/small-precip-data.csv",function(data) {
     // Array containing list of dates (0-31)
     var dates = new Array();
 
+    // split each line (row) of data
     var lines = data.split('\n'),
       series = {
         turboThreshold: 0,
@@ -68,63 +72,62 @@
       }
     });
 
-    console.log(min + " " + max);
+  // Create new highchart heatmap
   $('#container').highcharts({
 
     chart: {
-      type: 'heatmap'
+      type: 'heatmap' // type of chart
     },
 
     colorAxis: {
-      min: min,
-      max: max,
-      minColor: '#3060cf',
-      maxColor: '#c4463a',
+      min: min, // minimum value shown on color axis (legend)
+      max: max, // maximum value shown on color axis (legend)
+      minColor: '#3060cf',  // min color used for color axis (legend)
+      maxColor: '#c4463a',  // max color used for color axis (legend)
       stops: [
-          [min, '#3060cf'],
-          [(max * 1/4), '#fffbbc'],
-          [(max * 2/4), '#c4463a'],
-          [max, '#c4463a']
+          [min, '#3060cf'], // color that will be used for values that fall in the range of 0-min
+          [(max * 1/4), '#fffbbc'], // color that will be used for values in the range min-(max*1/4)
+          [(max * 2/4), '#c4463a'], // color that will be used for values in the range (max*1/4)-max
+          [max, '#c4463a']  // color that will be used for values > max
       ],
       labels: {
-          format: '{value} in'
+          format: '{value} in'  // format of label for legend (EX: 0 in, 1 in, etc.)
       }
     },
     
     legend: {
-          align: 'right',
-          layout: 'vertical',
-          margin: 0,
-          verticalAlign: 'top',
-          y: 25,
-          symbolHeight: 280
+          align: 'right', // where the legend will be placed on the chart
+          layout: 'vertical', // orientation of legend (horizontal or vertical)
+          margin: 0,  // margin between chart and legend
+          verticalAlign: 'top', // align the vertical orientation at the top
+          y: 25,  // y position of legend
+          symbolHeight: 280 // height of symbols
       },
 
-    tooltip: {
+    tooltip: {  // control what the tooltip will display when a user hovers over a point on the heatmap
       formatter: function(){
         return '<b>' + this.series.xAxis.categories[this.point.x] + ' ' + this.series.yAxis.categories[this.point.y] + '</b><br>' + this.point.value + ' inches';
       }
     },
 
     title: {
-      text: 'Daily Precipitation-Streamflow'
+      text: 'Daily Precipitation-Streamflow'  // title of chart
     },
 
     yAxis: {
-      categories: dates,
+      categories: dates,  // array of days (0-31)
       title: {
-        text: 'Day'
+        text: 'Day' // y axis title
       }
     },
 
     xAxis: {
-      categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'],
+      categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'], // array of months
       title: {
-        text: 'Month',
+        text: 'Month',  // x axis title
       }
      },
-    series: [series]
-
+    series: [series]  // array of series (data plots)
   });
 });
 </script>

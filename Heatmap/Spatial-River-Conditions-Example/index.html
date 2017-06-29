@@ -15,119 +15,126 @@
 <body>
 <div id="container" style="width:100%; height:100%;"></div>
 <script>
+
+  // jQuery command to get/read file from test-data.csv
   $.get("data-files/test-data.csv",function(csv) {
 
+    // create a new highchart chart
     var chart = new Highcharts.Chart({
         chart: {
-            renderTo: "container",
-            type: "heatmap",
-            // marginTop: 40,
-            // marginBottom: 80,
-            height: 800,
+            renderTo: "container",  // where to place the map (attaches to div element with id="container")
+            type: "heatmap",  // type of map
+            height: 800, // height of map
         },
         title: {
-          text: 'Daily Streamflow Map - Poudre River Point Flow Model'
+          text: 'Daily Streamflow Map - Poudre River Point Flow Model'  // title of chart
         },
         colorAxis: {
           stops: [
-              [0, '#3060cf'],
-              [0.5, '#fffbbc'],
-              [0.9, '#c4463a'],
-              [1, '#c4463a']
+              [0, '#3060cf'], // color that data points with 0 will be plotted with
+              [0.5, '#fffbbc'], // color that data ponts between 0.1 and 0.5 will be plotted with
+              [0.9, '#c4463a'], // color that data points between 0.51 and 0.9 will be plotted with
+              [1, '#c4463a'] // color that data points greater than or equal to 1 will be plotted with
           ],
           labels: {
-              format: '{value} in'
+              format: '{value} in'  // format of color axis labels
           }
       },
         data: {
-          csv: csv
+          csv: csv // data to be plotted
         },
 
         yAxis:
         {
           title: {
-            text: '2002'
+            text: '2002' // y axis title
           },
-          reversed: true,
-          categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+          reversed: true, // reverse the order of the y axis labels
+          categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"] // array of months
         },
         
         xAxis: 
         {
-          gridLineWidth: 2,
-          opposite: true,
+          gridLineWidth: 2, // line width of grid
+          opposite: true, // place the x axis on the opposite side (on top of chart instead of bottom)
           labels: 
           {
             groupedOptions: 
             [
               {
-                rotation: 0
+                rotation: 0 // rotate labels 0 degrees
               },
               {
-                rotation: 0,
+                rotation: 0 // rotate labels 0 degrees
               }
             ],
-              rotation: -90
+              rotation: -90 // rotate labels -90 degrees
             },
             categories: 
             [
+              // first category
               {
-                name: "Segment A",
+                name: "Segment A", // name of title
                 categories: 
                 [
                   {
-                    name: "Nov-Mar=85 cfs / Apr-Oct=130cfs",
-                    categories: ["Canyon Mouth Gage","Greeley Filters Pipeline","Hansen Supply Canal","Pleasant valley Lake Canal","Larimer County Ditch","Watson Lake","Watson Lake Return", "Dry Creek Ditch (aka Jackson)","Southside Ditches","Claymore Lake Return","Arthur Ditch","Larimer Weld Canal"]
+                    name: "Nov-Mar=85 cfs / Apr-Oct=130cfs", // name of subtitle
+                    categories: ["Canyon Mouth Gage","Greeley Filters Pipeline","Hansen Supply Canal","Pleasant valley Lake Canal","Larimer County Ditch","Watson Lake","Watson Lake Return", "Dry Creek Ditch (aka Jackson)","Southside Ditches","Claymore Lake Return","Arthur Ditch","Larimer Weld Canal"] // array of station names
                   }
                 ]
               },
+              // second category
               {
-                name: "B",
-                categories:
-                [
-                  {
-                    name: "85 cfs / 130 cfs",
-                    categories: ["Lake Canal Ditch","John G Coy Ditch", "Near Fort Collins Gage", "Mulberry WWTF", "CLP Reservoir Inlet Canal","Spring Creek Confluence"]
-                  }
-                ]
-              },
-              {
-                name: "C",
+                name: "B", // name of title
                 categories: 
                 [
                   {
-                    name: "30 cfs / 54 cfs",
-                    categories: ["Boxelder Ditch", "Fossil Creek Inlet Ditch","Above Boxelder Creek Gage","Boxelder Sanitation WWTF", "Fossil Creek Reservoir Return","New CLP Irrigation Co"]
+                    name: "85 cfs / 130 cfs", // name of subtitle
+                    categories: ["Lake Canal Ditch","John G Coy Ditch", "Near Fort Collins Gage", "Mulberry WWTF", "CLP Reservoir Inlet Canal","Spring Creek Confluence"] // array of station names
                   }
                 ]
               },
+              // third category
               {
-                name : "D",
-                categories:
+                name: "C", // name of title
+                categories: 
                 [
                   {
-                    name: "35 cfs/ 35 cfs",
-                    categories: ["Below New Cache Gage","La Poudre Reservoir #4","Whitney Irrigation Ditch","B H Eaton Ditch"]
+                    name: "30 cfs / 54 cfs", // name of subtitle
+                    categories: ["Boxelder Ditch", "Fossil Creek Inlet Ditch","Above Boxelder Creek Gage","Boxelder Sanitation WWTF", "Fossil Creek Reservoir Return","New CLP Irrigation Co"] // array of station names
                   }
                 ]
               },
+              // fourth category
               {
-                name: "E",
+                name : "D", // name of title
                 categories:
                 [
                   {
-                    name: "30 cfs / 30 cfs",
-                    categories: ["Windosr Outfall","Kodak Outfall","William R Jones Ditch","William R Jones Ditch Return","Whitney West Return","Siebring Reservoir Return","Canal No. 3 (aka Greeley No. 3)","Whitney East Return"]
+                    name: "35 cfs/ 35 cfs", // name of subtitle
+                    categories: ["Below New Cache Gage","La Poudre Reservoir #4","Whitney Irrigation Ditch","B H Eaton Ditch"] // array of station names
                   }
                 ]
               },
+              /// fifth category
               {
-                name: "F",
+                name: "E", // name of title
                 categories:
                 [
                   {
-                    name: "30 cfs / 30 cfs",
-                    categories: ["F Street Return","Boyd Freeman Ditch","Seeley Lake Return","Graham Seep Dtich","23rd Avenue Return", "Swift Packing Plant Return","Greeley WWTF","Ogilvy Ditch","16th Street Return","At S. Platte Confluence Gage"]
+                    name: "30 cfs / 30 cfs",  // name of subtitle
+                    categories: ["Windosr Outfall","Kodak Outfall","William R Jones Ditch","William R Jones Ditch Return","Whitney West Return","Siebring Reservoir Return","Canal No. 3 (aka Greeley No. 3)","Whitney East Return"]  // array of station names
+                  }
+                ]
+              },
+              // sixth category
+              {
+                name: "F",  // name of title
+                categories:
+                [
+                  {
+                    name: "30 cfs / 30 cfs", // name of subtitle
+                    categories: ["F Street Return","Boyd Freeman Ditch","Seeley Lake Return","Graham Seep Dtich","23rd Avenue Return", "Swift Packing Plant Return","Greeley WWTF","Ogilvy Ditch","16th Street Return","At S. Platte Confluence Gage"] // array of station names
                   }
                 ]
               }

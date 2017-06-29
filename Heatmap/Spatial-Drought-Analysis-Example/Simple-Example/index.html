@@ -13,68 +13,68 @@
 <body>
 <div id="container" style="width:100%; height:400px;"></div>
 <script>
+  // jQuery command to get/read file from mock-data.csv
   $.get("data-files/mock-data.csv",function(csv) {
 
+  // create a new highchart heatmap
   Highcharts.chart('container', {
 
     chart: {
-      type: 'heatmap',
+      type: 'heatmap',  // type of chart
     },
 
     data: {
-      csv: csv
+      csv: csv  // data to be plotted
     },
 
     title: {
-      text: 'Dry Periods by River Basin'
+      text: 'Dry Periods by River Basin'  // title of chart
     },
 
     xAxis: {
-      type: 'datetime',
+      type: 'datetime', // data type of x axis
       title: {
-        text: 'Date'
+        text: 'Date'  // title of x axis
       }
     },
 
     yAxis: {
-      categories: ['Upper South Platte River Basin','Lower South Platte River Basin','Upper Arkansas River Basin','Lower Arkansas River Basin','Rio Grande Basin','San Miguel-Dolores-San Juan', 'Gunnison-Uncompahgre','Mainstream Colorado River Basin','Yampa-White River Basins'],
-      reversed: true,
-      minPadding: 0,
-      maxPadding: 0,
+      categories: ['Upper South Platte River Basin','Lower South Platte River Basin','Upper Arkansas River Basin','Lower Arkansas River Basin','Rio Grande Basin','San Miguel-Dolores-San Juan', 'Gunnison-Uncompahgre','Mainstream Colorado River Basin','Yampa-White River Basins'],  // array of river basin names
+      reversed: true, // reverse the order of the y axis labels
+      minPadding: 0,  // min padding between labels
+      maxPadding: 0, // max padding between labels
       title: {
-        text: 'River Basin'
+        text: 'River Basin' // y axis title
       }
      },
 
      colorAxis: {
           stops: [
-              [0, '#3060cf'],
-              [0.5, '#fffbbc'],
-              [0.9, '#c4463a'],
-              [1, '#c4463a']
+              [0, '#3060cf'], // color that data points with 0 will be plotted with
+              [0.5, '#fffbbc'], // color that data ponts between 0.1 and 0.5 will be plotted with
+              [0.9, '#c4463a'], // color that data points between 0.51 and 0.9 will be plotted with
+              [1, '#c4463a'] // color that data points greater than or equal to 1 will be plotted with
           ],
           labels: {
-              format: '{value} in'
+              format: '{value} in'  // format of color axis labels
           }
       },
 
       legend: {
-          align: 'right',
-          layout: 'vertical',
-          margin: 0,
-          verticalAlign: 'top',
-          y: 25,
-          symbolHeight: 280
+          align: 'right', // where the legend will be placed on the chart
+          layout: 'vertical', // orientation of the legend (horizontal or vertical)
+          margin: 0,  // margin between chart and legend
+          verticalAlign: 'top', // align the vertical orientation at the top
+          y: 25,  // y position of legend
+          symbolHeight: 280 // height of symbols
       },
 
       tooltip: {
-        headerFormat: 'Precipitation<br>',
+        headerFormat: 'Precipitation<br>',  // control what the tooltip will display when a user hovers over a data point
         pointFormat: '{point.x:%e %b, %Y} {point.value} in',
         style: {
         }
       },
-
-
       series: [{
         turboThreshold: 0,
         colsize: 24 * 36e5
