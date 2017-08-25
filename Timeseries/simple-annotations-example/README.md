@@ -22,7 +22,8 @@ Line Graphs are drawn by first plotting data points on a Cartesian coordinate gr
 For more information refer to the links below:
 
 * [Timeseries Graph](http://www.datavizcatalogue.com/methods/line_graph.html)
-* [Timeseries Documenation](https://developers.google.com/chart/interactive/docs/gallery/linechart)
+* [Timeseries Documentation](https://developers.google.com/chart/interactive/docs/gallery/linechart)
+* [Annotation Documentation](https://www.highcharts.com/plugin-registry/single/17/Annotations)
 
 ## Additional Documentation
 
