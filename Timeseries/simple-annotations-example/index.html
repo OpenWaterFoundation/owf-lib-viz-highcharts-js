@@ -52,21 +52,22 @@
             type: 'path',
             params: {
               d: ['M', 0, 0, 'L', 1800, 0], // Refer to link for further doc: https://www.w3.org/TR/SVG/paths.html#PathData
-              stroke: '#FF003F'
+              stroke: '#FF003F',
+              dashstyle: 'ShortDash'  // Create dashed line
             }
-          }
+          },
         },
         {
-            linkedTo: 'circle', // Link annotation to a point or series using an id
-            allowDragY: false,
-            allowDragX: false,
-            shape: {
-                type: 'circle',
-                params: {
-                    r: 7, // radius of circle
-                    stroke: '#000000',
-                }
-            }
+          linkedTo: 'circle', // Link annotation to a point or series using an id
+          allowDragY: false,
+          allowDragX: false,
+          shape: {
+              type: 'circle',
+              params: {
+                  r: 7, // radius of circle
+                  stroke: '#000000',
+              }
+          }
         }],
         legend: {   // show legend
             enabled: true
@@ -90,7 +91,7 @@
         },
         series: [{      // data points
             name: 'Series 1',
-            data: [90,40,50,120,80,90,{y: 110,id: 'circle'}]
+            data: [90,40,50,120,{y:80, id: 'circle'},90,110]
         }, {
             name: 'Series 2',
             data: [120,160,200,null,130,220,160]
