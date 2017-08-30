@@ -1,4 +1,4 @@
- # owf-lib-viz-highchart
+# owf-lib-viz-highchart
 Open Water Foundation visualization library based on Highchart
 
 ## Getting Started
@@ -13,7 +13,7 @@ A standard development folder structure is recommended. The website development 
 > mkdir git-repos
 > cd git-repos
 > git clone https://github.com/OpenWaterFoundation/owf-lib-viz-highcharts-js
-``` 
+```
 The repository contains multiple folders that include time series examples using different sets of data.
 ## Additional Documentation
 
@@ -22,6 +22,11 @@ See also:
 * [Highchart API Reference](http://api.highcharts.com/highcharts)
 * [Highstock API Reference](http://api.highcharts.com/highstock/)
 * [Highmaps API Reference](http://api.highcharts.com/highmaps/)
+
+## Timeseries - examples graphing time series data
+* TSTool-Large-Data-Example - example of graph for > 15,000 data points
+* TSTool-Small-Data-Example - example of graph for < 150 data points
+
 
 ## Data Format RCC-ACIS Precipitation Time Series
 |Date   |StationID 1   |StationID 2   |StationID 3   |StationID X   |
@@ -43,7 +48,7 @@ See also:
 
 ## NOTES
 
-* Requires small amount of code to implement 
+* Requires small amount of code to implement
 * Provides examples and documentation
 * Open Source
 * Free for non-profit and personal use
