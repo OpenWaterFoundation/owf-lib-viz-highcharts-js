@@ -1,21 +1,16 @@
-# TSTool-Small-Data-Example
+# simple-annotations-example
 
-This example is meant to show how to load a small dataset from a CSV (Comma Seperated Value) file. It shows some of the options that can be used to configure and customize a Time Series chart when using a big set of data. Note, in this example the data used is specified within the **URL** option and is created from a TSTool command file. Feel free to start with this example as a template and customize the chart to meet the needs of your visualization project.
+This example is meant to serve as a base root of how Highcharts works. It shows some of the options that can be used to configure and customize a Time Series chart. Note, in this example the data used is specified within the options (hardcoded). Feel free to start with this example as a template and customize the chart to meet the needs of your visualization project.
 
 ## File Structure
 ```
-├── TSTool-Small-Data-Example
+├── simple-example
 │   ├── index.html
 │   ├── css
 │   │   ├── highcharts.css
 │   ├── javascript
-│   │   ├── highcharts.js
-│   │   ├── highstock.src.js
-│   │   ├── data.js
-│   ├── TSTool
-│   │   ├── Small-Precip.TSTool
-│   ├── data-files
-│   │   ├── small-precip-data.csv
+│   │   ├── highstock.js
+│   │   ├── annotations.js
 ```
 
 ## What is a Timeseries Graph
@@ -27,7 +22,8 @@ Line Graphs are drawn by first plotting data points on a Cartesian coordinate gr
 For more information refer to the links below:
 
 * [Timeseries Graph](http://www.datavizcatalogue.com/methods/line_graph.html)
-* [Timeseries Documenation](https://developers.google.com/chart/interactive/docs/gallery/linechart)
+* [Timeseries Documentation](https://developers.google.com/chart/interactive/docs/gallery/linechart)
+* [Annotation Documentation](https://www.highcharts.com/plugin-registry/single/17/Annotations)
 
 ## Additional Documentation
 
@@ -36,4 +32,3 @@ See also:
 * [Highchart API Reference](http://api.highcharts.com/highcharts)
 * [Highstock API Reference](http://api.highcharts.com/highstock/)
 * [Highmaps API Reference](http://api.highcharts.com/highmaps/)
-* [TSTool](http://openwaterfoundation.org/software-tools/tstool)

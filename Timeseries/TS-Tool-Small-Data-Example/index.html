@@ -8,39 +8,40 @@
     <script src="javascript/data.js"></script>
     <script>
     $(function(){
+        // jQuery command to get/read file from small-precip-data.csv
         $.get('data-files/small-precip-data.csv', function(csv) {
             Highcharts.stockChart('container', {
                 chart: {
-                    zoomType: 'x',
+                    zoomType: 'x',  // describes what axis to zoom in on when a user decides to zoom on certain data
                 },
                 title: {
-                    text: 'Precipitation'
+                    text: 'Precipitation' // title of chart
                 },
                 xAxis: {
-                    type: 'datetime',
+                    type: 'datetime',   // datatype of x axis (YYYY-MM-DD, MM-DD-YYYY, etc.)
                     title: {
-                        text: 'Date'
+                        text: 'Date'    // x axis title
                     },
-                    gridLineWidth: 1
+                    gridLineWidth: 1    // line width of grid
                 },
                 yAxis: {
                     title: {
-                        text: 'inches'
+                        text: 'inches'  // y axis title
                     }
                 },
-                tooltip: {
+                tooltip: {  // control what the tooltip displays when a user hovers over a data point
                     pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>',
-                    valueDecimals: 2,
+                    valueDecimals: 2, // how many decimals to show 
                     split: true
                 },
                 legend: {
-                    enabled: true
+                    enabled: true   // show legend
                 },
                 data: {
-                    csv: csv
+                    csv: csv    // data to be plotted
                 },
-                navigator: {
-                    adapToUpdatedData: true,
+                navigator: { // update chart based on zoom
+                    adapToUpdatedData: true, 
                     enabled: true
                 },
             });

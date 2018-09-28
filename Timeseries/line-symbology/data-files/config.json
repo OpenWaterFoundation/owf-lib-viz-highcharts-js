@@ -1,0 +1,21 @@
+{
+	"Properties": {
+		"chart": {
+			"type": "column"
+		},
+		"title": {
+			"text": "Fruit Consumption"
+		},
+		"xAxis": {
+			"categories": []
+		},
+		"yAxis": {
+			"title": {
+				"text": "Units"
+			}
+		},
+		"legend": {
+			"enabled": true
+		}
+	}
+}
