@@ -1,11 +1,27 @@
 {
 	"Properties": {
 		"chart": {
-			"type": "column"
+			"type": "column",
+			"backgroundColor": "#FCFFC5",
+			"borderColor": "#EBBA95",
+        	"borderWidth": 2,
+       		"borderRadius": 10,
+       		"height": 500
 		},
+
+		"navigator": {
+            "height": 80,
+            "outlineColor": "black",
+            "outlineWidth": 2
+        },
+
 		"title": {
 			"text": "Fruit Consumption"
 		},
+		"subtitle": {
+            "text": "Add a subtitle with the 'subtitle' attribute"
+        },
+       
 		"xAxis": {
 			"categories": []
 		},
@@ -15,7 +31,8 @@
 			}
 		},
 		"legend": {
-			"enabled": true
+			"enabled": "true"
 		}
+
 	}
 }
