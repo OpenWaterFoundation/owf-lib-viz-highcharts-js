@@ -1,7 +1,7 @@
 {
 	"Properties": {
 		"chart": {
-			"type": "area",
+			"type": "column",
 			"backgroundColor": "#FCFFC5",
 			"borderColor": "#EBBA95",
         	"borderWidth": 2,
