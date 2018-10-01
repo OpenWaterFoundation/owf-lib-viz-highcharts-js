@@ -1,7 +1,7 @@
 {
 	"Properties": {
 		"chart": {
-			"type": "area",
+			"type": "column",
 			"backgroundColor": "#FCFFC5",
 			"borderColor": "#EBBA95",
         	"borderWidth": 2,
@@ -14,12 +14,20 @@
         },
 
 		"title": {
-			"text": "Consumer Price Index"
+			"text": "United States Crime Rates"
 		},
 		"subtitle": {
-            "text": "Add a subtitle with the 'subtitle' attribute"
+            "text": "Source: FBI UCR data"
         },
-       
+
+
+       	
+		"plotOptions": {
+    		"column": {
+      			"stacking": "percent"
+   			}
+  		},
+
 		"xAxis": {
 			"categories": []
 		},
