@@ -1,0 +1,48 @@
+{
+	"Properties": {
+		"chart": {
+			"type": "column",
+			"backgroundColor": "#FFF",
+			"borderColor": "black",
+        	"borderWidth": 2,
+       		"borderRadius": 10,
+       		"height": 900
+		},
+		"title": {
+			"text": "Flow Rates"
+		},
+		"subtitle": {
+            "text": ""
+        },
+
+		"plotOptions": {
+    		"column": {
+      			
+   			}
+  		},
+
+		"xAxis": {
+			"categories": [],
+			"type": "datetime",
+			"labels": {
+				"format": "{value:%Y-%b-%e}"
+			},
+			"title": {
+				"text": "date"
+			}
+		},
+		"yAxis": {
+			"title": {
+				"text": "Streamflow"
+			}
+		},
+		"toolTip": {
+			"valueDecimals": 2,
+			"split": true
+		},
+		"legend": {
+			"enabled": "true"
+		}
+
+	}
+}
