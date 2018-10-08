@@ -30,13 +30,17 @@
 			"title": {
 				"text": "date"
 			}
+
+			
 		},
 		"yAxis": {
 			"title": {
 				"text": "Streamflow"
-			}
+			},
+			"offset": 10
 		},
 		"toolTip": {
+			"pointFormat": "Value: {point.y:,.0f} mm",
 			"valueDecimals": 2,
 			"split": true
 		},
