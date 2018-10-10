@@ -7,10 +7,10 @@
 		},
 		
 		"title": {
-			"text": "Flow Rates"
+			"text": "Cache La Poudre River at Fort Collins (06752260)"
 		},
 		"subtitle": {
-            "text": ""
+            "text": "Source: CDSS Hydrobase"
         },
 
 		"plotOptions": {
@@ -33,23 +33,21 @@
   		},
 
 		"xAxis": {
-			"categories": [],
+
 			"gridLineWidth": 1,
-			"ordinal": true,
+
 			"type": "datetime",
 			"labels": {
-				"format": "{value:%Y-%b-%e}",
-				"overflow": "justify"
+				"format": "{value:%Y-%b-%e}"
 			},
 			"title": {
 				"text": "date"
-			},
-			"showLastLabel": true
+			}
 			
 		},
 		"yAxis": {
 			"title": {
-				"text": "Streamflow"
+				"text": "Discharge (cfs)"
 			},
 			"offset": 10
 		},
@@ -60,6 +58,9 @@
 		},
 		"legend": {
 			"enabled": true
+		},
+		"series": {
+    	"name": "Streamflow"
 		}
 
 	}

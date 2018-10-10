@@ -30,7 +30,8 @@
                 		data: {
                   			csv: csvData    // data to be plotted
                 		},
-                		navigator: { // update chart based on zoom
+                		//highstock element must be specified in constructor
+                		navigator: {
                    	 	adapToUpdatedData: true, 
                    	 	enabled: true
                 		}
