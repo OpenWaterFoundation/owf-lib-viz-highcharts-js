@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div id="container" style="width:100%; height:400px;"></div>
+    <div id="container" style="width:100%; height:600px;"></div>
 
     <script>
         var configurationFile = "./data-files/config.json";
@@ -25,7 +25,7 @@
                 $(function(){
                 // jQuery command to get/read file from testing.csv
                 $.get('data-files/testing.csv', function(csvData) {
-                    var myChart = Highcharts.stockChart('container', {data: {csv: csvData}});
+                    var myChart = Highcharts.chart('container', {data: {csv: csvData}});
                     myChart.update(data.Properties)
                 });
 

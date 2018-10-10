@@ -23,6 +23,21 @@ Continuing from the line-symbology example, this example demonstrates how to uti
 │   │   ├── example-streamflow.csv
 ```
 
-## TSTool Compatibility
+## Using an External .json File with TSTool data
 
-When loading data from TSTool that spans multiple years, it better to utilize the `highcharts.chart` option in index.html.  While the `highcharts.stockChart` option provides scaling functionality, it misrepresents data from TSTool at specific ranges and does not format the axis correctly.
+When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  While the `highcharts.stockChart` option provides scaling functionality, it misrepresents data from TSTool at specific ranges and does not format the axis correctly.  The stockChart elements, such as a navigator, can be accessed by including them within the constructor itself.  The data must also be loaded directly into the constructor instead of the .json configuration file.  See the following example from index.html:
+
+```
+$.get('data-prep/example-streamflow.csv', function(csvData) {
+  var myChart = Highcharts.chart('container', {
+  	data: {
+  			csv: csvData    // data to be plotted
+  	},
+  	navigator: { // update chart based on zoom
+   	 	adapToUpdatedData: true,
+   	 	enabled: true
+  	}
+  });
+  myChart.update(data.Properties);
+});
+```

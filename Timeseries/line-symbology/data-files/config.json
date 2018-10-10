@@ -5,13 +5,21 @@
 			"backgroundColor": "#FCFFC5",
 			"borderColor": "#EBBA95",
         	"borderWidth": 2,
-       		"borderRadius": 10,
-       		"height": 500
+       		"borderRadius": 10
 		},
 
 		"navigator": {
-            "enabled": "false"
+			"adaptToUpdatedData": true,
+            "enabled": true
         },
+
+        "rangeSelector": {
+			"enabled": false,
+			"height": 0
+		},
+		"scrollbar": {
+			"enabled": false
+		},
 
 		"title": {
 			"text": "Consumer Price Index"

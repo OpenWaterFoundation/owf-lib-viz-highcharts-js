@@ -1,13 +1,11 @@
 {
 	"Properties": {
+		
+
 		"chart": {
-			"type": "column",
-			"backgroundColor": "#FFF",
-			"borderColor": "black",
-        	"borderWidth": 2,
-       		"borderRadius": 10,
-       		"height": 900
+			"zoomType": "x"
 		},
+		
 		"title": {
 			"text": "Flow Rates"
 		},
@@ -16,21 +14,37 @@
         },
 
 		"plotOptions": {
-    		"column": {
+    		"line": {
+      			"marker": {
+      				"enabled": false,
+      				"radius": 2
+      			},
+      			"states": {
+      				"hover": {
+      					"lineWidth": 2
+      				}
+      			}
       			
-   			}
+   			},
+   			"column": {
+            	"shadow": false,
+            	"borderWidth": 0
+        	}
   		},
 
 		"xAxis": {
 			"categories": [],
+			"gridLineWidth": 1,
+			"ordinal": true,
 			"type": "datetime",
 			"labels": {
-				"format": "{value:%Y-%b-%e}"
+				"format": "{value:%Y-%b-%e}",
+				"overflow": "justify"
 			},
 			"title": {
 				"text": "date"
-			}
-
+			},
+			"showLastLabel": true
 			
 		},
 		"yAxis": {
@@ -42,10 +56,10 @@
 		"toolTip": {
 			"pointFormat": "Value: {point.y:,.0f} mm",
 			"valueDecimals": 2,
-			"split": true
+			"shared": true
 		},
 		"legend": {
-			"enabled": "true"
+			"enabled": true
 		}
 
 	}
