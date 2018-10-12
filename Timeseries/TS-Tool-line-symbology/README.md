@@ -42,8 +42,47 @@ $.get('data-prep/example-streamflow.csv', function(csvData) {
 });
 ```
 
+Additionally, html is not compatible with .json format.  Any html options specifiers, such as tooltip pointFormat, should be specified in teh index.html constructor:
+
+```
+$.get('data-prep/example-streamflow.csv', function(csvData) {
+  var myChart = Highcharts.chart('container', {
+    data: {
+        csv: csvData    // data to be plotted
+    },
+    navigator: { // update chart based on zoom
+      adapToUpdatedData: true,
+      enabled: true
+    },
+    tooltip: {  // control what the tooltip displays when a user hovers over a data point
+      pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>'
+    }
+  });
+  myChart.update(data.Properties);
+});
+```
+
 For more information about highStock elements, see the online [documentation](https://www.highcharts.com/docs/chart-concepts/understanding-highstock)
 
 ## .JSON Options
 
 * Labels on the x-axis may be formatted too close together by default.  To make them more readable, use the `padding` or `step` options.  By default, padding is 5.  Step layers the labels on different lines to make room for more information- specify the number of layers following the option, eg. `"step": 2`
+* In the tooltip option, set `split: true` to display the data values for 2 series at once
+
+## Multiple Series
+
+When loading csv data that contains multiple series, highCharts will by default load the name from the header of the csv file as the series name.  To override this, include a series option section in the .json file:
+
+```
+"series": [
+      {
+        "name": "Canal to Cache La Poudre River"
+      },
+      {
+        "name": "Canal to Poudre Valley Canal",
+        "color": "red"
+      }
+    ],
+```
+
+Use brackets when setting options for a series.
