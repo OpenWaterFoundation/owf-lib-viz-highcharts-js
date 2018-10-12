@@ -1,6 +1,6 @@
 ## TS-Tool-line-symbology
 
-Continuing from the line-symbology example, this example demonstrates how to utilize CSV water data from TSTool to create a highcharts graph, along with a separate .json configuration file.
+Building on the line-symbology example, this example demonstrates how to utilize CSV water data from TSTool to create a highcharts graph, along with a separate .json configuration file.
 
 ## File Structure
 
@@ -23,9 +23,9 @@ Continuing from the line-symbology example, this example demonstrates how to uti
 │   │   ├── example-streamflow.csv
 ```
 
-## Using an External .json File with external CSV file
+## Using an External .json File with External .csv file
 
-When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  While the `highcharts.stockChart` option provides scaling functionality, it misrepresents data from TSTool at specific ranges and does not format the axis correctly.  The stockChart elements, such as a navigator, can be accessed by including them within the constructor itself.  The data must also be loaded directly into the constructor instead of the .json configuration file.  See the following example from index.html:
+When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  The `highcharts.stockChart` option applies default configuration values that misrepresent data.  The stockChart elements, such as a navigator, can be instead accessed by including them within the constructor itself.  The data must also be loaded directly into the constructor instead of the .json configuration file.  See the following example from [index.html:](https://github.com/OpenWaterFoundation/owf-lib-viz-highcharts-js/blob/master/Timeseries/TS-Tool-line-symbology/index.html)
 
 ```
 $.get('data-prep/example-streamflow.csv', function(csvData) {
@@ -41,3 +41,5 @@ $.get('data-prep/example-streamflow.csv', function(csvData) {
   myChart.update(data.Properties);
 });
 ```
+
+For more information about highStock elements, see the online [documentation](https://www.highcharts.com/docs/chart-concepts/understanding-highstock)
