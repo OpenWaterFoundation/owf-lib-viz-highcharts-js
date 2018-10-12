@@ -43,3 +43,7 @@ $.get('data-prep/example-streamflow.csv', function(csvData) {
 ```
 
 For more information about highStock elements, see the online [documentation](https://www.highcharts.com/docs/chart-concepts/understanding-highstock)
+
+## .JSON Options
+
+* Labels on the x-axis may be formatted too close together by default.  To make them more readable, use the `padding` or `step` options.  By default, padding is 5.  Step layers the labels on different lines to make room for more information- specify the number of layers following the option, eg. `"step": 2`

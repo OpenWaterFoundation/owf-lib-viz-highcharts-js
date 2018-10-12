@@ -35,10 +35,10 @@
 		"xAxis": {
 
 			"gridLineWidth": 1,
-
 			"type": "datetime",
 			"labels": {
-				"format": "{value:%Y-%b-%e}"
+				"format": "{value:%Y-%b-%e}",
+				"padding": 10
 			},
 			"title": {
 				"text": "date"
