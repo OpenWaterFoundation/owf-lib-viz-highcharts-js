@@ -7,7 +7,7 @@
 		},
 		
 		"title": {
-			"text": "Cache La Poudre River at Fort Collins (06752260)"
+			"text": "Hansen Supply Canals Water Volume"
 		},
 		"subtitle": {
             "text": "Source: CDSS Hydrobase"
@@ -51,17 +51,23 @@
 			},
 			"offset": 10
 		},
-		"toolTip": {
-			"pointFormat": "Value: {point.y:,.0f} mm",
+		"series": [
+			{
+    		"name": "Canal to Cache La Poudre River"
+			},
+			{
+    		"name": "Canal to Poudre Valley Canal",
+    		"color": "red"
+			}
+		],
+		"tooltip": {
+			
 			"valueDecimals": 2,
-			"shared": true
+			"split": true
 		},
+
 		"legend": {
 			"enabled": true
-		},
-		"series": {
-    	"name": "Streamflow"
 		}
-
 	}
 }

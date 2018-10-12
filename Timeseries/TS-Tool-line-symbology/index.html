@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div id="container" style="min-width:300px; max-width: 800px; height:600px;"></div>
+    <div id="container" style="min-width:300px; max-width: 1200px; height:600px;"></div>
 
     <script>
         var configurationFile = "./data-files/config1.json";
@@ -25,7 +25,7 @@
                 console.log(data)
                 $(function(){
                 // jQuery command to get/read file from testing.csv
-                $.get('data-prep/example-streamflow.csv', function(csvData) {
+                $.get('data-prep/2series-example.csv', function(csvData) {
                 	var myChart = Highcharts.chart('container', {
                 		data: {
                   			csv: csvData    // data to be plotted
@@ -34,7 +34,10 @@
                 		navigator: {
                    	 	adapToUpdatedData: true, 
                    	 	enabled: true
-                		}
+                		},
+                        tooltip: {  // control what the tooltip displays when a user hovers over a data point
+                            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>'
+                        }
                 	});
                 	myChart.update(data.Properties);
                 	
