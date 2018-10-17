@@ -33,7 +33,7 @@
   		},
 
 		"xAxis": {
-
+			"reversed": false,
 			"gridLineWidth": 1,
 			"type": "datetime",
 			"labels": {
@@ -46,10 +46,12 @@
 			
 		},
 		"yAxis": {
+			"reversed": true,
 			"title": {
 				"text": "Discharge (cfs)"
 			},
 			"offset": 10
+			
 		},
 		"series": [
 			{
@@ -61,13 +63,18 @@
 			}
 		],
 		"tooltip": {
-			
+ 			"pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
 			"valueDecimals": 2,
 			"split": true
 		},
 
 		"legend": {
 			"enabled": true
-		}
+		},
+		
+		"navigator": {
+        	"adapToUpdatedData": true, 
+       		"enabled": true
+        }
 	}
 }
