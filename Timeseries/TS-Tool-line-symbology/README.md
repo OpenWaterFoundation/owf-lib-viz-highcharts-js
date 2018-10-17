@@ -42,7 +42,7 @@ $.get('data-prep/example-streamflow.csv', function(csvData) {
 });
 ```
 
-Additionally, html is not compatible with .json format.  Any html options specifiers, such as tooltip pointFormat, should be specified in teh index.html constructor:
+Additionally, html is not compatible with .json format.  Any html options specifiers, such as tooltip pointFormat, should be specified in the index.html constructor:
 
 ```
 $.get('data-prep/example-streamflow.csv', function(csvData) {
