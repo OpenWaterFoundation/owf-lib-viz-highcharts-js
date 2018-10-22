@@ -1,0 +1,130 @@
+
+this combination works:
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="javascript/data.js"></script>
+
+
+loading from .json file:
+
+<body>
+    <div id="container" style="min-width:300px; max-width: 800px; height:600px;"></div>
+
+    <script>
+        var configurationFile = "./data-files/config1.json";
+        $.ajax({
+            url: configurationFile,
+            async: false,
+            dataType: 'json',
+            error: function(error){
+                console.log('issue')
+            },
+            success: function(data){
+                console.log(data)
+                $(function(){
+                // jQuery command to get/read file from testing.csv
+                $.get('data-prep/example-streamflow.csv', function(csvData) {
+                	var myChart = Highcharts.chart('container', {data: {csv: csvData}});myChart.update(data.Properties)
+                	
+                	Highcharts.setOptions({
+						lang: {
+							thousandsSep: ','
+						}
+					});
+                });
+
+            });
+            }
+        })
+    </script>
+
+</body>
+
+
+
+
+
+
+
+
+hardcoded data:
+
+<body>
+    <div id="container" style="min-width:300px; max-width: 800px; height:600px;"></div>
+
+    <script>
+        var configurationFile = "./data-files/config1.json";
+        $.ajax({
+            url: configurationFile,
+            async: false,
+            dataType: 'json',
+            error: function(error){
+                console.log('issue')
+            },
+            success: function(data){
+                console.log(data)
+                $(function(){
+                // jQuery command to get/read file from testing.csv
+                $.get('data-prep/example-streamflow.csv', function(csvData) {
+                	var myChart = Highcharts.chart('container', {
+                		chart: {
+		                	zoomType: 'x',  // describes what axis to zoom in on when a user decides to zoom on certain data
+		                },
+		                title: {
+		                    text: 'Boulder Creek near Longmont (06730500)' // title of chart
+		                },
+						subtitle: {
+		                    text: 'Source:  CDSS HydroBase' // title of chart
+		                },
+						colors: ['#b30000', '#fe9929', 'green', '#6baed6', '#08519c'],
+		                xAxis: {
+		                    type: 'datetime',   // datatype of x axis (YYYY-MM-DD, MM-DD-YYYY, etc.)
+							labels: {
+								format: '{value:%b-%e}'
+								},
+		                    title: {
+		                        text: 'Date'    // x axis title
+		                    },
+		                    gridLineWidth: 1    // line width of grid
+		                },
+		                yAxis: {
+		                    title: {
+		                        text: 'Discharge (cfs)',  // y axis title
+		                    },
+		                },
+		                tooltip: {  // control what the tooltip displays when a user hovers over a data point
+		                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>',
+		                    valueDecimals: 0, // how many decimals to show 
+							xDateFormat: '%b %d',
+		                    split: true
+		                },
+		                legend: {
+		                    enabled: true   // show legend
+		                },
+                		data: {
+                  			csv: csvData    // data to be plotted
+                		},
+                		navigator: { // update chart based on zoom
+                   	 	adapToUpdatedData: true, 
+                   	 	enabled: true
+                		}
+
+                	});
+                	
+                });
+
+            });
+            }
+        })
+    </script>
+</body>
+
+
+
+
+
+
+
+
+
+  

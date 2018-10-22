@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TS-Tool-Line-Symbology</title>
+    <!-- Javascript -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="javascript/highstock-6.1.4.js"></script>
+    <script src="javascript/data.js"></script>
+
+</head>
+
+<body>
+    <div id="container" style="min-width:300px; max-width: 1200px; height:600px;"></div>
+
+    <script>
+        var configurationFile = "./data-files/config1.json";
+        $.ajax({
+            url: configurationFile,
+            async: false,
+            dataType: 'json',
+            error: function(error){
+                console.log('issue')
+            },
+            success: function(data){
+                console.log(data)
+                //read json configuration properties
+                $(function() {
+                    Highcharts.setOptions(data.Properties_global);
+                });
+                $(function(){
+                    // jQuery command to get/read file from testing.csv
+                    var myChart = Highcharts.chart('container', { series : [] });
+                    //myChart.series[0].remove(true);
+
+                    $.get('data-prep/example-precipitation-combined.csv', function(csvData) {
+                        myChart.addSeries({
+
+                	        series: {
+                                data: {
+                  			       csv: csvData    // data to be plotted
+                                }
+                            }
+                	    });
+                        //update properties that depend on data
+                	    myChart.update(data.Properties_1);
+                    });
+                    myChart.redraw();
+                    //$.get('data-prep/example-streamflow-combined.csv', function(csvData) {
+                    //    var myChart = Highcharts.chart('container', {
+                    //        series: {
+                    //            data: {
+                    //               csv: csvData    // data to be plotted
+                    //            }
+                    //        }
+                    //    });
+                    //    //update properties that depend on data
+                    //    myChart.update(data.Properties_2);
+                    //});
+                });
+
+                //$(function(){
+                // jQuery command to get/read file from testing.csv
+                //    $.get('data-prep/example-streamflow-combined.csv', function(csvData) {
+                //        var myChart = Highcharts.chart('container', {
+                //            data: {
+                //                csv: csvData    // data to be plotted
+                //            }
+                //        });
+                //        //update properties that depend on data
+                //        myChart.update(data.Properties_2);
+                //    });
+                //});
+
+            }
+        })
+        //see: http://jsfiddle.net/highcharts/Vf3yT/ for defining multiple charts
+    </script>
+</body>
+
+</html>
+
