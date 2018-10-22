@@ -1,0 +1,147 @@
+{	
+
+	"Properties_global": {
+
+		"chart": {
+			"zoomType": "x"
+		},
+		
+		"title": {
+			"text": "Hansen Supply Canals Water Volume"
+		},
+		"subtitle": {
+            "text": "Source: CDSS Hydrobase"
+        },
+
+		"plotOptions": {
+    		"line": {
+      			"marker": {
+      				"enabled": false,
+      				"radius": 2
+      			},
+      			"states": {
+      				"hover": {
+      					"lineWidth": 2
+      				}
+      			}
+      			
+   			},
+   			"column": {
+            	"shadow": false,
+            	"borderWidth": 0
+        	}
+  		},
+
+		"xAxis": {
+			"reversed": false,
+			"gridLineWidth": 1,
+			"type": "datetime",
+			"labels": {
+				"format": "{value:%Y-%b-%e}",
+				"padding": 10
+			},
+			"title": {
+				"text": "date"
+			}
+			
+		},
+		"yAxis": {
+			"reversed": true,
+			"title": {
+				"text": "Discharge (cfs)"
+			},
+			"offset": 10
+			
+		},
+		
+		"tooltip": {
+ 			"pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
+			"valueDecimals": 2,
+			"split": true
+		},
+
+		"legend": {
+			"enabled": true
+		},
+		
+		"navigator": {
+        	"adapToUpdatedData": true, 
+       		"enabled": true
+        }
+	},
+
+
+
+
+	"Properties_1": {
+		
+
+		"chart": {
+			"zoomType": "x"
+		},
+		
+
+		"xAxis": {
+			"reversed": false,
+			"gridLineWidth": 1,
+			"type": "datetime",
+			"labels": {
+				"format": "{value:%Y-%b-%e}",
+				"padding": 10
+			},
+			"title": {
+				"text": "date"
+			}
+			
+		},
+		"yAxis": {
+			"reversed": true,
+			"title": {
+				"text": "Discharge (cfs)"
+			},
+			"offset": 10
+			
+		},
+		"series": [
+			{
+    		"name": "Precipitation"
+			}
+		]
+	},
+
+
+	"Properties_2": {
+		
+
+		"chart": {
+			"zoomType": "x"
+		},
+		
+
+		"xAxis": {
+			"gridLineWidth": 1,
+			"type": "datetime",
+			"labels": {
+				"format": "{value:%Y-%b-%e}",
+				"padding": 10
+			},
+			"title": {
+				"text": "date"
+			}
+			
+		},
+		"yAxis": {
+			"title": {
+				"text": "Discharge (cfs)"
+			},
+			"offset": 10
+			
+		},
+		"series": [
+			{
+    		"name": "Streamflow"
+			}
+		]
+	}
+
+}

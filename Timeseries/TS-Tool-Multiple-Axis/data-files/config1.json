@@ -1,0 +1,98 @@
+{
+	"Properties": {
+		
+
+		"chart": {
+			"zoomType": "xy"
+		},
+		
+		"title": {
+			"text": "Title"
+		},
+		"subtitle": {
+            "text": "Source: somewhere"
+        },
+
+		"plotOptions": {
+    		"line": {
+      			"marker": {
+      				"enabled": false,
+      				"radius": 2
+      			},
+      			"states": {
+      				"hover": {
+      					"lineWidth": 2
+      				}
+      			}
+      			
+   			},
+   			"column": {
+            	"shadow": false,
+            	"borderWidth": 0
+        	}
+  		},
+
+
+
+		"xAxis": {
+			"gridLineWidth": 1,
+			"type": "datetime",
+			"labels": {
+				"format": "{value:%Y/%b/%e %H}",
+				"padding": 10
+			},
+			"title": {
+				"text": "date"
+			}
+			
+		},
+
+		"yAxis": [{
+			"labels": {
+				"offset": 10
+			},
+			"title": {
+				"text": "Stage"
+			},
+			"opposite": false
+
+		}, {
+			"labels": {
+				"offset": 10
+			},
+			"title": {
+				"text": "Discharge (cfs)"
+			},
+			"opposite": true
+		}],
+
+		"series": [
+			{
+   
+    		"type": "line",
+    		"name": "Adatunco Stage"
+
+			},
+			{
+    		"yAxis": 1,
+    		"type": "line",
+    		"name": "Adatunco Discharge",
+    		"color": "red"
+			}
+		],
+		"tooltip": {
+ 			"pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
+			"valueDecimals": 2,
+			"split": true
+		},
+
+		"legend": {
+			"enabled": true
+		},
+		
+		"navigator": {
+        	"adapToUpdatedData": true, 
+       		"enabled": true
+        }
+	}
+}

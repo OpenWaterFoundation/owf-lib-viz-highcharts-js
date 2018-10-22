@@ -1,0 +1,5 @@
+# ES1904 - HANSEN SUPPLY CANAL TO CACHE LA POUDRE RIVER NEAR FORT COLLINS
+ES1904.DWR.Streamflow.Day~HydroBase
+# HSCPVDCO - HANSEN SUP CAN TO POUDRE VALLEY CANAL NEAR FT. C
+HSCPVDCO.DWR.Streamflow.Day~HydroBase
+WriteDelimitedFile(OutputFile="2series-example.csv",OutputStart="1/1/1960",OutputEnd="1/1/2000")
