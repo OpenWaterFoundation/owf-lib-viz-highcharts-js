@@ -1,11 +1,11 @@
-## TS-Tool-line-symbology
+## TS-Tool-Multiple-Axis
 
-Building on the line-symbology example, this example demonstrates how to utilize CSV water data from TSTool to create a highcharts graph, along with a separate .json configuration file.
+Building on the line-symbology example, this example demonstrates how to utilize CSV water data from TSTool to create a highcharts graph, along with a separate .json configuration file.  It incorporates multiple series with a separate y-axis.
 
 ## File Structure
 
 ```
-├── TS-Tool-line-symbology
+├── TS-Tool-Multiple-Axis
 │   ├── README.md
 │   ├── index.html
 │   ├── css
@@ -20,7 +20,7 @@ Building on the line-symbology example, this example demonstrates how to utilize
 │   │   ├── config1.json
 │   ├── data-prep
 │   │   ├── data_prep.TSTool
-│   │   ├── example-streamflow.csv
+│   │   ├── stage-discharge-alva-b-adams.csv
 ```
 
 ## Using an External .json File with External .csv file
