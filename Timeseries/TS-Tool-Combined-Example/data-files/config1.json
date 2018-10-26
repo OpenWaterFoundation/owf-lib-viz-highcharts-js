@@ -1,6 +1,6 @@
 {	
 
-	"Properties_global": {
+	"Properties": {
 
 		"chart": {
 			"zoomType": "x"
@@ -45,14 +45,22 @@
 			}
 			
 		},
-		"yAxis": {
+		"yAxis": [{
 			"reversed": true,
+			"title": {
+				"text": "Rainfall"
+			},
+			"offset": 10,
+			"height": "50%"
+		},
+		{
+			"reversed": false,
 			"title": {
 				"text": "Discharge (cfs)"
 			},
-			"offset": 10
-			
-		},
+			"offset": 10,
+			"height": "50%"
+		}],
 		
 		"tooltip": {
  			"pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
@@ -67,7 +75,18 @@
 		"navigator": {
         	"adapToUpdatedData": true, 
        		"enabled": true
-        }
+        },
+
+        "series": [
+			{
+    		"name": "Precipitation",
+    		"type": "line"
+			},
+			{
+			"name": "Streamflow",
+			"type": "column"
+			}
+		]
 	},
 
 

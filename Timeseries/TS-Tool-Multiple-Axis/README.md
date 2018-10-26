@@ -25,44 +25,46 @@ Building on the line-symbology example, this example demonstrates how to utilize
 
 ## Using an External .json File with External .csv file
 
-When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  The `highcharts.stockChart` option applies default configuration values that misrepresent data.  The stockChart elements, such as a navigator, can be instead accessed by including them within the constructor itself.  The data must also be loaded directly into the constructor instead of the .json configuration file.  See the following example from [index.html:](https://github.com/OpenWaterFoundation/owf-lib-viz-highcharts-js/blob/master/Timeseries/TS-Tool-line-symbology/index.html)
+When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  The `highcharts.stockChart` option applies default configuration values that misrepresent data.  The stockChart elements, such as a navigator, can be instead accessed by using `Highcharts.setOptions(myConfigFile)` before calling the constructor.  The data itself must be loaded directly into the constructor instead of the .json configuration file.  See the following example from [index.html:](https://github.com/OpenWaterFoundation/owf-lib-viz-highcharts-js/blob/master/Timeseries/TS-Tool-Multiple-Axis/index.html)
 
 ```
-$.get('data-prep/example-streamflow.csv', function(csvData) {
-  var myChart = Highcharts.chart('container', {
-  	data: {
-  			csv: csvData    // data to be plotted
-  	},
-  	navigator: { // update chart based on zoom
-   	 	adapToUpdatedData: true,
-   	 	enabled: true
-  	}
-  });
-  myChart.update(data.Properties);
+$(function(){
+    //read json configuration properties
+    Highcharts.setOptions(data.Properties);
+    // jQuery command to get/read file from csv
+    $.get('data-prep/stage-discharge-alva-b-adams.csv', function(csvData) {
+      var myChart = Highcharts.chart('container', {
+        data: {
+            csv: csvData    // data to be plotted
+        },
+      });
+      //update properties that depend on data
+      myChart.update(data.Properties);
+
+    });
 });
 ```
 
-Additionally, html is not compatible with .json format.  Any html options specifiers, such as tooltip pointFormat, should be specified in the index.html constructor:
-
-```
-$.get('data-prep/example-streamflow.csv', function(csvData) {
-  var myChart = Highcharts.chart('container', {
-    data: {
-        csv: csvData    // data to be plotted
-    },
-    navigator: { // update chart based on zoom
-      adapToUpdatedData: true,
-      enabled: true
-    },
-    tooltip: {  // control what the tooltip displays when a user hovers over a data point
-      pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>'
-    }
-  });
-  myChart.update(data.Properties);
-});
-```
+Additionally, some configuration properties depend on data values and thus must be set after data is read.  To update the chart with these properties, include `myChart.update(myConfigFile)` after data is read inside the constructor, as seen above.
 
 For more information about highStock elements, see the online [documentation](https://www.highcharts.com/docs/chart-concepts/understanding-highstock)
+
+## dateTime Options
+
+Highcharts includes several built-in parsers to deal with dateTime data from CSV files.  However, if the CSV dateTime format does not match one of these formats, a custom parser can deal with this issue.  The example below parses the date column of a CSV file bases on `-` and space, using `dateTime.split(/-| /)`.  Thus, the CSV would include dates such as 2017-01-01 01.
+
+```
+data: {
+    //custom parser for dateTime
+    parseDate: function (dateTime) {
+        var arr = dateTime.split(/-| /),
+        fullDate = new Date(Date.UTC(arr[0], arr[1], arr[2], arr[3]));
+        return fullDate.getTime();
+    },
+    csv: csvData    // data to be plotted
+},
+```
+Note that the parser is part of the data section in the chart constructor, inside index.html.
 
 ## .JSON Options
 

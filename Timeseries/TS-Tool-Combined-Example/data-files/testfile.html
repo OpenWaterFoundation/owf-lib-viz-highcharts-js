@@ -1,10 +1,4 @@
 
-this combination works:
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://code.highcharts.com/stock/highstock.js"></script>
-    <script src="javascript/data.js"></script>
-
-
 loading from .json file:
 
 <body>
@@ -39,6 +33,64 @@ loading from .json file:
     </script>
 
 </body>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TS-Tool-Combined-Example</title>
+    <!-- Javascript -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="javascript/highstock-6.1.4.js"></script>
+    <script src="javascript/data.js"></script>
+
+</head>
+
+<body>
+    <div id="container" style="min-width:300px; max-width: 1200px; height:600px;"></div>
+
+    <script>
+        var configurationFile = "./data-files/config1.json";
+        $.ajax({
+            url: configurationFile,
+            async: false,
+            dataType: 'json',
+            error: function(error){
+                console.log('issue')
+            },
+            success: function(data){
+                console.log(data)
+                //read json configuration properties
+                $(function() {
+                    Highcharts.setOptions(data.Properties);
+                });
+                $(function(){
+                // jQuery command to get/read file from testing.csv
+                $.get('data-prep/example-combined.csv', function(csvData) {
+                    var myChart = Highcharts.chart('container', {
+                        data: {
+                            csv: csvData    // data to be plotted
+                        },
+                    });
+                    //update properties that depend on data
+                    myChart.update(data.Properties);
+
+                });
+            });
+            }
+        })
+    </script>
+</body>
+
+</html>
+
+
+
 
 
 
