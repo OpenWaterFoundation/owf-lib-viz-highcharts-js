@@ -23,23 +23,28 @@
             },
             success: function(data){
                 console.log(data)
-                //read json configuration properties
-                $(function() {
-                    Highcharts.setOptions(data.Properties);
-                });
+                
                 $(function(){
-                // jQuery command to get/read file from testing.csv
-                $.get('data-prep/stage-discharge-alva-b-adams.csv', function(csvData) {
-                	var myChart = Highcharts.chart('container', {
-                		data: {
-                  			csv: csvData    // data to be plotted
-                		}
-                	});
-                    //update properties that depend on data
-                	myChart.update(data.Properties);
+                    //read json configuration properties
+                    Highcharts.setOptions(data.Properties);
+                    // jQuery command to get/read file from csv
+                    $.get('data-prep/stage-discharge-alva-b-adams.csv', function(csvData) {
+                    	var myChart = Highcharts.chart('container', {
+                    		data: {
+                                //custom parser for dateTime
+                                parseDate: function (dateTime) {
+                                    var arr = dateTime.split(/-| /),
+                                    fullDate = new Date(Date.UTC(arr[0], arr[1], arr[2], arr[3]));
+                                    return fullDate.getTime();
+                                },
+                      			csv: csvData    // data to be plotted
+                    		},
+                    	});
+                        //update properties that depend on data
+                    	myChart.update(data.Properties);
 
+                    });
                 });
-            });
             }
         })
     </script>

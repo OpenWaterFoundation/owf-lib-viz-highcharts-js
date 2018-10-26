@@ -1,14 +1,16 @@
-
-this combination works:
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TS-Tool-Multiple-Axis</title>
+    <!-- Javascript -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="javascript/highstock-6.1.4.js"></script>
     <script src="javascript/data.js"></script>
 
-
-loading from .json file:
+</head>
 
 <body>
-    <div id="container" style="min-width:300px; max-width: 800px; height:600px;"></div>
+    <div id="container" style="min-width:300px; max-width: 1200px; height:600px;"></div>
 
     <script>
         var configurationFile = "./data-files/config1.json";
@@ -21,25 +23,27 @@ loading from .json file:
             },
             success: function(data){
                 console.log(data)
+                //read json configuration properties
+                $(function() {
+                    Highcharts.setOptions(data.Properties);
+                });
                 $(function(){
                 // jQuery command to get/read file from testing.csv
-                $.get('data-prep/example-streamflow.csv', function(csvData) {
-                	var myChart = Highcharts.chart('container', {data: {csv: csvData}});myChart.update(data.Properties)
-                	
-                	Highcharts.setOptions({
-						lang: {
-							thousandsSep: ','
-						}
-					});
-                });
+                $.get('data-prep/stage-discharge-alva-b-adams.csv', function(csvData) {
+                    var myChart = Highcharts.chart('container', {
+                        data: {
+                            csv: csvData    // data to be plotted
+                        }
+                    });
+                    //update properties that depend on data
+                    myChart.update(data.Properties);
 
+                });
             });
             }
         })
     </script>
-
 </body>
-
 
 
 
@@ -122,9 +126,110 @@ hardcoded data:
 
 
 
+JSON:
 
 
 
+
+
+
+{
+    "Properties": {
+        
+
+        "chart": {
+            "zoomType": "xy"
+        },
+        
+        "title": {
+            "text": "Wind Direction"
+        },
+        "subtitle": {
+            "text": "Source: Steve's Email"
+        },
+
+        "plotOptions": {
+            "line": {
+                "marker": {
+                    "enabled": false,
+                    "radius": 2
+                },
+                "states": {
+                    "hover": {
+                        "lineWidth": 2
+                    }
+                }
+                
+            }
+        },
+
+
+
+        "xAxis": {
+            "gridLineWidth": 1,
+            "type": "datetime",
+            "labels": {
+                "format": "{value:%Y/%b/%e %I:%M:%S}",
+                "padding": 10
+            },
+            "title": {
+                "text": "date"
+            }
+            
+        },
+
+        "yAxis": [{
+            "labels": {
+                "offset": 10,
+                "format": "{value}°"
+            },
+            "title": {
+                "text": "Degree"
+            },
+            "opposite": false,
+            "max": 360,
+            "tickInterval": 45,
+            "endOnTick": false
+
+        }, {
+            "labels": {
+                "offset": 10,
+                "format": "{value}"
+            },
+            "type": "category",
+            "title": {
+                "text": "Cardinal Direction"
+            },
+            "opposite": true,
+            "categories": ["Hello", "East", "South", "West", "North"],
+            "tickPositions": [0, 90, 180, 270, 360]
+
+        }],
+
+        "series": [
+            {
+   
+            "type": "line",
+            "name": "Wind Direction"
+
+            }
+        ],
+        "tooltip": {
+            "pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
+            "valueDecimals": 2,
+            "split": true
+        },
+
+        "legend": {
+            "enabled": true
+        },
+        
+        "navigator": {
+            "adapToUpdatedData": true, 
+            "enabled": true
+        }
+    }
+}
 
 
   
