@@ -5,12 +5,11 @@
         "chart": {
             "zoomType": "xy"
         },
-        
         "title": {
-            "text": "Alva B. Adams Streamflow vs. Stage"
+            "text": "${csv} - ${StationId} - Streamflow Data"
         },
         "subtitle": {
-            "text": "Source: somewhere"
+            "text": "Source: CDSS Hydrobase"
         },
 
         "plotOptions": {
@@ -24,11 +23,13 @@
                         "lineWidth": 2
                     }
                 }
-                
             },
             "column": {
                 "shadow": false,
                 "borderWidth": 0
+            },
+            "series": {
+                "showInNavigator": true
             }
         },
         "xAxis": {
@@ -36,10 +37,10 @@
             "type": "datetime",
             "tickPixelInterval": 160,
             "labels": {
-                "format": "{value:%Y/%b/%e %H}"
+                "format": "{value:%m-%e-%Y %I %p}"
             },
             "title": {
-                "text": "date"
+                "text": "Date"
             }
             
         },
@@ -48,7 +49,10 @@
                 "offset": 10
             },
             "title": {
-                "text": "Stage"
+                "text": "Stage",
+                "style": {
+                    "color": "red"
+                }
             },
             "opposite": false,
             "min": 0
@@ -58,7 +62,10 @@
                 "offset": 10
             },
             "title": {
-                "text": "Discharge (cfs)"
+                "text": "Discharge (cfs)",
+                "style": {
+                    "color": "blue"
+                }
             },
             "opposite": true
         }],
@@ -67,14 +74,22 @@
             {
    
             "type": "line",
-            "name": "Adatunco Stage"
-
+            "name": "Adatunco Stage",
+            "color": "blue",
+            "navigatorOptions": {
+                "lineColor": "blue",
+                "color": null
+            }
             },
             {
             "yAxis": 1,
             "type": "line",
             "name": "Adatunco Streamflow (cfs)",
-            "color": "red"
+            "color": "red",
+            "navigatorOptions": {
+                "lineColor": "red",
+                "color": null
+            }
             }
         ],
         "tooltip": {

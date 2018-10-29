@@ -10,44 +10,110 @@
 </head>
 
 <body>
-    <div id="container" style="min-width:300px; max-width: 1200px; height:600px;"></div>
+    <div id="container" style="min-width:300px; max-width: 1200px; height:600px;">
 
-    <script>
-        var configurationFile = "./data-files/config1.json";
-        $.ajax({
-            url: configurationFile,
-            async: false,
-            dataType: 'json',
-            error: function(error){
-                console.log('issue')
-            },
-            success: function(data){
-                console.log(data)
-                
-                $(function(){
-                    //read json configuration properties
-                    Highcharts.setOptions(data.Properties);
-                    // jQuery command to get/read file from csv
-                    $.get('data-prep/stage-discharge-alva-b-adams.csv', function(csvData) {
-                    	var myChart = Highcharts.chart('container', {
-                    		data: {
-                                //custom parser for dateTime
-                                parseDate: function (dateTime) {
-                                    var arr = dateTime.split(/-| /),
-                                    fullDate = new Date(Date.UTC(arr[0], arr[1], arr[2], arr[3]));
-                                    return fullDate.getTime();
-                                },
-                      			csv: csvData    // data to be plotted
-                    		},
-                    	});
-                        //update properties that depend on data
-                    	myChart.update(data.Properties);
+        <script>
+            var configurationFile = "./data-files/config1.json";
+            var url = new URL(window.location.href);
+            var StationIdValue = url.searchParams.get("stationId");
+            var csvValue = url.searchParams.get("csv");
+            console.log(csvValue);
 
-                    });
-                });
+            //Parse a title from the JSON file for values inside '${ }' and replace with values from the URL
+            function expand_parameter_value(parameter_value, properties){
+                var search_pos = 0,
+                    delim_start = "${",
+                    delim_end = "}";
+                var b = "";
+
+                while(search_pos < parameter_value.length){
+                    var found_pos_start = parameter_value.indexOf(delim_start),
+                        found_pos_end = parameter_value.indexOf(delim_end),
+                        prop_val = ""
+                        prop_name = parameter_value.substr((found_pos_start + 2), ((found_pos_end - found_pos_start) - 2)),
+                        prop_val = properties[prop_name];
+
+                        if(found_pos_start == -1){
+                            return b;
+                        }
+
+                    b = parameter_value.substr(0, found_pos_start) + prop_val + parameter_value.substr(found_pos_end + 1, parameter_value.length);
+
+                    search_pos = found_pos_start + prop_val.length;
+                    parameter_value = b;
+                }
+                return b;
             }
-        })
-    </script>
+
+
+            var myChart;
+            $.ajax({
+                url: configurationFile,
+                async: false,
+                dataType: 'json',
+                error: function(error){
+                    console.log('issue')
+                },
+                success: function(data){
+                    console.log(data)
+                    
+                    $(function(){
+                        //read json configuration properties
+                        Highcharts.setOptions(data.Properties);
+                        
+                        //load data name into variable
+                        var dataFile = "data-prep/stage-discharge-alva-b-adams.csv";
+                        //Parse date name, remove extension
+                        //var title = dataFile.replace(/-/g, " ");
+                        //title = title.slice(0, -4);
+                        // jQuery command to get/read file from csv
+                        $.get(dataFile, function(csvData) {
+                        	myChart = Highcharts.chart('container', {
+                        		//title: {
+                                //    text: title
+                                //},
+                                data: {
+                                    //custom parser for dateTime
+                                    parseDate: function (dateTime) {
+                                        var arr = dateTime.split(/-| /),
+                                        fullDate = new Date(Date.UTC(arr[0], arr[1], arr[2], arr[3]));
+                                        return fullDate.getTime();
+                                    },
+                          			csv: csvData    // data to be plotted
+                        		}
+                        	});
+                            //update properties that depend on data
+                        	myChart.update(data.Properties);
+
+                            //Update title based on URL data
+                            var newTitle = data.Properties.title.text;
+                            newTitle = expand_parameter_value(newTitle, {"StationId": StationIdValue, "csv": csvValue});
+ 
+                            myChart.update({
+                                title: {
+                                    text: newTitle
+                                }
+                            });
+                        });
+                    });
+                }
+            })
+            function selectAllFunction(){
+                for(var i = 0; i < myChart.series.length; i++){
+                    var series = myChart.series[i];
+                    series.show();
+                }
+            }
+            function deselectAllFunction(){
+                for(var i = 0; i < myChart.series.length; i++){
+                    var series = myChart.series[i];
+                    series.hide();
+                }
+            }
+        </script>
+    </div>
+    <button id="selectAll" onclick="selectAllFunction()">Select All Series</button>
+    <button id="deselectAll" onclick="deselectAllFunction()">Deselect All Series</button>
 </body>
 
 </html>
