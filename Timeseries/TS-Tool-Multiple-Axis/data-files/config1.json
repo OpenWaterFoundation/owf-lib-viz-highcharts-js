@@ -6,7 +6,7 @@
             "zoomType": "xy"
         },
         "title": {
-            "text": "${csv} - ${StationId} - Streamflow Data"
+            "text": "${csv} - ${stAtioNid} - Streamflow Data"
         },
         "subtitle": {
             "text": "Source: CDSS Hydrobase"

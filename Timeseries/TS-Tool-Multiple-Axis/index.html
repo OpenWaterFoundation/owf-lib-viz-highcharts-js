@@ -13,36 +13,66 @@
     <div id="container" style="min-width:300px; max-width: 1200px; height:600px;">
 
         <script>
+
+ 
             var configurationFile = "./data-files/config1.json";
             var url = new URL(window.location.href);
+            //Create a properties object to store different values from the URL under their corresponding names
+            var properties = {};
+
             var StationIdValue = url.searchParams.get("stationId");
+            properties.stationid = StationIdValue;
+
             var csvValue = url.searchParams.get("csv");
-            console.log(csvValue);
+            properties.csv = csvValue;
 
             //Parse a title from the JSON file for values inside '${ }' and replace with values from the URL
-            function expand_parameter_value(parameter_value, properties){
+            //If the value inside the delimiters does not appear in the URL, it is ignored and not updated
+            function expand_parameter_value(title, properties){
                 var search_pos = 0,
                     delim_start = "${",
                     delim_end = "}";
                 var b = "";
 
-                while(search_pos < parameter_value.length){
-                    var found_pos_start = parameter_value.indexOf(delim_start),
-                        found_pos_end = parameter_value.indexOf(delim_end),
-                        prop_val = ""
-                        prop_name = parameter_value.substr((found_pos_start + 2), ((found_pos_end - found_pos_start) - 2)),
-                        prop_val = properties[prop_name];
+                while(search_pos < title.length){
+                    //begining search_pos is inclusive
+                    var found_pos_start = title.indexOf(delim_start, search_pos)
+                    console.log(found_pos_start);
+                    //end search_pos is exclusive, so add 1
+                    //otherwise, the new search position will start on an end delimiter
+                    var found_pos_end = title.indexOf(delim_end, search_pos + 1)
+                    var prop_val = ""
+                    var prop_name = title.substr((found_pos_start + 2), ((found_pos_end - found_pos_start) - 2))
+                    
+                    //make property names case-insensitive
+                    prop_name = prop_name.toLowerCase();
 
-                        if(found_pos_start == -1){
-                            return b;
-                        }
-
-                    b = parameter_value.substr(0, found_pos_start) + prop_val + parameter_value.substr(found_pos_end + 1, parameter_value.length);
-
-                    search_pos = found_pos_start + prop_val.length;
-                    parameter_value = b;
+                    //replace prop_val with the corresponding value from properties (if it doesn't exist, this makes prop_val null)
+                    prop_val = properties[prop_name];
+ 
+                    //end condition:  if no more delimiters are present in title, the .indexOf method sets found_pos to -1
+                    if(found_pos_start == -1){
+                        return b;
+                    }
+                    //If the value is not in the URL, do not change the title
+                    //move search position to the end of the delimiter set
+                    if (prop_val == null){
+                        b = title;
+                        search_pos = found_pos_end;
+                        title = b;
+                    }
+                    //If the value is in the URL (and thus also in properties), change the title by removing the delimiters and replacing prop_name with prop_value (from the URL)
+                    //update search_pos to position just after end delimiter
+                    else {
+                        b = title.substr(0, found_pos_start) + prop_val + title.substr(found_pos_end + 1, title.length);
+                        search_pos = found_pos_start + prop_val.length;
+                        title = b;
+                    }
                 }
+
+
                 return b;
+
             }
 
 
@@ -63,9 +93,7 @@
                         
                         //load data name into variable
                         var dataFile = "data-prep/stage-discharge-alva-b-adams.csv";
-                        //Parse date name, remove extension
-                        //var title = dataFile.replace(/-/g, " ");
-                        //title = title.slice(0, -4);
+
                         // jQuery command to get/read file from csv
                         $.get(dataFile, function(csvData) {
                         	myChart = Highcharts.chart('container', {
@@ -87,8 +115,7 @@
 
                             //Update title based on URL data
                             var newTitle = data.Properties.title.text;
-                            newTitle = expand_parameter_value(newTitle, {"StationId": StationIdValue, "csv": csvValue});
- 
+                            newTitle = expand_parameter_value(newTitle, properties);
                             myChart.update({
                                 title: {
                                     text: newTitle

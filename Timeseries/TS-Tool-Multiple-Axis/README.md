@@ -88,3 +88,13 @@ When loading csv data that contains multiple series, highCharts will by default 
 ```
 
 Use brackets when setting options for a series.
+
+## Parsing URL for properties
+
+With an implementation where the data is loaded from different sources, it may be necessary to dynamically change the title of the graph based on parameters specified in the URL.  To read in the URL as a variable, use the url constructor with the following command: 
+
+```
+var url = new URL(window.location.href)
+```
+
+In this line, `window.location.href` returns the current page address.  Furthermore, the url variable can be parsed with `url.searchParams.get()`.  If a specific parameter occurs in the url, it can be assigned to another variable and added to a properties object.
