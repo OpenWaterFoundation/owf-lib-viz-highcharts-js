@@ -1,6 +1,6 @@
-## TS-Tool-Combined-Example
+## TS-Tool-Dynamic-Example
 
-This example is in development.
+This example is mostly the same as TS-Tool-Multiple-Axis, but it adds dynamic functionality to how the graph loads the title and buttons to select all series and hide the navigator.
 
 ## File Structure
 
@@ -20,69 +20,31 @@ This example is in development.
 │   │   ├── config1.json
 │   ├── data-prep
 │   │   ├── data_prep.TSTool
-│   │   ├── example-streamflow.csv
+│   │   ├── stage-discharge-alva-b-adams.csv
 ```
 
-## Using an External .json File with External .csv file
+## Parsing URL for properties
 
-When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  The `highcharts.stockChart` option applies default configuration values that misrepresent data.  The stockChart elements, such as a navigator, can be instead accessed by including them within the constructor itself.  The data must also be loaded directly into the constructor instead of the .json configuration file.  See the following example from [index.html:](https://github.com/OpenWaterFoundation/owf-lib-viz-highcharts-js/blob/master/Timeseries/TS-Tool-line-symbology/index.html)
+With an implementation where the data is loaded from different sources, it may be necessary to dynamically change the title of the graph based on parameters specified in the URL.  To read in the URL as a variable, use the url constructor with the following command: 
 
 ```
-$.get('data-prep/example-streamflow.csv', function(csvData) {
-  var myChart = Highcharts.chart('container', {
-  	data: {
-  			csv: csvData    // data to be plotted
-  	},
-  	navigator: { // update chart based on zoom
-   	 	adapToUpdatedData: true,
-   	 	enabled: true
-  	}
-  });
-  myChart.update(data.Properties);
+var url = new URL(window.location.href)
+```
+
+In this line, `window.location.href` returns the current page address.  Furthermore, the url variable can be parsed with `url.searchParams.get()`.  If a specific parameter occurs in the url, it can be assigned to another variable and added to a properties object.
+
+## Updating Title
+
+The command `myChart.update()` can change the title adfter the data has been loaded, according to the properties saved from the URL.  See the following section of code:
+
+```
+var newTitle = data.Properties.title.text;
+    newTitle = expand_parameter_value(newTitle, properties);
+    myChart.update({
+        title: {
+            text: newTitle
+        }
 });
 ```
 
-Additionally, html is not compatible with .json format.  Any html options specifiers, such as tooltip pointFormat, should be specified in the index.html constructor:
-
-```
-$.get('data-prep/example-streamflow.csv', function(csvData) {
-  var myChart = Highcharts.chart('container', {
-    data: {
-        csv: csvData    // data to be plotted
-    },
-    navigator: { // update chart based on zoom
-      adapToUpdatedData: true,
-      enabled: true
-    },
-    tooltip: {  // control what the tooltip displays when a user hovers over a data point
-      pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>'
-    }
-  });
-  myChart.update(data.Properties);
-});
-```
-
-For more information about highStock elements, see the online [documentation](https://www.highcharts.com/docs/chart-concepts/understanding-highstock)
-
-## .JSON Options
-
-* Labels on the x-axis may be formatted too close together by default.  To make them more readable, use the `padding` or `step` options.  By default, padding is 5.  Step layers the labels on different lines to make room for more information- specify the number of layers following the option, eg. `"step": 2`
-* In the tooltip option, set `split: true` to display the data values for 2 series at once
-
-## Multiple Series
-
-When loading csv data that contains multiple series, highCharts will by default load the name from the header of the csv file as the series name.  To override this, include a series option section in the .json file:
-
-```
-"series": [
-      {
-        "name": "Canal to Cache La Poudre River"
-      },
-      {
-        "name": "Canal to Poudre Valley Canal",
-        "color": "red"
-      }
-    ],
-```
-
-Use brackets when setting options for a series.
+A new title variable has been created and passed through the expand_parameter_value() function, which replaces values surrounded by delimiters in the title from the .json file with the corresponding values from the URL, as long as they exist.  If the values are not present in the URL, that section of the title is left unchanged.
