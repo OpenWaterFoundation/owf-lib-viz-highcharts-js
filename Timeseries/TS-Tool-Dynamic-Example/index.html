@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TS-Tool-Combined-Example</title>
+    <!-- Javascript -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="javascript/highstock-6.1.4.js"></script>
+    <script src="javascript/data.js"></script>
+
+</head>
+
+<body>
+    <div id="container" style="min-width:300px; max-width: 1200px; height:600px;"></div>
+
+    <script>
+        ['mousemove', 'touchmove', 'touchstart'].forEach(function (eventType) {
+            document.getElementById('container').addEventListener(
+                eventType,
+                function (e) {
+                    var chart,
+                        point,
+                        i,
+                        event;
+
+                    for (i = 0; i < Highcharts.charts.length; i = i + 1) {
+                        chart = Highcharts.charts[i];
+                        // Find coordinates within the chart
+                        event = chart.pointer.normalize(e);
+                        // Get the hovered point
+                        point = chart.series[0].searchPoint(event, true);
+
+                        if (point) {
+                            point.highlight(e);
+                        }
+                    }
+                }
+            );
+        });
+
+        Highcharts.Pointer.prototype.reset = function () {
+            return undefined;
+        };
+
+        Highcharts.Point.prototype.highlight = function (event) {
+            event = this.series.chart.pointer.normalize(event);
+            this.onMouseOver(); // Show the hover marker
+            this.series.chart.tooltip.refresh(this); // Show the tooltip
+            this.series.chart.xAxis[0].drawCrosshair(event, this); // Show the crosshair
+        };
+
+        function syncExtremes(e) {
+            var thisChart = this.chart;
+
+            if (e.trigger !== 'syncExtremes') { // Prevent feedback loop
+                Highcharts.each(Highcharts.charts, function (chart) {
+                    if (chart !== thisChart) {
+                        if (chart.xAxis[0].setExtremes) { // It is null while updating
+                            chart.xAxis[0].setExtremes(
+                                e.min,
+                                e.max,
+                                undefined,
+                                false,
+                                { trigger: 'syncExtremes' }
+                            );
+                        }
+                    }
+                });
+            }
+        }
+
+        var configurationFile = "./data-files/config1.json";
+        $.ajax({
+            url: configurationFile,
+            async: false,
+            dataType: 'json',
+            error: function(error){
+                console.log('issue')
+            },
+            success: function(data){
+                console.log(data)
+                //read json configuration properties
+                $(function() {
+                    Highcharts.setOptions(data.Properties);
+                });
+                $(function(){
+                // jQuery command to get/read file from testing.csv
+                $.get('data-prep/example-combined.csv', function(csvData) {
+                    var myChart = Highcharts.chart('container', {
+                        data: {
+                            csv: csvData    // data to be plotted
+                        },
+                    });
+                    //update properties that depend on data
+                    myChart.update(data.Properties);
+
+                });
+            });
+            }
+        })
+
+        // see https://www.highcharts.com/demo/synchronized-charts
+
+    </script>
+
+</body>
+
+</html>
+
+
+
