@@ -50,16 +50,14 @@
 			"title": {
 				"text": "Rainfall"
 			},
-			"offset": 10,
-			"height": "50%"
+			"offset": 10
 		},
 		{
 			"reversed": false,
 			"title": {
 				"text": "Discharge (cfs)"
 			},
-			"offset": 10,
-			"height": "50%"
+			"offset": 10
 		}],
 		
 		"tooltip": {
