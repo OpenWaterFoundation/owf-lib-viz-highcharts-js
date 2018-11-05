@@ -1,3 +1,0 @@
-# USC00053005 - FORT COLLINS
-USC00053005.NOAA.Precip.Day~HydroBase
-WriteDelimitedFile(OutputFile="C:\Users\masforce\cdss-dev\GitTraining\git-repos\owf-lib-viz-highcharts-js\Timeseries\TS-Tool-Combined-Example\data-prep\example-precipitation-combined.csv",OutputStart="01/01/1970",OutputEnd="01/01/1990")

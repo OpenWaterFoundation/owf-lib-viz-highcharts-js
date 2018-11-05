@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>TS-Tool-Combined-Example</title>
+    <style>
+        body {
+        }
+        h1   {}
+        p    {
+            font-size: 15px;
+            font-family: sans-serif;
+            text-align: center;
+        }
+    </style>
+    <title>TS-Tool-Dynamic-</title>
     <!-- Javascript -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="javascript/highstock-6.1.4.js"></script>
@@ -9,102 +19,178 @@
 
 </head>
 
+
+
 <body>
-    <div id="container" style="min-width:300px; max-width: 1200px; height:600px;"></div>
+    <p>
+        The title of this graph is dynamic- it parses the URL for the properties "stationId" and "csv".  To see this in action, add <i>'/?stationId=123&csv=mycsv'</i> to the url. <br>Additional properties can be added with '&', though they must be defined in both the properties object in index.html and the json file to appear in the title.
+    </p>
+    <br>
+    <div id="container" style="margin-left: auto; margin-right: auto; min-width:300px; max-width: 1200px; height:600px;">
+        <script>
 
-    <script>
-        ['mousemove', 'touchmove', 'touchstart'].forEach(function (eventType) {
-            document.getElementById('container').addEventListener(
-                eventType,
-                function (e) {
-                    var chart,
-                        point,
-                        i,
-                        event;
+ 
+            var configurationFile = "./data-files/config1.json";
+            var url = new URL(window.location.href);
+            //Create a properties object to store different values from the URL under their corresponding names
+            var properties = {};
 
-                    for (i = 0; i < Highcharts.charts.length; i = i + 1) {
-                        chart = Highcharts.charts[i];
-                        // Find coordinates within the chart
-                        event = chart.pointer.normalize(e);
-                        // Get the hovered point
-                        point = chart.series[0].searchPoint(event, true);
+            var StationIdValue = url.searchParams.get("stationId");
+            properties.stationid = StationIdValue;
 
-                        if (point) {
-                            point.highlight(e);
-                        }
+            var csvValue = url.searchParams.get("csv");
+            properties.csv = csvValue;
+
+            //Parse a title from the JSON file for values inside '${ }' and replace with values from the URL
+            //If the value inside the delimiters does not appear in the URL, it is ignored and not updated
+            function expand_parameter_value(title, properties){
+                var search_pos = 0,
+                    delim_start = "${",
+                    delim_end = "}";
+                var b = "";
+
+                while(search_pos < title.length){
+                    //begining search_pos is inclusive
+                    var found_pos_start = title.indexOf(delim_start, search_pos)
+                    console.log(found_pos_start);
+                    //end search_pos is exclusive, so add 1
+                    //otherwise, the new search position will start on an end delimiter
+                    var found_pos_end = title.indexOf(delim_end, search_pos + 1)
+                    var prop_val = ""
+                    var prop_name = title.substr((found_pos_start + 2), ((found_pos_end - found_pos_start) - 2))
+                    
+                    //make property names case-insensitive
+                    prop_name = prop_name.toLowerCase();
+
+                    //replace prop_val with the corresponding value from properties (if it doesn't exist, this makes prop_val null)
+                    prop_val = properties[prop_name];
+ 
+                    //end condition:  if no more delimiters are present in title, the .indexOf method sets found_pos to -1
+                    if(found_pos_start == -1){
+                        return b;
+                    }
+                    //If the value is not in the URL, do not change the title
+                    //move search position to the end of the delimiter set
+                    if (prop_val == null){
+                        b = title;
+                        search_pos = found_pos_end;
+                        title = b;
+                    }
+                    //If the value is in the URL (and thus also in properties), change the title by removing the delimiters and replacing prop_name with prop_value (from the URL)
+                    //update search_pos to position just after end delimiter
+                    else {
+                        b = title.substr(0, found_pos_start) + prop_val + title.substr(found_pos_end + 1, title.length);
+                        search_pos = found_pos_start + prop_val.length;
+                        title = b;
                     }
                 }
-            );
-        });
 
-        Highcharts.Pointer.prototype.reset = function () {
-            return undefined;
-        };
 
-        Highcharts.Point.prototype.highlight = function (event) {
-            event = this.series.chart.pointer.normalize(event);
-            this.onMouseOver(); // Show the hover marker
-            this.series.chart.tooltip.refresh(this); // Show the tooltip
-            this.series.chart.xAxis[0].drawCrosshair(event, this); // Show the crosshair
-        };
+                return b;
 
-        function syncExtremes(e) {
-            var thisChart = this.chart;
+            }
+            
 
-            if (e.trigger !== 'syncExtremes') { // Prevent feedback loop
-                Highcharts.each(Highcharts.charts, function (chart) {
-                    if (chart !== thisChart) {
-                        if (chart.xAxis[0].setExtremes) { // It is null while updating
-                            chart.xAxis[0].setExtremes(
-                                e.min,
-                                e.max,
-                                undefined,
-                                false,
-                                { trigger: 'syncExtremes' }
-                            );
-                        }
+
+            var myChart;
+            //$ provides access to jQuery
+            //Performs an AJAX request to highcharts
+            $.ajax({
+                //set the url that ajax sends the request to  (in this case, a local .json file with configuration properties)
+                url: configurationFile,
+                //async is true by default. 
+                async: false,
+                dataType: 'json',
+                error: function(error){
+                    //return issue to console if json file has error
+                    console.log('Issue is present in .json file.  See the debug message:');
+                    //Loads .json file into myJson variable and parses the variable
+                    //will return specific error line number to developer debugger in chrome
+                    var myJson = new XMLHttpRequest();
+                    myJson.open("GET", configurationFile);
+                    myJson.onload=function(){
+                        console.log(JSON.parse(myJson.responseText));
                     }
-                });
-            }
-        }
+                    myJson.send();
+                },
+                success: function(data){
+                    console.log(data)
+                    
+                    //doccument ready event: prevents jQuery from loading before the doccument is finished loading
+                    //can also be written as $(function(){
+                    $(document).ready(function(){
+                        //read json configuration properties
+                        Highcharts.setOptions(data.Properties);
+                        
+                        //load data name into variable  (currently hardcoded)
+                        var dataFile = "data-prep/stage-discharge-alva-b-adams.csv";
 
-        var configurationFile = "./data-files/config1.json";
-        $.ajax({
-            url: configurationFile,
-            async: false,
-            dataType: 'json',
-            error: function(error){
-                console.log('issue')
-            },
-            success: function(data){
-                console.log(data)
-                //read json configuration properties
-                $(function() {
-                    Highcharts.setOptions(data.Properties);
-                });
-                $(function(){
-                // jQuery command to get/read file from testing.csv
-                $.get('data-prep/example-combined.csv', function(csvData) {
-                    var myChart = Highcharts.chart('container', {
-                        data: {
-                            csv: csvData    // data to be plotted
-                        },
+                        // jQuery command to get/read file from csv
+                        $.get(dataFile, function(csvData) {
+                            myChart = Highcharts.chart('container', {
+                                //title: {
+                                //    text: title
+                                //},
+                                data: {
+                                    //custom parser for dateTime
+                                    parseDate: function (dateTime) {
+                                        var arr = dateTime.split(/-| /),
+                                        fullDate = new Date(Date.UTC(arr[0], arr[1], arr[2], arr[3]));
+                                        return fullDate.getTime();
+                                    },
+                                    csv: csvData    // data to be plotted
+                                }
+                            });
+                            //update properties that depend on data
+                            myChart.update(data.Properties);
+
+                            //Update title based on URL data
+                            var newTitle = data.Properties.title.text;
+                            newTitle = expand_parameter_value(newTitle, properties);
+                            myChart.update({
+                                title: {
+                                    text: newTitle
+                                }
+                            });
+                        });
                     });
-                    //update properties that depend on data
-                    myChart.update(data.Properties);
-
-                });
-            });
+                }
+            })
+            function selectAllFunction(){
+                for(var i = 0; i < myChart.series.length; i++){
+                    var series = myChart.series[i];
+                    series.show();
+                }
             }
-        })
-
-        // see https://www.highcharts.com/demo/synchronized-charts
-
-    </script>
-
+            function deselectAllFunction(){
+                for(var i = 0; i < myChart.series.length; i++){
+                    var series = myChart.series[i];
+                    series.hide();
+                }
+            }
+            function hideNavigator(){
+                myChart.update({
+                    navigator: {
+                        enabled: false
+                    }
+                })
+            }
+            function showNavigator(){
+                myChart.update({
+                    navigator: {
+                        enabled: true
+                    }
+                })
+            }
+        </script>
+    </div>
+    <div id="options" style="text-align: center;"> 
+        <button id="selectAll" onclick="selectAllFunction()">Select All Series</button>
+        <button id="deselectAll" onclick="deselectAllFunction()">Deselect All Series</button>
+        <button id="hideNavigator" onclick="hideNavigator()">Hide Navigator</button>
+        <button id="showNavigator" onclick="showNavigator()">Show Navigator</button>
+    </div>
 </body>
 
 </html>
-
-
 
