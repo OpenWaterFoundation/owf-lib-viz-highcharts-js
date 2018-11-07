@@ -94,25 +94,30 @@
 
             var myChart;
             //$ provides access to jQuery
-            //Performs an AJAX request to highcharts
+            //Performs an AJAX XMLHttpRequest
             $.ajax({
                 //set the url that ajax sends the request to  (in this case, a local .json file with configuration properties)
                 url: configurationFile,
                 //async is true by default. 
                 async: false,
+                //tells jQuery what data type to expect
                 dataType: 'json',
                 error: function(error){
                     //return issue to console if json file has error
                     console.log('Issue is present in .json file.  See the debug message:');
                     //Loads .json file into myJson variable and parses the variable
                     //will return specific error line number to developer debugger in chrome
+                    //create new XMLHttpRequest object
                     var myJson = new XMLHttpRequest();
                     myJson.open("GET", configurationFile);
+                    //When the page loads, log the results of the parse
                     myJson.onload=function(){
                         console.log(JSON.parse(myJson.responseText));
                     }
+                    //actually send the request to the server
                     myJson.send();
                 },
+                //if the json file can be read, log data to the developer console and run highcharts constructor
                 success: function(data){
                     console.log(data)
                     
@@ -128,9 +133,6 @@
                         // jQuery command to get/read file from csv
                         $.get(dataFile, function(csvData) {
                             myChart = Highcharts.chart('container', {
-                                //title: {
-                                //    text: title
-                                //},
                                 data: {
                                     //custom parser for dateTime
                                     parseDate: function (dateTime) {
