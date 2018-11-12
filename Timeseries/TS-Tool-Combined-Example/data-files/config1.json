@@ -1,58 +1,31 @@
 {	
-
 	"Properties": {
-
-		"chart": {
-			"zoomType": "x"
+		"legend": {
+			"enabled": false
 		},
-
-		"plotOptions": {
-    		"line": {
-      			"marker": {
-      				"enabled": false,
-      				"radius": 2
-      			},
-      			"states": {
-      				"hover": {
-      					"lineWidth": 2
-      				}
-      			}
-      			
-   			},
-   			"column": {
-            	"shadow": false,
-            	"borderWidth": 0
-        	}
-  		},
-		
-		"tooltip": {
- 			"pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
-			"valueDecimals": 2,
-			"split": true
-		},
-		"navigator": {
-       		"enabled": false
-        },
-
-        "series": [
-			{
-    		"name": "Precipitation",
-    		"type": "line"
+		"xAxis": {
+            "crosshair": true,
+            "events": {
+                "setExtremes": "syncExtremes"
+            },
+            "gridLineWidth": 1,
+			"type": "datetime",
+			"labels": {
+				"format": "{value:%Y-%b-%e}",
+				"padding": 10
 			},
-			{
-			"name": "Streamflow",
-			"type": "column"
+			"title": {
+				"text": "date"
 			}
-		]
+        }
+
 	},
-
-
-
 
 	"Properties_1": {
 		
 
 		"chart": {
+			"type": "line",
 			"zoomType": "x"
 		},
 		"title": {
@@ -62,17 +35,7 @@
             "text": "Source: CDSS Hydrobase"
         },
 		"xAxis": {
-			"reversed": false,
-			"gridLineWidth": 1,
-			"type": "datetime",
-			"labels": {
-				"format": "{value:%Y-%b-%e}",
-				"padding": 10
-			},
-			"title": {
-				"text": "date"
-			}
-			
+			"reversed": false
 		},
 		"yAxis": {
 			"reversed": true,
@@ -81,9 +44,6 @@
 			},
 			"offset": 10
 			
-		},
-		"legend": {
-			"enabeled": false
 		}
 	},
 
@@ -92,6 +52,7 @@
 		
 
 		"chart": {
+			"type": "line",
 			"zoomType": "x"
 		},
 		"title": {
@@ -101,21 +62,9 @@
             "text": ""
         },
 
-		"legend": {
-			"enabeled": true
-		},
 
 		"xAxis": {
-			"gridLineWidth": 1,
-			"type": "datetime",
-			"labels": {
-				"format": "{value:%Y-%b-%e}",
-				"padding": 10
-			},
-			"title": {
-				"text": "date"
-			}
-			
+			"gridLineWidth": 1
 		},
 		"yAxis": {
 			"title": {

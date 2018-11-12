@@ -10,10 +10,12 @@
 </head>
 
 <body>
-    <div id="chart-A" style="min-width:300px; max-width: 1200px; height:300px;"> </div>
-    <div id="chart-B" style="min-width:300px; max-width: 1200px; height:300px;"> </div>
+    <div id="container">
+        <div id="chartDiv" style="min-width:300px; max-width: 1200px; height:300px;"> </div>
+        <div id="chart-B" style="min-width:300px; max-width: 1200px; height:300px;"> </div>
+    </div>
         <script>
-            /*['mousemove', 'touchmove', 'touchstart'].forEach(function (eventType) {
+            ['mousemove', 'touchmove', 'touchstart'].forEach(function (eventType) {
                 document.getElementById('container').addEventListener(
                     eventType,
                     function (e) {
@@ -66,7 +68,7 @@
                         }
                     });
                 }
-            }*/
+            }
 
             var configurationFile = "./data-files/config1.json";
             $.ajax({
@@ -85,13 +87,13 @@
                     $(function(){
                     // jQuery command to get/read file from testing.csv
                     $.get('data-prep/example-precipitation-combined.csv', function(csvData) {
-                        var myChart1 = Highcharts.chart('chart-A', {
+                        var myChart1 = Highcharts.chart(chartDiv, {
                             data: {
                                 csv: csvData    // data to be plotted
-                            },
+                            }
                         });
                         //update properties that depend on data
-                        myChart1.update(data.Properties);
+
                         myChart1.update(data.Properties_1);
                     });
                 });
@@ -108,19 +110,19 @@
                 success: function(data){
                     console.log(data)
                     //read json configuration properties
-                    $(function() {
-                        Highcharts.setOptions(data.Properties);
-                    });
+                    //$(function() {
+                    //    Highcharts.setOptions(data.Properties);
+                    //});
                     $(function(){
                     // jQuery command to get/read file from testing.csv
                     $.get('data-prep/example-streamflow-combined.csv', function(csvData) {
                         var myChart = Highcharts.chart('chart-B', {
                             data: {
                                 csv: csvData    // data to be plotted
-                            },
+                            }
                         });
                         //update properties that depend on data
-                        myChart.update(data.Properties);
+
                         myChart.update(data.Properties_2);
                     });
                 });
