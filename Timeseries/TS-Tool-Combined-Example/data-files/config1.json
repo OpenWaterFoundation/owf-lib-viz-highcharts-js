@@ -1,127 +1,68 @@
 {	
-
 	"Properties": {
+		"legend": {
+			"enabled": false
+		},
+		"xAxis": {
+            "crosshair": true,
+            "gridLineWidth": 1,
+			"type": "datetime",
+			"labels": {
+				"format": "{value:%Y-%b-%e}",
+				"padding": 10
+			},
+			"xAxis": {
+	            "events": {
+
+	            }
+	        }
+        },
+        "chart": {
+        	"marginLeft": 100,
+        	"zoomType": "x"
+        },
+        "plotOptions": {
+        	"series": {
+        		"states": {
+        			"hover": {
+        				"lineWidth": 1
+        			}
+        		}
+        	}
+        },
+        "series": [
+			{
+    		"lineWidth": 1
+			}
+		]
+
+	},
+
+	"Properties_1": {
+		
 
 		"chart": {
-			"zoomType": "x"
+			"type": "line"
 		},
-		
 		"title": {
 			"text": "Hansen Supply Canals Water Volume"
 		},
 		"subtitle": {
             "text": "Source: CDSS Hydrobase"
         },
-
-		"plotOptions": {
-    		"line": {
-      			"marker": {
-      				"enabled": false,
-      				"radius": 2
-      			},
-      			"states": {
-      				"hover": {
-      					"lineWidth": 2
-      				}
-      			}
-      			
-   			},
-   			"column": {
-            	"shadow": false,
-            	"borderWidth": 0
-        	}
-  		},
-
 		"xAxis": {
-			"reversed": false,
-			"gridLineWidth": 1,
-			"type": "datetime",
-			"labels": {
-				"format": "{value:%Y-%b-%e}",
-				"padding": 10
-			},
-			"title": {
-				"text": "date"
-			}
-			
-		},
-		"yAxis": [{
-			"reversed": true,
-			"title": {
-				"text": "Rainfall"
-			},
-			"offset": 10
-		},
-		{
-			"reversed": false,
-			"title": {
-				"text": "Discharge (cfs)"
-			},
-			"offset": 10
-		}],
-		
-		"tooltip": {
- 			"pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
-			"valueDecimals": 2,
-			"split": true
-		},
-
-		"legend": {
-			"enabled": true
-		},
-		
-		"navigator": {
-        	"adapToUpdatedData": true, 
-       		"enabled": true
-        },
-
-        "series": [
-			{
-    		"name": "Precipitation",
-    		"type": "line"
-			},
-			{
-			"name": "Streamflow",
-			"type": "column"
-			}
-		]
-	},
-
-
-
-
-	"Properties_1": {
-		
-
-		"chart": {
-			"zoomType": "x"
-		},
-		
-
-		"xAxis": {
-			"reversed": false,
-			"gridLineWidth": 1,
-			"type": "datetime",
-			"labels": {
-				"format": "{value:%Y-%b-%e}",
-				"padding": 10
-			},
-			"title": {
-				"text": "date"
-			}
-			
+			"reversed": false
 		},
 		"yAxis": {
 			"reversed": true,
 			"title": {
-				"text": "Discharge (cfs)"
+				"text": "Precipitation"
 			},
 			"offset": 10
-			
 		},
 		"series": [
 			{
-    		"name": "Precipitation"
+    		"name": "Percipitation"
 			}
 		]
 	},
@@ -131,22 +72,14 @@
 		
 
 		"chart": {
-			"zoomType": "x"
+			"type": "line"
 		},
-		
-
-		"xAxis": {
-			"gridLineWidth": 1,
-			"type": "datetime",
-			"labels": {
-				"format": "{value:%Y-%b-%e}",
-				"padding": 10
-			},
-			"title": {
-				"text": "date"
-			}
-			
+		"title": {
+			"text": ""
 		},
+		"subtitle": {
+            "text": ""
+        },
 		"yAxis": {
 			"title": {
 				"text": "Discharge (cfs)"
@@ -154,10 +87,13 @@
 			"offset": 10
 			
 		},
+
 		"series": [
 			{
-    		"name": "Streamflow"
+    		"name": "Streamflow",
+    		"color": "red"
 			}
+
 		]
 	}
 
