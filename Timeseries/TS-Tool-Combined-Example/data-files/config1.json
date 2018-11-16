@@ -56,7 +56,7 @@
 		"yAxis": {
 			"reversed": true,
 			"title": {
-				"text": "Precipitation"
+				"text": "Precipitation (cm)"
 			},
 			"offset": 10
 		},

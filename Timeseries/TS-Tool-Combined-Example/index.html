@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div id="container"></div>
+    <div id="container" style="width: 60%"></div>
 
         <script>
             ['mousemove', 'touchmove', 'touchstart'].forEach(function (eventType) {
@@ -45,6 +45,7 @@
                 this.series.chart.xAxis[0].drawCrosshair(event, this); // Show the crosshair
             };
 
+            //syncExtremes function synchronizes zoom feature between charts
             function syncExtremes(e) {
                 var thisChart = this.chart;
 
@@ -59,7 +60,7 @@
                 }
             }
            
-
+            //condensed syncExtremes function
             //"setExtremes": "function(e){var thisChart = this.chart; if (e.trigger !== 'syncExtremes') {Highcharts.each(Highcharts.charts, function (chart) {if (chart !== thisChart) {if (chart.xAxis[0].setExtremes) {chart.xAxis[0].setExtremes(e.min,e.max,undefined,false,{ trigger: 'syncExtremes' });}}});}}"
 
             var configurationFile = "./data-files/config1.json";
@@ -72,11 +73,10 @@
                 },
                 success: function(data){
                     console.log(data)
-                    //read json configuration properties
-                    $(function() {
-                        Highcharts.setOptions(data.Properties);
-                    });
+
                     $(function(){
+                        //read json configuration properties
+                        Highcharts.setOptions(data.Properties);
 
                         var chartA = document.createElement('div');
                         chartA.className = 'chart';
@@ -86,12 +86,13 @@
                         chartB.className = 'chart';
                         document.getElementById('container').appendChild(chartB);
 
-                    // jQuery command to get/read file from testing.csv
+                    // jQuery command to get/read file from example-precipitation-combined.csv
                         $.get('data-prep/example-precipitation-combined.csv', function(csvData) {
                             Highcharts.chart(chartA, {
                                 data: {
                                     csv: csvData    // data to be plotted
                                 },
+                                //Use the setExtremes function to sync the zoom feature between the two charts
                                 xAxis: {
                                     events: {
                                         setExtremes: syncExtremes
