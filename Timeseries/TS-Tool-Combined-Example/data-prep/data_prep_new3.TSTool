@@ -1,6 +1,0 @@
-SetOutputPeriod(OutputStart="1970-01-01",OutputEnd="1986-01-01")
-# CLACANCO - FT. COL. CA. AT CACHE LA POUDRE R. NR.
-CLACANCO.DWR.Streamflow.Day~HydroBase
-# USC00053005 - FORT COLLINS
-USC00053005.NOAA.Precip.Day~HydroBase
-WriteDelimitedFile(OutputFile="C:\Users\masforce\cdss-dev\GitTraining\git-repos\owf-lib-viz-highcharts-js\Timeseries\TS-Tool-Combined-Example\data-prep\example-combined.csv")

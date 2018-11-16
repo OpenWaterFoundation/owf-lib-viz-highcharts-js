@@ -1,9 +1,0 @@
-# This command file creates streamflow data for the example.
-# Separate CSV files are created for each data interval.
-SetInputPeriod(InputStart="2000-01-01",InputEnd="2015-12-31")
-# 06752260 - CACHE LA POUDRE RIVER AT FORT COLLINS, CO
-06752260.USGS.Streamflow.Day~HydroBase
-06752260.USGS.Streamflow.Month~HydroBase
-Exit()
-WriteDelimitedFile(TSList=AllMatchingTSID,TSID="06752260.USGS.Streamflow.Day",OutputFile="example-streamflow-day.csv")
-WriteDelimitedFile(TSList=AllMatchingTSID,TSID="06752260.USGS.Streamflow.Month",OutputFile="example-streamflow-month.csv")
