@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TS-Tool-Multiple-Axis</title>
+    <!-- Javascript -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="javascript/highstock-6.1.4.js"></script>
+    <script src="javascript/data.js"></script>
+
+</head>
+
+<body>
+    <div id="container" style="min-width:300px; max-width: 1200px; height:600px;">
+
+        <script>
+            var configFile = "../data-files/config1.json";
+            var myChart;
+            $.ajax({
+                url: configFile,
+                async: false,
+                dataType: 'json',
+                error: function(error){
+                    console.log('issue')
+                },
+                success: function(data){
+                    console.log(data)
+                    
+                    $(function(){
+                        //read json configuration properties
+                        Highcharts.setOptions(data.Properties);
+                        
+                        //load data name into variable
+                        var dataFile = "data-prep/4710-wind.csv";
+
+                        // jQuery command to get/read file from csv
+                        $.get(dataFile, function(csvData) {
+                        	myChart = Highcharts.chart('container', {
+                                data: {
+                          			csv: csvData    // data to be plotted
+                        		},
+                                yAxis: {
+                                    plotBands: [{
+                                        from: 0,
+                                        to: 0,
+                                        color: 'black',
+                                        label: {
+                                            text: "North",
+                                            style: {
+                                                color: '#606060'
+                                            },
+                                            align: 'right',
+                                            x: 40
+                                        }
+                                    }, {
+                                        from: 90,
+                                        to: 90,
+                                        color: 'black',
+                                        label: {
+                                            text: "East",
+                                            style: {
+                                                color: '#606060'
+                                            },
+                                            align: 'right',
+                                            x: 40
+                                        }
+                                    }, {
+                                        from: 180,
+                                        to: 180,
+                                        color: 'black',
+                                        label: {
+                                            text: "South",
+                                            style: {
+                                                color: '#606060'
+                                            },
+                                            align: 'right',
+                                            x: 40
+                                        }
+                                    }, {
+                                        from: 270,
+                                        to: 270,
+                                        color: 'black',
+                                        label: {
+                                            text: "West",
+                                            style: {
+                                                color: '#606060'
+                                            },
+                                            align: 'right',
+                                            x: 40
+                                        }
+                                    }, {
+                                        from: 360,
+                                        to: 360,
+                                        color: 'black',
+                                        label: {
+                                            text: "North",
+                                            style: {
+                                                color: '#606060'
+                                            },
+                                            align: 'right',
+                                            x: 40
+                                        }
+                                    }]
+                                }
+                        	}).update(data.Properties);
+                            //update properties that depend on data
+                        	
+                        });
+                    });
+                }
+            })
+
+        </script>
+    </div>
+</body>
+
+</html>
+
