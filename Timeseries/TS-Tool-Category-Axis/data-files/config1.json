@@ -28,8 +28,6 @@
             }
         },
 
-
-
         "xAxis": {
             "gridLineWidth": 1,
             "type": "datetime",
@@ -40,7 +38,7 @@
             "title": {
                 "text": "date"
             }
-            
+  
         },
 
         "yAxis": [
@@ -55,21 +53,80 @@
             "opposite": false,
             "max": 360,
             "tickInterval": 45,
-            "endOnTick": false
+            "endOnTick": false,
+
+            "plotBands": [{
+                "from": 0,
+                "to": 0,
+                "color": "black",
+                "label": {
+                    "text": "North",
+                    "style": {
+                        "color": "#606060"
+                    },
+                    "align": "right",
+                    "x": 40
+                }
+                }, {
+                "from": 90,
+                "to": 90,
+                "color": "black",
+                "label": {
+                    "text": "East",
+                    "style": {
+                        "color": "#606060"
+                    },
+                    "align": "right",
+                    "x": 40
+                }
+                }, {
+                "from": 180,
+                "to": 180,
+                "color": "black",
+                "label": {
+                    "text": "South",
+                    "style": {
+                        "color": "#606060"
+                    },
+                    "align": "right",
+                    "x": 40
+                }
+                }, {
+                "from": 270,
+                "to": 270,
+                "color": "black",
+                "label": {
+                    "text": "West",
+                    "style": {
+                        "color": "#606060"
+                    },
+                    "align": "right",
+                    "x": 40
+                }
+                }, {
+                "from": 360,
+                "to": 360,
+                "color": "black",
+                "label": {
+                    "text": "North",
+                    "style": {
+                        "color": "#606060"
+                    },
+                    "align": "right",
+                    "x": 40
+                }
+            }]
 
         }, {
             "labels": {
                 "offset": 10,
                 "format": "{value}"
             },
-            "type": "category",
             "title": {
                 "margin": 60,
                 "text": "Cardinal Direction"
             },
             "opposite": true
-            
-
         }],
 
         "series": [
