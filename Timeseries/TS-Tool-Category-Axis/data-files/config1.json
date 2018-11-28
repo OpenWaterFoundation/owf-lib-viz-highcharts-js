@@ -145,10 +145,6 @@
 
         "legend": {
             "enabled": true
-        },
-        
-        "navigator": {
-            "enabled": false
         }
     }
 }

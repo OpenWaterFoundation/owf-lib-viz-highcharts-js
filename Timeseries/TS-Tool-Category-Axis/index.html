@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>TS-Tool-Multiple-Axis</title>
+    <title>TS-Tool-Category-Axis</title>
     <!-- Javascript -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="javascript/highstock-6.1.4.js"></script>
@@ -43,20 +43,23 @@
                         		}
                         	});
 
+                            //get the maximum date from highcharts to determine how many plotbands need to be drawn for sunrise data
+                            //Note:  Currently assumes data is recorded withing a single month
+                            var maxDate = new Date(myChart.xAxis[0].getExtremes().max);
 
                             //perform the request for sunrise/sunset data
                             var day;
-                            for (day = 1; day < 11; day++){
+                            for (day = 1; day <= maxDate.getDate(); day++){
 
-                                var sunrise = "https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400&date=2016-1-" + day + "&formatted=0";
+                                var sunrise = "https://api.sunrise-sunset.org/json?lat=40.036380&lng=-105.543600&date=2016-1-" + day + "&formatted=0";
 
                                 $.ajax({
                                     url: sunrise,
                                     async: false,
                                     dataType: 'json',
                                     error: function(error){
-                                        console.log('issue')
-                                        //loop to add plot bands for day/night cycles (default 7am-7pm)
+                                        console.log('issue in json')
+                                        //Add plot bands for day/night cycles (default 7am-7pm)
                                         myChart.xAxis[0].addPlotBand({
                                             from: Date.UTC(2016,0,day,7),
                                             to: Date.UTC(2016,0,day,19),
@@ -66,7 +69,7 @@
                                     success: function(data){
                                         if (data.status != "OK"){
                                             console.log('data.status is not OK')
-                                            //loop to add plot bands for day/night cycles (default 7am-7pm)
+                                            //Add plot bands for day/night cycles (default 7am-7pm)
                                             myChart.xAxis[0].addPlotBand({
                                                 from: Date.UTC(2016,0,day,7),
                                                 to: Date.UTC(2016,0,day,19),
@@ -74,20 +77,26 @@
                                             });
                                         }
                                         else {
-
+                                            console.log('data.status is OK')
                                             var mySunrise = data.results.sunrise.substring(
                                                 data.results.sunrise.indexOf("T") + 1, 
                                                 data.results.sunrise.indexOf("+")
                                             );
-                                            console.log(mySunrise);
+                                            //console.log(mySunrise);
 
-                                            var times = mySunrise.split(':')//////////////////////////////////////////////////////////////
+                                            var mySunset = data.results.sunset.substring(
+                                                data.results.sunset.indexOf("T") + 1, 
+                                                data.results.sunset.indexOf("+")
+                                            );
 
-                                            console.log(times[0])
+                                            var startTimes = mySunrise.split(':')
+                                            var endTimes = mySunset.split(':')
+
+                                            //console.log(startTimes[0])
 
                                             myChart.xAxis[0].addPlotBand({
-                                                from: Date.UTC(2016,0,day,times[0],times[1],times[2]),
-                                                to: Date.UTC(2016,0,day,times[0],times[1],times[2]),
+                                                from: Date.UTC(2016,0,day,startTimes[0],startTimes[1],startTimes[2]),
+                                                to: Date.UTC(2016,0,day,endTimes[0],endTimes[1],endTimes[2]),
                                                 color: '#FCFFC5'
                                             }); 
                                         }
