@@ -1,33 +1,10 @@
 {
     "Properties": {
-        
-
         "chart": {
-            "zoomType": "x"
+            "type": "scatter",
+            "zoomType": "x",
+            "spacingRight": 50
         },
-        
-        "title": {
-            "text": "Wind Direction"
-        },
-        "subtitle": {
-            "text": "Source: Steve's Email"
-        },
-
-        "plotOptions": {
-            "line": {
-                "marker": {
-                    "enabled": false,
-                    "radius": 2
-                },
-                "states": {
-                    "hover": {
-                        "lineWidth": 2
-                    }
-                }
-                
-            }
-        },
-
         "xAxis": {
             "gridLineWidth": 1,
             "type": "datetime",
@@ -36,10 +13,27 @@
                 "padding": 10
             },
             "title": {
-                "text": "date"
+                "text": "Date"
             }
   
         },
+        "plotOptions": {
+            "scatter": {
+                
+                
+            }
+        }
+    },
+
+    "Properties_1": {
+        
+        "title": {
+            "text": "Wind Direction"
+        },
+        "subtitle": {
+            "text": "Source: Steve's Email"
+        },
+
 
         "yAxis": [
             {
@@ -132,19 +126,36 @@
         "series": [
             {
    
-            "type": "line",
+            "type": "scatter",
             "name": "Wind Direction"
 
             }
         ],
         "tooltip": {
+            "xDateFormat": "%Y-%m-%d",
             "pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
             "valueDecimals": 2,
             "split": true
-        },
+        }
+    },
 
-        "legend": {
-            "enabled": true
+    "Properties_2": {
+        "title": {
+            "text": "Wind Speed"
+        },
+        "series": [
+            {
+   
+            "type": "scatter",
+            "name": "Wind Direction"
+
+            }
+        ],
+        "tooltip": {
+            "xDateFormat": "%Y-%m-%d",
+            "pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
+            "valueDecimals": 2,
+            "split": true
         }
     }
 }

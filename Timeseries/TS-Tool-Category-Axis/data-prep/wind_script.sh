@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>TS-Tool-Category-Axis</title>
-    <!-- Javascript -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="javascript/highstock-6.1.4.js"></script>
-    <script src="javascript/data.js"></script>
+#!/bin/sh
 
-</head>
+awk -F"," 'BEGIN { OFS = "," } {$3=$2/100.0; print}' 4710-wind.csv > 4710-wind-speed.csv
 
 <body>
-    <div id="container" style="width: 1200px;"></div>
+    <div id="container" style="width: 600px;"></div>
 
     <script>
         var configFile = "../data-files/config1.json";
@@ -113,11 +106,7 @@
                         Highcharts.chart(chartB, {
                             data: {
                                 csv: csvData,    // data to be plotted
-                                startColumn: 0,
-                                endColumn: 8,
-                                parsed: function (column) {
-                                    column.splice(1,1);
-                                }
+                                startColumn: 3
                             }
                         }).update(data.Properties_2);
                     });
@@ -129,6 +118,3 @@
     </script>
     
 </body>
-
-</html>
-
