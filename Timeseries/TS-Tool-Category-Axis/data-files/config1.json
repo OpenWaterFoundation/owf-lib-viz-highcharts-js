@@ -3,37 +3,44 @@
         "chart": {
             "type": "scatter",
             "zoomType": "x",
-            "spacingRight": 50
+            "spacingRight": 50,
+            "marginLeft": 75
         },
         "xAxis": {
+            "crosshair": true,
             "gridLineWidth": 1,
             "type": "datetime",
             "labels": {
                 "format": "{value:%Y/%b/%e %I:%M:%S}",
                 "padding": 10
             },
-            "title": {
-                "text": "Date"
+            "xAxis": {
+                "events": {
+                }
             }
-  
         },
         "plotOptions": {
             "scatter": {
-                
-                
+                "tooltip": {
+                    "headerFormat": "<b>{point.key:%b %e, %H:%S}</b><br>",
+                    "pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>"
+                }
             }
+        },
+        "tooltip": {
+            "pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
+            "valueDecimals": 2,
+            "split": true
         }
     },
 
     "Properties_1": {
-        
+        "legend": {
+            "enabled": false
+        },
         "title": {
             "text": "Wind Direction"
         },
-        "subtitle": {
-            "text": "Source: Steve's Email"
-        },
-
 
         "yAxis": [
             {
@@ -113,49 +120,51 @@
 
         }, {
             "labels": {
-                "offset": 10,
-                "format": "{value}"
-            },
-            "title": {
-                "margin": 60,
-                "text": "Cardinal Direction"
+                "offset": 10
             },
             "opposite": true
         }],
 
         "series": [
             {
-   
-            "type": "scatter",
             "name": "Wind Direction"
-
             }
-        ],
-        "tooltip": {
-            "xDateFormat": "%Y-%m-%d",
-            "pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
-            "valueDecimals": 2,
-            "split": true
-        }
+        ]
     },
 
     "Properties_2": {
+        "legend": {
+            "enabled": false
+        },
         "title": {
             "text": "Wind Speed"
         },
+        "yAxis": {
+            "title": {
+                "text": "Speed (km/hr)"
+            }
+        },
+
         "series": [
             {
-   
-            "type": "scatter",
-            "name": "Wind Direction"
-
+            "name": "Wind Speed",
+            "color": "#cc0000"
             }
-        ],
-        "tooltip": {
-            "xDateFormat": "%Y-%m-%d",
-            "pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
-            "valueDecimals": 2,
-            "split": true
-        }
+        ]
+    },
+
+    "Properties_symbol": {
+        "series": [{
+            "marker": {
+                "symbol": "url(https://www.highcharts.com/samples/graphics/sun.png)"
+            }
+        }]
+    },
+    "Properties_nosymbol": {
+        "series": [{
+            "marker": {
+                "symbol": "circle"
+            }
+        }]
     }
 }
