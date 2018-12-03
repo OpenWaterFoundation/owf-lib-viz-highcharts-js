@@ -1,0 +1,170 @@
+{
+    "Properties": {
+        "chart": {
+            "type": "scatter",
+            "zoomType": "x",
+            "spacingRight": 50,
+            "marginLeft": 75
+        },
+        "xAxis": {
+            "crosshair": true,
+            "gridLineWidth": 1,
+            "type": "datetime",
+            "labels": {
+                "format": "{value:%Y/%b/%e %I:%M:%S}",
+                "padding": 10
+            },
+            "xAxis": {
+                "events": {
+                }
+            }
+        },
+        "plotOptions": {
+            "scatter": {
+                "tooltip": {
+                    "headerFormat": "<b>{point.key:%b %e, %H:%S}</b><br>",
+                    "pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>"
+                }
+            }
+        },
+        "tooltip": {
+            "pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b>",
+            "valueDecimals": 2,
+            "split": true
+        }
+    },
+
+    "Properties_1": {
+        "legend": {
+            "enabled": false
+        },
+        "title": {
+            "text": "Wind Direction"
+        },
+
+        "yAxis": [
+            {
+            "labels": {
+                "offset": 10,
+                "format": "{value}°"
+            },
+            "title": {
+                "text": "Degree"
+            },
+            "opposite": false,
+            "max": 360,
+            "tickInterval": 45,
+            "endOnTick": false,
+
+            "plotBands": [{
+                "from": 0,
+                "to": 0,
+                "color": "black",
+                "label": {
+                    "text": "North",
+                    "style": {
+                        "color": "#606060"
+                    },
+                    "align": "right",
+                    "x": 40
+                }
+                }, {
+                "from": 90,
+                "to": 90,
+                "color": "black",
+                "label": {
+                    "text": "East",
+                    "style": {
+                        "color": "#606060"
+                    },
+                    "align": "right",
+                    "x": 40
+                }
+                }, {
+                "from": 180,
+                "to": 180,
+                "color": "black",
+                "label": {
+                    "text": "South",
+                    "style": {
+                        "color": "#606060"
+                    },
+                    "align": "right",
+                    "x": 40
+                }
+                }, {
+                "from": 270,
+                "to": 270,
+                "color": "black",
+                "label": {
+                    "text": "West",
+                    "style": {
+                        "color": "#606060"
+                    },
+                    "align": "right",
+                    "x": 40
+                }
+                }, {
+                "from": 360,
+                "to": 360,
+                "color": "black",
+                "label": {
+                    "text": "North",
+                    "style": {
+                        "color": "#606060"
+                    },
+                    "align": "right",
+                    "x": 40
+                }
+            }]
+
+        }, {
+            "labels": {
+                "offset": 10
+            },
+            "opposite": true
+        }],
+
+        "series": [
+            {
+            "name": "Wind Direction"
+            }
+        ]
+    },
+
+    "Properties_2": {
+        "legend": {
+            "enabled": false
+        },
+        "title": {
+            "text": "Wind Speed"
+        },
+        "yAxis": {
+            "title": {
+                "text": "Speed (km/hr)"
+            }
+        },
+
+        "series": [
+            {
+            "name": "Wind Speed",
+            "color": "#cc0000"
+            }
+        ]
+    },
+
+    "Properties_symbol": {
+        "series": [{
+            "marker": {
+                "symbol": "url(https://www.highcharts.com/samples/graphics/sun.png)"
+            }
+        }]
+    },
+    "Properties_nosymbol": {
+        "series": [{
+            "marker": {
+                "symbol": "circle"
+            }
+        }]
+    }
+}
