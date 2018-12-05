@@ -6,6 +6,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="javascript/highstock-6.1.4.js"></script>
     <script src="javascript/data.js"></script>
+    <script src="javascript/papaparse.min.js"></script>
 
 </head>
 
@@ -14,7 +15,8 @@
 
     <script>
 
-        var configFile = "../data-files/config1.json";
+        var configFile = "data-files/config1.json";
+        var dataFile = "data-prep/4710-wind-speed.csv"
         var myChart1;
         var myChart2;
 
@@ -64,6 +66,7 @@
 
                             //Anytime zoom is altered, check the interval to determine if it is small enough to display symbols
                             //If so, update the chart
+                            
                             $.ajax({
                                 url: configFile,
                                 async: false,
@@ -73,8 +76,49 @@
                                 },
                                 success: function(data){
                                     console.log("zoom event");
+
+                                    var smallDate = new Date(e.min);
+                                    var largeDate = new Date(e.max);
+
+                                    console.log(smallDate.getDay());
+                                    console.log(largeDate.getDay())
+                                    //console.log(smallDate.getDay() - largeDate.getDay())
+                                    var anotherDate = new Date(smallDate.getDay() - largeDate.getDay());
+                                    console.log(anotherDate)
+
+                                    //if (e.max - e.min < 120000000){
+
                                     if (e.max - e.min < 120000000){
-                                        myChart2.update(data.Properties_symbol)
+
+                                        $.ajax({
+                                            url: dataFile,
+                                            async: false,
+                                            dataType: 'text',
+                                            error: function(error){
+                                                console.log('issue')
+                                            },
+                                            success: function(data){
+                                                var myConfig = Papa.parse(data);
+                                                console.log(myConfig.data.length);
+                                                
+                                                //console.log(myDate.valueOf());
+                                                //for (var i = 0; i < myConfig.data.length; i++){ 
+                                                //    var myDate = new Date(myConfig.data[i][0])
+                                                //    console.log(myDate.valueOf())
+                                                //   myChart2.update({
+                                                //       series: [{
+                                                //            data: [{
+                                                //                x: myDate.valueOf(),
+                                                //                marker: {
+                                                //                    symbol: "url(../data-prep/right-up.png)"
+                                                //                }
+                                                //            }]         
+                                                //        }]
+                                                //    })
+                                                //}
+                                            }
+                                        })
+                                        
                                     }
                                     //If e.min and e.max are null, it indicates that the reset zoom button has been triggered
                                     else if ((e.max - e.min > 120000000) || (e.max == null && e.min == null)){
@@ -114,10 +158,12 @@
                     document.getElementById('container').appendChild(chartB);
 
                     // jQuery command to get/read file from csv
-                    $.get('data-prep/4710-wind.csv', function(csvData) {
+                    $.get(dataFile, function(csvData) {
                         myChart1 = Highcharts.chart(chartA, {
                             data: {
                                 csv: csvData,    // data to be plotted
+                                startColumn: 0,
+                                endColumn: 1,
                             },
                             //Use the setExtremes function to sync the zoom feature between the two charts
                             xAxis: {
@@ -190,12 +236,12 @@
                         myChart1.update(data.Properties_1);
                     });
 
-                    $.get('data-prep/4710-wind-speed.csv', function(csvData) {
+                    $.get(dataFile, function(csvData) {
                         myChart2 = Highcharts.chart(chartB, {
                             data: {
                                 csv: csvData,    // data to be plotted
                                 startColumn: 0,
-                                endColumn: 8,
+                                endColumn: 2,
                                 parsed: function (column) {
                                     column.splice(1,1);
                                 }
