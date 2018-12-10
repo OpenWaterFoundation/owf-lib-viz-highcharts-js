@@ -6,6 +6,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="javascript/highstock-6.1.4.js"></script>
     <script src="javascript/data.js"></script>
+    <script src="javascript/papaparse.min.js"></script>
 
 </head>
 
@@ -14,9 +15,12 @@
 
     <script>
 
-        var configFile = "../data-files/config1.json";
+        var configFile = "data-files/config1.json";
+        var myConfig;
+        var dataFile = "data-prep/4710-wind-speed.csv";
         var myChart1;
         var myChart2;
+        var minVal = Number.MAXVALUE;
 
         //Synchronize tooltips and crosshairs with event handlers
         ['mousemove', 'touchmove', 'touchstart'].forEach(function (eventType) {
@@ -64,6 +68,7 @@
 
                             //Anytime zoom is altered, check the interval to determine if it is small enough to display symbols
                             //If so, update the chart
+                            
                             $.ajax({
                                 url: configFile,
                                 async: false,
@@ -73,17 +78,115 @@
                                 },
                                 success: function(data){
                                     console.log("zoom event");
+                                    //Figure out minvalue when a double zoom is performed!!!  Number.MAXVALUE?  or 0?
+
+
                                     if (e.max - e.min < 120000000){
-                                        myChart2.update(data.Properties_symbol)
+                                        if ((!(e.min > minVal)) && (e.min != null)){
+                                            console.log("replace minVal")
+                                            minVal = e.min;
+                                        }
+                                        
+                                        $.ajax({
+                                            url: dataFile,
+                                            async: false,
+                                            dataType: 'text',
+                                            error: function(error){
+                                                console.log('issue')
+                                            },
+                                            success: function(data){
+                                                myConfig = Papa.parse(data);
+                                                for (var i = 0; i < myConfig.data.length; i++){
+                                                    var myDate = new Date(myConfig.data[i][0])
+
+                                                    if (myDate.valueOf() > e.min && myDate.valueOf() < (e.min + 120000000)){
+                                                        var direction = myConfig.data[i][1]
+
+                                                        if (direction == 0 || direction == 360){
+                                                            myChart2.series[0].data[i-1].update({
+                                                                marker: {
+                                                                    symbol: "url(../data-prep/up.png)"
+                                                                }
+                                                            })
+                                                        }
+                                                        else if ((direction > 0) && (direction < 90)){
+                                                            myChart2.series[0].data[i-1].update({
+                                                                marker: {
+                                                                    symbol: "url(../data-prep/right-up.png)"
+                                                                }
+                                                            })
+                                                        }
+                                                        else if (direction == 90){
+                                                            myChart2.series[0].data[i-1].update({
+                                                                marker: {
+                                                                    symbol: "url(../data-prep/right.png)"
+                                                                }
+                                                            })
+                                                        }
+                                                        else if ((direction > 90) && (direction < 180)){
+                                                            myChart2.series[0].data[i-1].update({
+                                                                marker: {
+                                                                    symbol: "url(../data-prep/right-down.png)"
+                                                                }
+                                                            })
+                                                        }
+                                                        else if (direction == 180){
+                                                            myChart2.series[0].data[i-1].update({
+                                                                marker: {
+                                                                    symbol: "url(../data-prep/down.png)"
+                                                                }
+                                                            })
+                                                        }
+                                                        else if ((direction > 180) && (direction < 270)){
+                                                            myChart2.series[0].data[i-1].update({
+                                                                marker: {
+                                                                    symbol: "url(../data-prep/left-down.png)"
+                                                                }
+                                                            })
+                                                        }
+                                                        else if (direction == 270){
+                                                            myChart2.series[0].data[i-1].update({
+                                                                marker: {
+                                                                    symbol: "url(../data-prep/left.png)"
+                                                                }
+                                                            })
+                                                        }
+                                                        else if ((direction > 270) && (direction < 360)){
+                                                            myChart2.series[0].data[i-1].update({
+                                                                marker: {
+                                                                    symbol: "url(../data-prep/left-up.png)"
+                                                                }
+                                                            })
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        })
+                                        
                                     }
                                     //If e.min and e.max are null, it indicates that the reset zoom button has been triggered
-                                    else if ((e.max - e.min > 120000000) || (e.max == null && e.min == null)){
+                                    else if (e.max == null && e.min == null){
                                         console.log("else triggered")
-                                        myChart2.update(data.Properties_nosymbol)
+                                        for (var i = 0; i < myConfig.data.length; i++){
+                                            var myDate = new Date(myConfig.data[i][0])
+                                            console.log("minVal is: " + minVal)
+                                            if (myDate.valueOf() > minVal && myDate.valueOf() < (minVal + 120000000)){
+                                                console.log("conditional triggered")
+                                                myChart2.series[0].data[i-1].update({
+                                                    marker: {
+                                                        symbol: "circle"
+                                                    }
+                                                })
+                                            }  
+                                        }
+                                        console.log("reset minVal")
+                                        minVal = Number.MAXVALUE;
                                     }
-                                }
-                            });                          
 
+                                }
+
+                            });                          
+                            
                         }
                     }
                 });
@@ -114,10 +217,12 @@
                     document.getElementById('container').appendChild(chartB);
 
                     // jQuery command to get/read file from csv
-                    $.get('data-prep/4710-wind.csv', function(csvData) {
+                    $.get(dataFile, function(csvData) {
                         myChart1 = Highcharts.chart(chartA, {
                             data: {
                                 csv: csvData,    // data to be plotted
+                                startColumn: 0,
+                                endColumn: 1
                             },
                             //Use the setExtremes function to sync the zoom feature between the two charts
                             xAxis: {
@@ -190,12 +295,12 @@
                         myChart1.update(data.Properties_1);
                     });
 
-                    $.get('data-prep/4710-wind-speed.csv', function(csvData) {
+                    $.get(dataFile, function(csvData) {
                         myChart2 = Highcharts.chart(chartB, {
                             data: {
                                 csv: csvData,    // data to be plotted
                                 startColumn: 0,
-                                endColumn: 8,
+                                endColumn: 2,
                                 parsed: function (column) {
                                     column.splice(1,1);
                                 }

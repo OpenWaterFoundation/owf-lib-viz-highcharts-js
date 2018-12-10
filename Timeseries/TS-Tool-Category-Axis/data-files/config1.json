@@ -152,14 +152,7 @@
             }
         ]
     },
-
-    "Properties_symbol": {
-        "series": [{
-            "marker": {
-                "symbol": "url(https://www.highcharts.com/samples/graphics/sun.png)"
-            }
-        }]
-    },
+    
     "Properties_nosymbol": {
         "series": [{
             "marker": {
