@@ -1,5 +1,9 @@
 ## TS-Tool-Combined-Example
 
+![](data-prep/TS-Tool-Combined-Example.png)
+
+This example demonstrates two charts that share a crosshairs and will synchronize the zoom function.
+
 ## File Structure
 
 ```
