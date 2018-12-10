@@ -20,7 +20,7 @@
         var dataFile = "data-prep/4710-wind-speed.csv";
         var myChart1;
         var myChart2;
-        var minVal = 0;
+        var minVal = Number.MAXVALUE;
 
         //Synchronize tooltips and crosshairs with event handlers
         ['mousemove', 'touchmove', 'touchstart'].forEach(function (eventType) {
@@ -78,23 +78,12 @@
                                 },
                                 success: function(data){
                                     console.log("zoom event");
-
-                                    //var smallDate = new Date(e.min);
-                                    //var largeDate = new Date(e.max);
-
-                                    //console.log(smallDate.getDay());
-                                    //console.log(largeDate.getDay())
-                                    //console.log(smallDate.getDay() - largeDate.getDay())
-                                    //var anotherDate = new Date(smallDate.getDay() - largeDate.getDay());
-                                    //console.log(anotherDate)
-                                    //minVal = null;
-
-
                                     //Figure out minvalue when a double zoom is performed!!!  Number.MAXVALUE?  or 0?
 
 
                                     if (e.max - e.min < 120000000){
-                                        if (e.min > minVal){
+                                        if ((!(e.min > minVal)) && (e.min != null)){
+                                            console.log("replace minVal")
                                             minVal = e.min;
                                         }
                                         
@@ -107,19 +96,10 @@
                                             },
                                             success: function(data){
                                                 myConfig = Papa.parse(data);
-                                                //console.log(myConfig.data.length);
-
-                                                //console.log(myChart2.series[0].data[e.min].index);
-
-                                                
-                                                //console.log(myDate.valueOf());
-                                                //myConfig.data.length
                                                 for (var i = 0; i < myConfig.data.length; i++){
                                                     var myDate = new Date(myConfig.data[i][0])
+
                                                     if (myDate.valueOf() > e.min && myDate.valueOf() < (e.min + 120000000)){
-                                                        //console.log("In Loop!")
-                                                        //console.log(myDate.valueOf())
-                                                        //console.log(myChart2.series[0].data[0].x)
                                                         var direction = myConfig.data[i][1]
 
                                                         if (direction == 0 || direction == 360){
@@ -187,21 +167,9 @@
                                     //If e.min and e.max are null, it indicates that the reset zoom button has been triggered
                                     else if (e.max == null && e.min == null){
                                         console.log("else triggered")
-                                        //var myConfig = Papa.parse(data);
-                                        //myChart2.series[0].update({
-                                        //    marker:{
-                                        //        enabeled: false
-                                        //    }
-                                        //});
-                                        //myChart2.redraw({
-                                        //    series: {
-                                        //        marker: {
-                                        //            symbol: "square"                                                }
-                                        //    }
-                                        //})
-
                                         for (var i = 0; i < myConfig.data.length; i++){
                                             var myDate = new Date(myConfig.data[i][0])
+                                            console.log("minVal is: " + minVal)
                                             if (myDate.valueOf() > minVal && myDate.valueOf() < (minVal + 120000000)){
                                                 console.log("conditional triggered")
                                                 myChart2.series[0].data[i-1].update({
@@ -211,7 +179,8 @@
                                                 })
                                             }  
                                         }
-                                        minVal = null;
+                                        console.log("reset minVal")
+                                        minVal = Number.MAXVALUE;
                                     }
 
                                 }
