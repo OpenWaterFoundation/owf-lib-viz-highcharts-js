@@ -1,5 +1,7 @@
 ## TS-Tool-Multiple-Axis
 
+![](data-prep/TS-Tool-Multiple-Axis.png)
+
 Building on the line-symbology example, this example demonstrates how to utilize CSV water data from TSTool to create a highcharts graph, along with a separate .json configuration file.  It incorporates multiple series with a separate y-axis.
 
 ## File Structure
@@ -91,7 +93,7 @@ Use brackets when setting options for a series.
 
 ## Parsing URL for properties
 
-With an implementation where the data is loaded from different sources, it may be necessary to dynamically change the title of the graph based on parameters specified in the URL.  To read in the URL as a variable, use the url constructor with the following command: 
+With an implementation where the data is loaded from different sources, it may be necessary to dynamically change the title of the graph based on parameters specified in the URL.  To read in the URL as a variable, use the url constructor with the following command:
 
 ```
 var url = new URL(window.location.href)
