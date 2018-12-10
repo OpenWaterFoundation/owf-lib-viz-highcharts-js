@@ -33,7 +33,6 @@
   		},
 
 		"xAxis": {
-			"reversed": false,
 			"gridLineWidth": 1,
 			"type": "datetime",
 			"labels": {
@@ -46,7 +45,6 @@
 			
 		},
 		"yAxis": {
-			"reversed": true,
 			"title": {
 				"text": "Discharge (cfs)"
 			},

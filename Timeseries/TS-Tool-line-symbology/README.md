@@ -1,6 +1,8 @@
 ## TS-Tool-line-symbology
 
-Building on the line-symbology example, this example demonstrates how to utilize CSV water data from TSTool to create a highcharts graph, along with a separate .json configuration file.
+![](data-prep/TS-Tool-line-symbology.png)
+
+This example demonstrates how to utilize CSV water data from TSTool to create a highcharts graph, along with a separate .json configuration file.
 
 ## File Structure
 
