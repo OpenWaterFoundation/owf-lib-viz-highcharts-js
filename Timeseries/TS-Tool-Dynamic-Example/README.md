@@ -1,5 +1,7 @@
 ## TS-Tool-Dynamic-Example
 
+![](data-prep/TS-Tool-Dynamic-Example.png)
+
 This example is mostly the same as TS-Tool-Multiple-Axis, but it adds dynamic functionality to how the graph loads the title and buttons to select all series and hide the navigator.
 
 ## File Structure
