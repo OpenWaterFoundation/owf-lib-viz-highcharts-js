@@ -1,13 +1,13 @@
-## TS-Tool-line-symbology
+## TSTool-Line-Symbology
 
-![](data-prep/TS-Tool-line-symbology.png)
+![](README-docs/TS-Tool-line-symbology.png)
 
 This example demonstrates how to utilize CSV water data from TSTool to create a highcharts graph, along with a separate .json configuration file.
 
 ## File Structure
 
 ```
-├── TS-Tool-line-symbology
+├── TSTool-Line-Symbology
 │   ├── README.md
 │   ├── index.html
 │   ├── css
