@@ -1,4 +1,4 @@
-## TS-Tool-Combined-Example
+## TSTool-Combined-Example
 
 ![](README-docs/TS-Tool-Combined-Example.png)
 
@@ -7,7 +7,7 @@ This example demonstrates two charts that share a crosshairs and will synchroniz
 ## File Structure
 
 ```
-├── TS-Tool-line-symbology
+├── TSTool-line-symbology
 │   ├── README.md
 │   ├── index.html
 │   ├── css

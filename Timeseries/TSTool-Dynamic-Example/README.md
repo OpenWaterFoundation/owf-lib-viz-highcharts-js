@@ -1,4 +1,4 @@
-## TS-Tool-Dynamic-Example
+## TSTool-Dynamic-Example
 
 ![](README-docs/TS-Tool-Dynamic-Example.png)
 
@@ -7,7 +7,7 @@ This example is mostly the same as TS-Tool-Multiple-Axis, but it adds dynamic fu
 ## File Structure
 
 ```
-├── TS-Tool-line-symbology
+├── TSTool-line-symbology
 │   ├── README.md
 │   ├── index.html
 │   ├── css

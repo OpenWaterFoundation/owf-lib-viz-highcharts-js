@@ -1,13 +1,13 @@
-## TS-Tool-Multiple-Axis
+## TSTool-Multiple-Axis
 
-![](data-prep/TS-Tool-Multiple-Axis.png)
+![](README-docs/TS-Tool-Multiple-Axis.png)
 
 Building on the line-symbology example, this example demonstrates how to utilize CSV water data from TSTool to create a highcharts graph, along with a separate .json configuration file.  It incorporates multiple series with a separate y-axis.
 
 ## File Structure
 
 ```
-├── TS-Tool-Multiple-Axis
+├── TSTool-Multiple-Axis
 │   ├── README.md
 │   ├── index.html
 │   ├── css

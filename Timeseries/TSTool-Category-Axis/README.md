@@ -1,4 +1,4 @@
-## TS-Tool-Category-Axis
+## TSTool-Category-Axis
 
 ![](README-docs/TS-Tool-Category-Axis.png)
 
@@ -7,7 +7,7 @@ This example demonstrates a combined chart example that shows different ways to 
 ## File Structure
 
 ```
-├── TS-Tool-Category-Axis
+├── TSTool-Category-Axis
 │   ├── README.md
 │   ├── index.html
 │   ├── css
