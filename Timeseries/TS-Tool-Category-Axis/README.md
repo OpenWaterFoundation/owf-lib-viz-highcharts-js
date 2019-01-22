@@ -1,6 +1,6 @@
 ## TS-Tool-Category-Axis
 
-![](data-prep/TS-Tool-Category-Axis.png)
+![](README-docs/TS-Tool-Category-Axis.png)
 
 This example demonstrates a combined chart example that shows different ways to display wind data.
 
@@ -103,7 +103,7 @@ The second chart displays the wind speed at a given time.  However, when zoomed 
 
 #### Dynamically changing point icons
 
-![](data-prep/TS-Tool-Category-Axis-Zoomed.png)
+![](README-docs/TS-Tool-Category-Axis-Zoomed.png)
 
 The syncExtremes function keeps track of whenever a zoom event is triggered and synchronizes the extreme values between each chart.  It also checks the new interval of the second chart to determine if it is small enough to display the vector icons, which would be difficult to read when zoomed all the way out.  In this case, the icons only appear when the interval is smaller than 120,000,000 milliseconds, or about 33 hours.  See the partial section below from index.html:
 
