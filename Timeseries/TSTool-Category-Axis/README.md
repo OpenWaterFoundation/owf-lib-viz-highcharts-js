@@ -4,23 +4,32 @@
 
 This example demonstrates a combined chart example that shows different ways to display wind data.
 
+This file includes the following sections:
+
+* [File Structure](#File Structure)
+* [Chart One: Wind Direction](#Chart One: Wind Direction)
+  * [Plotting Day/Night Cycles](#Plotting Day/Night cycles)
+* [Chart Two: Wind Speed](#Chart Two: Wind Speed)
+  * [Dynamically Changing Point Icons](#Dynamically Changing Point Icons)
+
 ## File Structure
 
 ```
 ├── TSTool-Category-Axis
-│   ├── README.md
-│   ├── index.html
+│   ├── README.md  
+│   ├── README-docs                            //contains images for README
+│   ├── index.html  
 │   ├── css
-│   │   ├── highcharts.css
+│   │   ├── highcharts.css  
 │   ├── javascript
-│   │   ├── highstock.js
-│   │   ├── papaparse.min.js
+│   │   ├── highstock.js  
+│   │   ├── papaparse.min.js  
 │   │   ├── data.js
-│   ├── build-util
+│   ├── build-util                             //contains script to run example on local python server
 │   │   ├── run-http-server-8000.sh
-│   ├── data-files
+│   ├── data-files                             //contains external .json file to set highcharts configuration properties
 │   │   ├── config1.json
-│   ├── data-prep
+│   ├── data-prep                              //contains TSTool commands and example csv data set
 │   │   ├── data_prep.TSTool
 │   │   ├── stage-discharge-alva-b-adams.csv
 ```
