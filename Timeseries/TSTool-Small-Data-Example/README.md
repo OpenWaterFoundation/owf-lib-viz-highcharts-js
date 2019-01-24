@@ -7,6 +7,8 @@ This example is meant to show how to load a small dataset from a CSV (Comma Sepe
 ## File Structure
 ```
 ├── TSTool-Small-Data-Example
+│   ├── README.md  
+│   ├── README-docs                            //contains images for README
 │   ├── index.html
 │   ├── css
 │   │   ├── highcharts.css

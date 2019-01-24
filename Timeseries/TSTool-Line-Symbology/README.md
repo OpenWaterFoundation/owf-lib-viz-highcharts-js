@@ -4,28 +4,36 @@
 
 This example demonstrates how to utilize CSV water data from TSTool to create a highcharts graph, along with a separate .json configuration file.
 
+This file includes the following sections:
+
+* [File Structure](#file-structure)
+* [Using External .json File with External .csv File](#using-external-.json-filefwith-external-.csv-file)
+* [.JSON Options](#.json-options)
+* [Multiple Series](#multiple-series)
+
 ## File Structure
 
 ```
 ├── TSTool-Line-Symbology
 │   ├── README.md
+│   ├── README-docs                            //contains images for README
 │   ├── index.html
 │   ├── css
 │   │   ├── highcharts.css
 │   ├── javascript
 │   │   ├── highstock.js
 │   │   ├── data.js
-│   ├── build-util
+│   ├── build-util                             //contains script to run example on local python server
 │   │   ├── run-http-server-8000.sh
-│   ├── data-files
+│   ├── data-files                             //contains external .json file to set highcharts configuration properties
 │   │   ├── testing1.csv
 │   │   ├── config1.json
-│   ├── data-prep
+│   ├── data-prep                              //contains TSTool commands and example csv data set
 │   │   ├── data_prep.TSTool
 │   │   ├── example-streamflow.csv
 ```
 
-## Using an External .json File with External .csv file
+## Using External .json File with External .csv File
 
 When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  The `highcharts.stockChart` option applies default configuration values that misrepresent data.  The stockChart elements, such as a navigator, can be instead accessed by including them within the constructor itself.  The data must also be loaded directly into the constructor instead of the .json configuration file.  See the following example from [index.html:](https://github.com/OpenWaterFoundation/owf-lib-viz-highcharts-js/blob/master/Timeseries/TS-Tool-line-symbology/index.html)
 
