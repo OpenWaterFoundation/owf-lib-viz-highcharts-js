@@ -4,30 +4,39 @@
 
 Building on the line-symbology example, this example demonstrates how to utilize CSV water data from TSTool to create a highcharts graph, along with a separate .json configuration file.  It incorporates multiple series with a separate y-axis.
 
+This file includes the following sections:
+
+* [File Structure](#file-structure)
+* [Using External .json File with External .csv File](#using-external-.json-file-with-external-.csv-file)
+* [DateTime Options](#datetime-options)
+* [.JSON Options](#.json-options)
+* [Multiple Series](#multiple-series)
+
 ## File Structure
 
 ```
 ├── TSTool-Multiple-Axis
 │   ├── README.md
+│   ├── README-docs                            //contains images for README
 │   ├── index.html
 │   ├── css
 │   │   ├── highcharts.css
 │   ├── javascript
 │   │   ├── highstock.js
 │   │   ├── data.js
-│   ├── build-util
+│   ├── build-util                             //contains script to run example on local python server
 │   │   ├── run-http-server-8000.sh
-│   ├── data-files
+│   ├── data-files                             //contains external .json file to set highcharts configuration properties
 │   │   ├── testing1.csv
 │   │   ├── config1.json
-│   ├── data-prep
+│   ├── data-prep                              //contains TSTool commands and example csv data set
 │   │   ├── data_prep.TSTool
 │   │   ├── stage-discharge-alva-b-adams.csv
 ```
 
-## Using an External .json File with External .csv file
+## Using External .json File with External .csv File
 
-When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  The `highcharts.stockChart` option applies default configuration values that misrepresent data.  The stockChart elements, such as a navigator, can be instead accessed by using `Highcharts.setOptions(myConfigFile)` before calling the constructor.  The data itself must be loaded directly into the constructor instead of the .json configuration file.  See the following example from [index.html:](https://github.com/OpenWaterFoundation/owf-lib-viz-highcharts-js/blob/master/Timeseries/TS-Tool-Multiple-Axis/index.html)
+When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  The `highcharts.stockChart` option applies default configuration values that misrepresent data.  The stockChart elements, such as a navigator, can be instead accessed by using `Highcharts.setOptions(myConfigFile)` before calling the constructor.  The data itself must be loaded directly into the constructor instead of the .json configuration file.  See the following example from [index.html:](index.html)
 
 ```
 $(function(){
@@ -49,11 +58,11 @@ $(function(){
 
 Additionally, some configuration properties depend on data values and thus must be set after data is read.  To update the chart with these properties, include `myChart.update(myConfigFile)` after data is read inside the constructor, as seen above.
 
-For more information about highStock elements, see the online [documentation](https://www.highcharts.com/docs/chart-concepts/understanding-highstock)
+For more information about highStock elements, see the online [documentation.](https://www.highcharts.com/docs/chart-concepts/understanding-highstock)
 
-## dateTime Options
+## DateTime Options
 
-Highcharts includes several built-in parsers to deal with dateTime data from CSV files.  However, if the CSV dateTime format does not match one of these formats, a custom parser can deal with this issue.  The example below parses the date column of a CSV file bases on `-` and space, using `dateTime.split(/-| /)`.  Thus, the CSV would include dates such as 2017-01-01 01.
+Highcharts includes several built-in parsers to deal with dateTime data from CSV files.  However, if the CSV dateTime format does not match one of these formats, a custom parser can deal with this issue.  The example below parses the date column of a CSV file based on `-` and space, using `dateTime.split(/-| /)`.  Thus, the CSV would include dates such as 2017-01-01 01.
 
 ```
 data: {

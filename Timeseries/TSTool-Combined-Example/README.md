@@ -4,22 +4,29 @@
 
 This example demonstrates two charts that share a crosshairs and will synchronize the zoom function.
 
+This file includes the following sections:
+
+* [File Structure](#file-structure)
+* [Combined Charts](#combined-charts)
+* [Using External .json File with External .csv File](#using-external-.json-file-with-external-.csv-file)
+
 ## File Structure
 
 ```
 ├── TSTool-line-symbology
 │   ├── README.md
+│   ├── README-docs                            //contains images for README
 │   ├── index.html
 │   ├── css
 │   │   ├── highcharts.css
 │   ├── javascript
 │   │   ├── highstock.js
 │   │   ├── data.js
-│   ├── build-util
+│   ├── build-util                             //contains script to run example on local python server
 │   │   ├── run-http-server-8000.sh
-│   ├── data-files
+│   ├── data-files                             //contains external .json file to set highcharts configuration properties
 │   │   ├── config1.json
-│   ├── data-prep
+│   ├── data-prep                              //contains TSTool commands and example csv data set
 │   │   ├── data_prep_new.TSTool
 │   │   ├── data_prep_new2.TSTool
 │   │   ├── example-streamflow-combined.csv
@@ -66,9 +73,9 @@ Highcharts.chart(chartA, {
 Another useful example can be found [here.](https://www.highcharts.com/demo/synchronized-charts)
 
 
-## Using an External .json File with External .csv file
+## Using External .json File with External .csv File
 
-When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  The `highcharts.stockChart` option applies default configuration values that misrepresent data.  The stockChart elements, such as a navigator, can be instead accessed by including them within the constructor itself.  The data must also be loaded directly into the constructor instead of the .json configuration file.  See the following example from [index.html:](https://github.com/OpenWaterFoundation/owf-lib-viz-highcharts-js/blob/master/Timeseries/TS-Tool-line-symbology/index.html)
+When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  The `highcharts.stockChart` option applies default configuration values that may misrepresent data.  The stockChart elements, such as a navigator, can be instead accessed by including them within the constructor itself.  The data must also be loaded directly into the constructor instead of the .json configuration file.  See the following example from [index.html:](index.html)
 
 ```
 $.get('data-prep/example-streamflow.csv', function(csvData) {

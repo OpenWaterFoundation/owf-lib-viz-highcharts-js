@@ -6,11 +6,11 @@ This example demonstrates a combined chart example that shows different ways to 
 
 This file includes the following sections:
 
-* [File Structure](#File Structure)
-* [Chart One: Wind Direction](#Chart One: Wind Direction)
-  * [Plotting Day/Night Cycles](#Plotting Day/Night cycles)
-* [Chart Two: Wind Speed](#Chart Two: Wind Speed)
-  * [Dynamically Changing Point Icons](#Dynamically Changing Point Icons)
+* [File Structure](#file-structure)
+* [Chart One: Wind Direction](#chart-one:-wind-direction)
+  * [Plotting Day/Night Cycles](#plotting-day/night-cycles)
+* [Chart Two: Wind Speed](#chart-two:-wind-speed)
+  * [Dynamically Changing Point Icons](#dynamically-changing-point-icons)
 
 ## File Structure
 
@@ -40,7 +40,7 @@ The first chart features a dual y-axis, where the left side shows the wind direc
 
 Plotband is also used to create the cardinal direction labels on the right side of the graph.  Each horizontal direction line that appears on the graph is actually a plotband with a width of one.
 
-#### Plotting day/night cycles
+#### Plotting Day/Night Cycles
 
 Within the constructor for the first chart, an additional ajax call utilizes `sunrise-sunset.org` to determine the exact daylight interval for each day of the x-axis.  See the section below from index.html:
 
@@ -110,7 +110,7 @@ Dynamically calling the url `https://api.sunrise-sunset.org/json?lat=40.036380&l
 
 The second chart displays the wind speed at a given time.  However, when zoomed in to a specific interval, it also displays wind direction by replacing each point with vector icons.  When the reset zoom button is triggered, the points revert to the default icons.
 
-#### Dynamically changing point icons
+#### Dynamically Changing Point Icons
 
 ![](README-docs/TS-Tool-Category-Axis-Zoomed.png)
 

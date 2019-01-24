@@ -11,7 +11,7 @@ This folder contains a series of examples of how Highcharts can be used in combi
 |                                          | **[Simple-Annotations-Example](simple-annotations-example)** | Basic demonstration of options to customize Time Series chart           |
 |![](README-docs/TSTool-Small-Data-Example.png)| **[TSTool-Small-Data-Example](TSTool-Small-Data-Example)**  | Basic demonstration of how to load CSV data into Highcharts             |
 |![](README-docs/TSTool-Large-Data-Example.png)| **[TSTool-Large-Data-Example](TSTool-Large-Data-Example)**  | Basic demonstration of how to load bulk CSV data into Highcharts        |
-|![](README-docs/TS-Tool-Line-Symbology.png)| **[TSTool-Line-Symbology](TSTool-Line-Symbology)**      | An example of loading configuration data from an external .json file    |
+|![](README-docs/TS-Tool-line-symbology.png)| **[TSTool-Line-Symbology](TSTool-Line-Symbology)**      | An example of loading configuration data from an external .json file    |
 |![](README-docs/TS-Tool-Multiple-Axis.png)| **[TSTool-Multiple-Axis](TSTool-Multiple-Axis)**       | An example of multiple series on one chart with a separate y-axis       |
 |![](README-docs/TS-Tool-Combined-Example.png)| **[TSTool-Combined-Example](TSTool-Combined-Example)**    | Example of two charts combined through synchronized zoom and crosshairs |
 |![](README-docs/TS-Tool-Dynamic-Example.png)| **[TSTool-Dynamic-Example](TSTool-Dynamic-Example)**     | Like TSTool-Multiple-Axis, but loads chart title dynamically from URL   |
