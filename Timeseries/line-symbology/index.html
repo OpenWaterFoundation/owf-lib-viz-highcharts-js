@@ -1,38 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Line-Symbology</title>
-    <!-- Javascript -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="javascript/highstock.js"></script>
-    <script src="javascript/data.js"></script>
-</head>
+{
+	"Properties": {
+		"chart": {
+			"type": "column",
+			"backgroundColor": "#FCFFC5",
+			"borderColor": "#EBBA95",
+        	"borderWidth": 2,
+       		"borderRadius": 10
+		},
 
-<body>
-    <div id="container" style="width:100%; height:600px;"></div>
+		"navigator": {
+			"adaptToUpdatedData": true,
+            "enabled": true
+        },
 
-    <script>
-        var configurationFile = "./data-files/config.json";
-        $.ajax({
-            url: configurationFile,
-            async: false,
-            dataType: 'json',
-            error: function(error){
-                console.log('issue')
-            },
-            success: function(data){
-                console.log(data)
-                $(function(){
-                // jQuery command to get/read file from testing.csv
-                $.get('data-files/testing.csv', function(csvData) {
-                    var myChart = Highcharts.chart('container', {data: {csv: csvData}});
-                    myChart.update(data.Properties)
-                });
+        "rangeSelector": {
+			"enabled": false,
+			"height": 0
+		},
+		"scrollbar": {
+			"enabled": false
+		},
 
-            });
-            }
-        })
-    </script>
+		"title": {
+			"text": "Consumer Price Index"
+		},
+		"subtitle": {
+            "text": "Add a subtitle with the 'subtitle' attribute"
+        },
+       
+		"xAxis": {
+			"categories": []
+		},
+		"yAxis": {
+			"title": {
+				"text": "Units"
+			}
+		},
+		"legend": {
+			"enabled": "true"
+		}
 
-</body>
-</html>
+	}
+}
