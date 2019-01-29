@@ -1,44 +1,47 @@
-{
-	"Properties": {
-		"chart": {
-			"type": "column",
-			"backgroundColor": "#FCFFC5",
-			"borderColor": "#EBBA95",
-        	"borderWidth": 2,
-       		"borderRadius": 10
-		},
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TS-Tool-Line-Symbology</title>
+    <!-- Javascript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="javascript/highstock-6.1.4.js"></script>
+    <script src="javascript/data.js"></script>
 
-		"navigator": {
-			"adaptToUpdatedData": true,
-            "enabled": true
-        },
+</head>
 
-        "rangeSelector": {
-			"enabled": false,
-			"height": 0
-		},
-		"scrollbar": {
-			"enabled": false
-		},
+<body>
+    <div id="container" style="min-width:300px; max-width: 1200px; height:600px;">There should be something below this:</div>
+    <script>
+        var configurationFile = "./data-files/config1.json";
+        $.ajax({
+            url: configurationFile,
+            async: false,
+            dataType: 'json',
+            error: function(error){
+                console.log('issue')
+            },
+            success: function(data){
+                console.log(data)
+                //read json configuration properties
+                $(function() {
+                    Highcharts.setOptions(data.Properties);
+                });
+                $(function(){
+                // jQuery command to get/read file from testing.csv
+                $.get('data-prep/example-streamflow.csv', function(csvData) {
+                	var myChart = Highcharts.chart('container', {
+                		data: {
+                  			csv: csvData    // data to be plotted
+                		}
+                	});
+                    //update properties that depend on data
+                	myChart.update(data.Properties);
+                });
+            });
+            }
+        })
+    </script>
+</body>
 
-		"title": {
-			"text": "Consumer Price Index"
-		},
-		"subtitle": {
-            "text": "Add a subtitle with the 'subtitle' attribute"
-        },
-       
-		"xAxis": {
-			"categories": []
-		},
-		"yAxis": {
-			"title": {
-				"text": "Units"
-			}
-		},
-		"legend": {
-			"enabled": "true"
-		}
+</html>
 
-	}
-}
