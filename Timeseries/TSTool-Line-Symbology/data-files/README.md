@@ -1,0 +1,1 @@
+This file contains an external .json configuration file that specifies the properties for the highcharts visualization
