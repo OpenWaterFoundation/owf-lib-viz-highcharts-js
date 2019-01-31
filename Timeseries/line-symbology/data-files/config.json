@@ -2,7 +2,6 @@
 	"Properties": {
 		"chart": {
 			"type": "column",
-			"backgroundColor": "#FCFFC5",
 			"borderColor": "#EBBA95",
         	"borderWidth": 2,
        		"borderRadius": 10

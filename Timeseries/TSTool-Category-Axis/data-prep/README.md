@@ -1,0 +1,1 @@
+This file contains .csv data for the highcharts visualization, as well as the TSTool commands to retrieve that set of data.  It also contains a series of icons that replace the default highcharts icons to represent the wind direction when the chart interval is small enough.
