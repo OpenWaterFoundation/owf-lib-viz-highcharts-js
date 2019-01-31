@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Line-Symbology</title>
+    <title>TS-Tool-Line-Symbology</title>
     <!-- Javascript -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="javascript/highstock.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="javascript/highstock-6.1.4.js"></script>
     <script src="javascript/data.js"></script>
+
 </head>
 
 <body>
-    <div id="container" style="width:100%; height:600px;"></div>
-
+    <div id="container" style="min-width:300px; max-width: 1200px; height:600px;">There should be something below this:</div>
     <script>
-        var configurationFile = "./data-files/config.json";
+        var configurationFile = "./data-files/config1.json";
         $.ajax({
             url: configurationFile,
             async: false,
@@ -22,17 +22,26 @@
             },
             success: function(data){
                 console.log(data)
+                //read json configuration properties
+                $(function() {
+                    Highcharts.setOptions(data.Properties);
+                });
                 $(function(){
                 // jQuery command to get/read file from testing.csv
-                $.get('data-files/testing.csv', function(csvData) {
-                    var myChart = Highcharts.chart('container', {data: {csv: csvData}});
-                    myChart.update(data.Properties)
+                $.get('data-prep/example-streamflow.csv', function(csvData) {
+                	var myChart = Highcharts.chart('container', {
+                		data: {
+                  			csv: csvData    // data to be plotted
+                		}
+                	});
+                    //update properties that depend on data
+                	myChart.update(data.Properties);
                 });
-
             });
             }
         })
     </script>
-
 </body>
+
 </html>
+
