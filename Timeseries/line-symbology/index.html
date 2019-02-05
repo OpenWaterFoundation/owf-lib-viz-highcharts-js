@@ -12,7 +12,7 @@
 <body>
     <div id="container" style="min-width:300px; max-width: 1200px; height:600px;"></div>
     <script>
-        var configurationFile = "./data-files/config1.json";
+        var configurationFile = "./data-files/config.json";
         $.ajax({
             url: configurationFile,
             async: false,
@@ -28,7 +28,7 @@
                 });
                 $(function(){
                 // jQuery command to get/read file from testing.csv
-                $.get('data-prep/example-streamflow.csv', function(csvData) {
+                $.get('data-files/testing.csv', function(csvData) {
                 	var myChart = Highcharts.chart('container', {
                 		data: {
                   			csv: csvData    // data to be plotted
