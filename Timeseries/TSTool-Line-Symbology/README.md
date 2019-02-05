@@ -1,6 +1,6 @@
 ## TSTool-Line-Symbology
-<center><a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/TSTool-Line-Symbology/" style="text-align:center;"><b>See a Live Demo of this Example</b></a></center>
-<br>
+<a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/TSTool-Line-Symbology/"><b>See a Live Demo of this Example</b></a>
+
 ![](README-docs/TS-Tool-line-symbology.png)
 
 This example demonstrates how to utilize CSV water data from TSTool to create a highcharts graph, along with a separate .json configuration file.
@@ -8,8 +8,8 @@ This example demonstrates how to utilize CSV water data from TSTool to create a 
 This file includes the following sections:
 
 * [File Structure](#file-structure)
-* [Using External .json File with External .csv File](#using-external-.json-filefwith-external-.csv-file)
-* [.JSON Options](#.json-options)
+* [Using External json File with External csv File](#using-external-json-filefwith-external-csv-file)
+* [JSON Options](#json-options)
 * [Multiple Series](#multiple-series)
 
 ## File Structure
@@ -34,7 +34,7 @@ This file includes the following sections:
 │   │   ├── example-streamflow.csv
 ```
 
-## Using External .json File with External .csv File
+## Using External json File with External csv File
 
 When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  The `highcharts.stockChart` option applies default configuration values that misrepresent data.  The stockChart elements, such as a navigator, can be instead accessed by including them within the constructor itself.  The data must also be loaded directly into the constructor instead of the .json configuration file.  See the following example from [index.html:](https://github.com/OpenWaterFoundation/owf-lib-viz-highcharts-js/blob/master/Timeseries/TS-Tool-line-symbology/index.html)
 
@@ -75,7 +75,7 @@ $.get('data-prep/example-streamflow.csv', function(csvData) {
 
 For more information about highStock elements, see the online [documentation](https://www.highcharts.com/docs/chart-concepts/understanding-highstock)
 
-## .JSON Options
+## JSON Options
 
 * Labels on the x-axis may be formatted too close together by default.  To make them more readable, use the `padding` or `step` options.  By default, padding is 5.  Step layers the labels on different lines to make room for more information- specify the number of layers following the option, eg. `"step": 2`
 * In the tooltip option, set `split: true` to display the data values for 2 series at once
