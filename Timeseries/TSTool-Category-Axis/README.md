@@ -1,7 +1,7 @@
 ## TSTool-Category-Axis
 
-<center><a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/TSTool-Category-Axis/" style="text-align:center;"><b>See a Live Demo of this Example</b></a></center>
-<br>
+<a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/TSTool-Category-Axis/"><b>See a Live Demo of this Example</b></a>
+
 ![](README-docs/TS-Tool-Category-Axis.png)
 
 This example demonstrates a combined chart example that shows different ways to display wind data.
