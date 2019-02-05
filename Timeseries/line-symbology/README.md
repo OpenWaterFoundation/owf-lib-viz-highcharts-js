@@ -1,4 +1,7 @@
 ## line-symbology
+<a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/line-symbology/"><b>See a Live Demo of this Example</b></a>
+
+![](README-docs/line-symbology.png)
 
 This example is meant to show how to load a simple dataset from a CSV (Comma Separated Value) file. It also demonstrates how the configuration properties of a Highcharts element can be set through a JSON (Javascript Object Notation) file.  This allows for easier access to the configuration properties without modifying index.html.
 
