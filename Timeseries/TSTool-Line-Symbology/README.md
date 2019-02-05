@@ -8,7 +8,7 @@ This example demonstrates how to utilize CSV water data from TSTool to create a 
 This file includes the following sections:
 
 * [File Structure](#file-structure)
-* [Using External json File with External csv File](#using-external-json-filefwith-external-csv-file)
+* [Using External json File with External csv File](#using-external-json-file-with-external-csv-file)
 * [JSON Options](#json-options)
 * [Multiple Series](#multiple-series)
 
