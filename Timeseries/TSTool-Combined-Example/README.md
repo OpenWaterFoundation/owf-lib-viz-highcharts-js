@@ -1,6 +1,6 @@
 ## TSTool-Combined-Example
-<center><a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/TSTool-Combined-Example/" style="text-align:center;"><b>See a Live Demo of this Example</b></a></center>
-<br>
+<a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/TSTool-Combined-Example/"><b>See a Live Demo of this Example</b></a>
+
 ![](README-docs/TS-Tool-Combined-Example.png)
 
 This example demonstrates two charts that share a crosshairs and will synchronize the zoom function.
@@ -9,7 +9,7 @@ This file includes the following sections:
 
 * [File Structure](#file-structure)
 * [Combined Charts](#combined-charts)
-* [Using External .json File with External .csv File](#using-external-.json-file-with-external-.csv-file)
+* [Using External json File with External csv File](#using-external-json-file-with-external-csv-file)
 
 ## File Structure
 
@@ -74,7 +74,7 @@ Highcharts.chart(chartA, {
 Another useful example can be found [here.](https://www.highcharts.com/demo/synchronized-charts)
 
 
-## Using External .json File with External .csv File
+## Using External json File with External csv File
 
 When loading data from TSTool as a CSV file, always use the `highcharts.chart` constructor in index.html.  The `highcharts.stockChart` option applies default configuration values that may misrepresent data.  The stockChart elements, such as a navigator, can be instead accessed by including them within the constructor itself.  The data must also be loaded directly into the constructor instead of the .json configuration file.  See the following example from [index.html:](index.html)
 

@@ -1,6 +1,6 @@
 # TSTool-Large-Data-Example
-<center><a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/TSTool-Large-Data-Example/" style="text-align:center;"><b>See a Live Demo of this Example</b></a></center>
-<br>
+<a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/TSTool-Large-Data-Example/"><b>See a Live Demo of this Example</b></a>
+
 ![](README-docs/TSTool-Large-Data-Example.png)
 
 This example is meant to show how to load a large dataset from a CSV (Comma Separated Value) file. It shows some of the options that can be used to configure and customize a Time Series chart when using a big set of data. Note, in this example the data used is specified using **JQuery** and is created from a TSTool command file. Feel free to start with this example as a template and customize the chart to meet the needs of your visualization project.

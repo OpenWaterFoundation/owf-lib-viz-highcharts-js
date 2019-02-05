@@ -9,9 +9,9 @@ This example demonstrates a combined chart example that shows different ways to 
 This file includes the following sections:
 
 * [File Structure](#file-structure)
-* [Chart One: Wind Direction](#chart-one:-wind-direction)
+* [Chart One Wind Direction](#chart-one-wind-direction)
   * [Plotting Day/Night Cycles](#plotting-day/night-cycles)
-* [Chart Two: Wind Speed](#chart-two:-wind-speed)
+* [Chart Two Wind Speed](#chart-two-wind-speed)
   * [Dynamically Changing Point Icons](#dynamically-changing-point-icons)
 
 ## File Structure
@@ -36,7 +36,7 @@ This file includes the following sections:
 │   │   ├── stage-discharge-alva-b-adams.csv
 ```
 
-## Chart One: Wind Direction
+## Chart One Wind Direction
 
 The first chart features a dual y-axis, where the left side shows the wind direction as a degree from 0 to 360 and the right side shows cardinal directions.  It also incorporates the Highcharts plotband element to display the day/night cycle as yellow bars on the chart.
 
@@ -108,7 +108,7 @@ for (day = 1; day <= maxDate.getDate(); day++){
 
 Dynamically calling the url `https://api.sunrise-sunset.org/json?lat=40.036380&lng=-105.543600&date=2016-1-" + day + "&formatted=0` returns a .json file with data for a specific day.  Notice how, in the case that this .json data is invalid or returns an error, this code defaults to drawing plotbands from 7AM to 7PM for each day.  If the .json file is valid, it parses the returned `data.results` for sunrise/sunset times, which will appear between the characters `T` and `+` in the returned string.
 
-## Chart Two: Wind Speed
+## Chart Two Wind Speed
 
 The second chart displays the wind speed at a given time.  However, when zoomed in to a specific interval, it also displays wind direction by replacing each point with vector icons.  When the reset zoom button is triggered, the points revert to the default icons.
 
