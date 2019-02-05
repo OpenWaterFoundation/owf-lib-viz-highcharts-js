@@ -8,8 +8,7 @@
 		},
 
 		"navigator": {
-			"adaptToUpdatedData": true,
-            "enabled": true
+            "enabled": false
         },
 
         "rangeSelector": {
