@@ -1,5 +1,6 @@
 ## TSTool-Combined-Example
-
+<center><a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/TSTool-Combined-Example/" style="text-align:center;"><b>See a Live Demo of this Example</b></a></center>
+<br>
 ![](README-docs/TS-Tool-Combined-Example.png)
 
 This example demonstrates two charts that share a crosshairs and will synchronize the zoom function.

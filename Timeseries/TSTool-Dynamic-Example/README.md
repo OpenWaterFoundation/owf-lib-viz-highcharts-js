@@ -1,5 +1,6 @@
 ## TSTool-Dynamic-Example
-
+<center><a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/TSTool-Dynamic-Example/" style="text-align:center;"><b>See a Live Demo of this Example</b></a></center>
+<br>
 ![](README-docs/TS-Tool-Dynamic-Example.png)
 
 This example is mostly the same as TS-Tool-Multiple-Axis, but it adds dynamic functionality to how the graph loads the title and buttons to select all series and hide the navigator.

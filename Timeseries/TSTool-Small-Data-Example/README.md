@@ -1,5 +1,6 @@
 # TSTool-Small-Data-Example
-
+<center><a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/TSTool-Small-Data-Example/" style="text-align:center;"><b>See a Live Demo of this Example</b></a></center>
+<br>
 ![](README-docs/TSTool-Small-Data-Example.png)
 
 This example is meant to show how to load a small dataset from a CSV (Comma Seperated Value) file. It shows some of the options that can be used to configure and customize a Time Series chart when using a big set of data. Note, in this example the data used is specified within the **URL** option and is created from a TSTool command file. Feel free to start with this example as a template and customize the chart to meet the needs of your visualization project.
