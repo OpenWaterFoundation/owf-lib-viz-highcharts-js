@@ -1,5 +1,14 @@
 # owf-lib-viz-highchart
-Open Water Foundation visualization library based on Highchart
+Open Water Foundation visualization library based on Highcharts
+
+## Contents
+
+The repository contains multiple folders that include Highcharts time series and heat map examples using different sets of data.  These are the main sections:
+
+| Folder/Link     | Description |
+|:------------:|:-------------:|
+|   **[Heatmap](Heatmap)**<br><br>[![button](README-docs/heatmapExample.jpg)](Heatmap)|A Heatmap visualizes data through variations in coloring. <br><br>Useful For:<br><br><ul><li>Cross-examining multivariate data</li><li>Revealing patterns</li><li>Detecting correlations</li></ul> |
+| **[Timeseries](Timeseries)**<br><br>[![button](README-docs/timeseriesExample.png)](Timeseries) |A Timeseries visualizes data through a sequence of data points.<br><br>Useful For:<br><br><ul><li>Showing variations over time</li><li>Handling large amounts of data</li></ul>|
 
 ## Getting Started
 
@@ -14,11 +23,7 @@ A standard development folder structure is recommended. The website development 
 > cd git-repos
 > git clone https://github.com/OpenWaterFoundation/owf-lib-viz-highcharts-js
 ```
-The repository contains multiple folders that include time series examples using different sets of data as well as heatmap examples.
 
-Timeseries - examples graphing time series data
-* TSTool-Large-Data-Example - example of graph for > 15,000 data points
-* TSTool-Small-Data-Example - example of graph for < 150 data points
 
 ## Additional Documentation
 
@@ -41,9 +46,9 @@ See also:
 ## Data Format Heatmap
 |X   |Y   |Value   |
 |:-:|---|---|
-|0   |0   |5   |   |
-|1/1/2017   |0   |5   |   |
-|0   |1/1/2017   |5   |   |
+|0   |0   |5   |
+|1/1/2017   |0   |5   |
+|0   |1/1/2017   |5   |
 
 ** **Note** X or Y values can be of type 'datetime' (A valid date of the calendar EX: 017-01-01).
 
