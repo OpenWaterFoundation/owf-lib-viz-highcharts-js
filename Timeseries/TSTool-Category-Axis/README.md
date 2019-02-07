@@ -116,7 +116,7 @@ The second chart displays the wind speed at a given time.  However, when zoomed 
 
 ![](README-docs/TS-Tool-Category-Axis-Zoomed.png)
 
-The syncExtremes function keeps track of whenever a zoom event is triggered and synchronizes the extreme values between each chart.  It also checks the new interval of the second chart to determine if it is small enough to display the vector icons, which would be difficult to read when zoomed all the way out.  In this case, the icons only appear when the interval is smaller than 120,000,000 milliseconds, or about 33 hours.  See the partial section below from index.html:
+The following section is not complete:  The syncExtremes function keeps track of whenever a zoom event is triggered and synchronizes the extreme values between each chart.  It also checks the new interval of the second chart to determine if it is small enough to display the vector icons, which would be difficult to read when zoomed all the way out.  In this case, the icons only appear when the interval is smaller than 120,000,000 milliseconds, or about 33 hours.  See the partial section below from index.html:
 
 ```
 $.ajax({
@@ -128,6 +128,8 @@ $.ajax({
     },
     success: function(data){
         console.log("zoom event");
+
+        //There are still bugs- why do some vector icons stay after a double-zoom when the scale is reset?
         //Figure out minvalue when a double zoom is performed!!!  Number.MAXVALUE?  or 0?
 
 
