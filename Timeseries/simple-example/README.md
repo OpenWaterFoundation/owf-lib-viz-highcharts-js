@@ -1,4 +1,7 @@
 # simple-example
+<a href="http://github.openwaterfoundation.org/owf-lib-viz-highcharts-js/Timeseries/simple-example/"><b>See a Live Demo of this Example</b></a>
+
+![](README-docs/simple-example.png)
 
 This example is meant to serve as a base root of how Highcharts works. It shows some of the options that can be used to configure and customize a Time Series chart. Note, in this example the data used is specified within the options (hardcoded). Feel free to start with this example as a template and customize the chart to meet the needs of your visualization project.
 
