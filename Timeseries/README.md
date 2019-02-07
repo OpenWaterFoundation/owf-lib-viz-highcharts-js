@@ -5,7 +5,7 @@ This folder contains a series of examples of how Highcharts can be used in combi
 ### Table of Contents
 
 | Preview Link | Description |
-|---------|----------------------------|-------------------------------------------------------------------------|
+|---------|-------------------------------------------------------------------------|
 |<center>**[Simple-Example](simple-example)**<center><br>[![button](README-docs/simple-example.png)](simple-example)| Basic demonstration of how Highcharts works                             |
 |<center>**[Line-Symbology](line-symbology)**<center><br>[![button](README-docs/line-symbology.png)](line-symbology)| Simplified version of TSTool-Line-Symbology                             |
 |<center>**[Simple-Annotations-Example](simple-annotations-example)**<center><br>[![button](README-docs/simple-annotations-example.png)](simple-annotations-example)| Basic demonstration of options to customize Time Series chart           |
