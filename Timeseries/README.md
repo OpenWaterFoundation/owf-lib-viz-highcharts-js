@@ -8,7 +8,7 @@ This folder contains a series of examples of how Highcharts can be used in combi
 |---------|-------------------------------------------------------------------------|
 |<center>**[Simple-Example](simple-example)**<center><br>[![button](README-docs/simple-example.png)](simple-example)| Basic demonstration of how Highcharts works                             |
 |<center>**[Line-Symbology](line-symbology)**<center><br>[![button](README-docs/line-symbology.png)](line-symbology)| Simplified version of TSTool-Line-Symbology                             |
-|<center>**[Simple-Annotations-Example](simple-annotations-example)**<center><br>[![button](README-docs/simple-annotations-example.png)](simple-annotations-example)| Basic demonstration of options to customize Time Series chart           |
+|<center>**[Simple-Annotations-Example](simple-annotations-example)**<center><br>[![button](README-docs/simple-annotations-example.png)](simple-annotations-example)| Simple-Example with added annotation functionality           |
 |<center>**[TSTool-Small-Data-Example](TSTool-Small-Data-Example)**<center><br>[![button](README-docs/TSTool-Small-Data-Example.png)](TSTool-Small-Data-Example)| Basic demonstration of how to load CSV data into Highcharts             |
 |<center>**[TSTool-Large-Data-Example](TSTool-Large-Data-Example)**<center><br>[![button](README-docs/TSTool-Large-Data-Example.png)](TSTool-Large-Data-Example)| Basic demonstration of how to load bulk CSV data into Highcharts        |
 |<center>**[TSTool-Line-Symbology](TSTool-Line-Symbology)**<center><br>[![button](README-docs/TS-Tool-line-symbology.png)](TSTool-line-symbology)| An example of loading configuration data from an external .json file    |
