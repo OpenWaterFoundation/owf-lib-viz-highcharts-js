@@ -15,12 +15,17 @@
 
     <script>
 
-        var configFile = "data-files/config1.json";
-        var myConfig;
-        var dataFile = "data-prep/4710-wind-speed.csv";
-        var myChart1;
-        var myChart2;
-        var minVal = Number.MAXVALUE;
+        //object to hold all global variables without cluttering js namespace
+        globals = Object();
+        globals.configFile = "data-files/config1.json";
+        globals.dataFile = "data-prep/4710-wind-speed.csv";
+        globals.minVal = Number.MAXVALUE;
+        globals.myConfig = '';
+        globals.myChart1 = '';
+        globals.myChart2 = '';
+        globals.debug = true;  //set to true to allow debug statements to print to the console
+
+
 
         //Synchronize tooltips and crosshairs with event handlers
         ['mousemove', 'touchmove', 'touchstart'].forEach(function (eventType) {
@@ -60,7 +65,9 @@
             var thisChart = this.chart;
 
             if (e.trigger !== 'syncExtremes') { // Prevent feedback loop
-                //console.log("event");
+                if (globals.debug == true){
+                    console.log("syncExtremes event");
+                }
                 Highcharts.each(Highcharts.charts, function (chart) {
                     if (chart !== thisChart) {
                         if (chart.xAxis[0].setExtremes) { // It is null while updating
@@ -70,89 +77,93 @@
                             //If so, update the chart
                             
                             $.ajax({
-                                url: configFile,
+                                url: globals.configFile,
                                 async: false,
                                 dataType: 'json',
                                 error: function(error){
-                                    console.log('issue')
+                                    console.log('issue in json data')
                                 },
                                 success: function(data){
-                                    console.log("zoom event");
-                                    //Figure out minvalue when a double zoom is performed!!!  Number.MAXVALUE?  or 0?
+                                    if (globals.debug == true){
+                                        console.log("zoom event");
+                                    }
+                                    //May need work: Double-zoom occasionally results in an extra icon that remains on screen when reset zoom is performed
 
 
                                     if (e.max - e.min < 120000000){
-                                        if ((!(e.min > minVal)) && (e.min != null)){
-                                            console.log("replace minVal")
-                                            minVal = e.min;
+                                        if ((!(e.min > globals.minVal)) && (e.min != null)){
+                                            if (globals.debug == true){
+                                                console.log("replace minVal")
+                                            }
+                                            globals.minVal = e.min;
                                         }
                                         
                                         $.ajax({
-                                            url: dataFile,
+                                            url: globals.dataFile,
                                             async: false,
                                             dataType: 'text',
                                             error: function(error){
-                                                console.log('issue')
+                                                console.log('issue in csv data')
                                             },
                                             success: function(data){
-                                                myConfig = Papa.parse(data);
-                                                for (var i = 0; i < myConfig.data.length; i++){
-                                                    var myDate = new Date(myConfig.data[i][0])
+                                                globals.myConfig = Papa.parse(data);
+                                                for (var i = 0; i < globals.myConfig.data.length; i++){
+                                                    var myDate = new Date(globals.myConfig.data[i][0])
 
                                                     if (myDate.valueOf() > e.min && myDate.valueOf() < (e.min + 120000000)){
-                                                        var direction = myConfig.data[i][1]
+                                                        var direction = globals.myConfig.data[i][1]
 
                                                         if (direction == 0 || direction == 360){
-                                                            myChart2.series[0].data[i-1].update({
+                                                            globals.myChart2.series[0].data[i-1].update({
                                                                 marker: {
                                                                     symbol: "url(data-prep/up.png)"
                                                                 }
                                                             })
                                                         }
                                                         else if ((direction > 0) && (direction < 90)){
-                                                            myChart2.series[0].data[i-1].update({
+                                                            globals.myChart2.series[0].data[i-1].update({
                                                                 marker: {
                                                                     symbol: "url(data-prep/right-up.png)"
                                                                 }
                                                             })
                                                         }
                                                         else if (direction == 90){
-                                                            myChart2.series[0].data[i-1].update({
+                                                            globals.myChart2.series[0].data[i-1].update({
                                                                 marker: {
                                                                     symbol: "url(data-prep/right.png)"
                                                                 }
                                                             })
                                                         }
                                                         else if ((direction > 90) && (direction < 180)){
-                                                            myChart2.series[0].data[i-1].update({
+                                                            globals.myChart2.series[0].data[i-1].update({
                                                                 marker: {
                                                                     symbol: "url(data-prep/right-down.png)"
                                                                 }
                                                             })
                                                         }
                                                         else if (direction == 180){
-                                                            myChart2.series[0].data[i-1].update({
+                                                            globals.myChart2.series[0].data[i-1].update({
                                                                 marker: {
                                                                     symbol: "url(data-prep/down.png)"
                                                                 }
                                                             })
                                                         }
                                                         else if ((direction > 180) && (direction < 270)){
-                                                            myChart2.series[0].data[i-1].update({
+                                                            globals.myChart2.series[0].data[i-1].update({
                                                                 marker: {
                                                                     symbol: "url(data-prep/left-down.png)"
                                                                 }
                                                             })
                                                         }
                                                         else if (direction == 270){
-                                                            myChart2.series[0].data[i-1].update({
+                                                            globals.myChart2.series[0].data[i-1].update({
                                                                 marker: {
                                                                     symbol: "url(data-prep/left.png)"
                                                                 }
                                                             })
                                                         }
                                                         else if ((direction > 270) && (direction < 360)){
-                                                            myChart2.series[0].data[i-1].update({
+                                                            globals.myChart2.series[0].data[i-1].update({
                                                                 marker: {
                                                                     symbol: "url(data-prep/left-up.png)"
                                                                 }
@@ -166,21 +177,26 @@
                                     }
                                     //If e.min and e.max are null, it indicates that the reset zoom button has been triggered
                                     else if (e.max == null && e.min == null){
-                                        console.log("else triggered")
-                                        for (var i = 0; i < myConfig.data.length; i++){
-                                            var myDate = new Date(myConfig.data[i][0])
-                                            console.log("minVal is: " + minVal)
-                                            if (myDate.valueOf() > minVal && myDate.valueOf() < (minVal + 120000000)){
-                                                console.log("conditional triggered")
-                                                myChart2.series[0].data[i-1].update({
+                                        if (globals.debug == true){
+                                            console.log("reset zoom button triggered, minVal is: " + globals.minVal)
+                                        }
+                                        for (var i = 0; i < globals.myConfig.data.length; i++){
+                                            var myDate = new Date(globals.myConfig.data[i][0])
+                                            if (myDate.valueOf() > globals.minVal && myDate.valueOf() < (globals.minVal + 120000000)){
+                                                if (globals.debug == true){
+                                                    console.log("reset zoom conditional triggered")
+                                                }
+                                                globals.myChart2.series[0].data[i-1].update({
                                                     marker: {
                                                         symbol: "circle"
                                                     }
                                                 })
                                             }  
                                         }
-                                        console.log("reset minVal")
-                                        minVal = Number.MAXVALUE;
+                                        if (globals.debug == true){
+                                            console.log("reset minVal")
+                                        }
+                                        globals.minVal = Number.MAXVALUE;
                                     }
 
                                 }
@@ -195,15 +211,16 @@
 
         
         $.ajax({
-            url: configFile,
+            url: globals.configFile,
             async: false,
             dataType: 'json',
             error: function(error){
-                console.log('issue')
+                console.log('issue in json data')
             },
             success: function(data){
-                console.log(data)
-                
+                if (globals.debug == true){
+                    console.log(data)
+                }
                 $(function(){
                     //read json configuration properties
                     Highcharts.setOptions(data.Properties);
@@ -217,8 +234,8 @@
                     document.getElementById('container').appendChild(chartB);
 
                     // jQuery command to get/read file from csv
-                    $.get(dataFile, function(csvData) {
-                        myChart1 = Highcharts.chart(chartA, {
+                    $.get(globals.dataFile, function(csvData) {
+                        globals.myChart1 = Highcharts.chart(chartA, {
                             data: {
                                 csv: csvData,    // data to be plotted
                                 startColumn: 0,
@@ -233,8 +250,8 @@
                         });
 
                         //get the maximum date from highcharts to determine how many plotbands need to be made for sunrise data
-                        //Note:  Currently assumes data is recorded within a single month
-                        var maxDate = new Date(myChart1.xAxis[0].getExtremes().max);
+                        //Note:  Currently assumes data is recorded within a single month, can be expanded
+                        var maxDate = new Date(globals.myChart1.xAxis[0].getExtremes().max);
 
                         //perform the request for sunrise/sunset data
                         var day;
@@ -247,9 +264,9 @@
                                 async: false,
                                 dataType: 'json',
                                 error: function(error){
-                                    console.log('issue in json')
+                                    console.log('issue in json data')
                                     //Add plot bands for day/night cycles (default 7am-7pm)
-                                    myChart1.xAxis[0].addPlotBand({
+                                    globals.myChart1.xAxis[0].addPlotBand({
                                         from: Date.UTC(2016,0,day,7),
                                         to: Date.UTC(2016,0,day,19),
                                         color: '#FCFFC5'
@@ -257,9 +274,11 @@
                                 },
                                 success: function(data){
                                     if (data.status != "OK"){
-                                        console.log('data.status is not OK')
+                                        if (globals.debug == true){
+                                            console.log('issue in sunrise data.status, reverting to default values')
+                                        }
                                         //Add plot bands for day/night cycles (default 7am-7pm)
-                                        myChart1.xAxis[0].addPlotBand({
+                                        globals.myChart1.xAxis[0].addPlotBand({
                                             from: Date.UTC(2016,0,day,7),
                                             to: Date.UTC(2016,0,day,19),
                                             color: '#FCFFC5'
@@ -267,7 +286,9 @@
                                     }
                                     else {
                                         //If data is okay, add dynamic plot bands for day/night cycles
-                                        console.log('data.status is OK')
+                                        if (globals.debug == true){
+                                            console.log('sunrise data.status is OK')
+                                        }
                                         var mySunrise = data.results.sunrise.substring(
                                             data.results.sunrise.indexOf("T") + 1, 
                                             data.results.sunrise.indexOf("+")
@@ -281,7 +302,7 @@
                                         var startTimes = mySunrise.split(':')
                                         var endTimes = mySunset.split(':')
 
-                                        myChart1.xAxis[0].addPlotBand({
+                                        globals.myChart1.xAxis[0].addPlotBand({
                                             from: Date.UTC(2016,0,day,startTimes[0],startTimes[1],startTimes[2]),
                                             to: Date.UTC(2016,0,day,endTimes[0],endTimes[1],endTimes[2]),
                                             color: '#FCFFC5'
@@ -292,11 +313,11 @@
                             })
                         }
                         //update properties that depend on data
-                        myChart1.update(data.Properties_1);
+                        globals.myChart1.update(data.Properties_1);
                     });
 
-                    $.get(dataFile, function(csvData) {
-                        myChart2 = Highcharts.chart(chartB, {
+                    $.get(globals.dataFile, function(csvData) {
+                        globals.myChart2 = Highcharts.chart(chartB, {
                             data: {
                                 csv: csvData,    // data to be plotted
                                 startColumn: 0,
@@ -314,9 +335,7 @@
 
                         });
 
-                        myChart2.update(data.Properties_2);
-
-                        //myChart2.update(data.Properties_symbol);
+                        globals.myChart2.update(data.Properties_2);
 
                     });
 
