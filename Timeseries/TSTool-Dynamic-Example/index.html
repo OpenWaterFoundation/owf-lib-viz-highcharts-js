@@ -2,16 +2,13 @@
 <html>
 <head>
     <style>
-        body {
-        }
-        h1   {}
-        p    {
+        p {
             font-size: 15px;
             font-family: sans-serif;
             text-align: center;
         }
     </style>
-    <title>TS-Tool-Dynamic-</title>
+    <title>TS-Tool-Dynamic-Example</title>
     <!-- Javascript -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="javascript/highstock-6.1.4.js"></script>
@@ -29,17 +26,15 @@
     <div id="container" style="margin-left: auto; margin-right: auto; min-width:300px; max-width: 1200px; height:600px;">
         <script>
 
- 
-            var configurationFile = "./data-files/config1.json";
-            var url = new URL(window.location.href);
-            //Create a properties object to store different values from the URL under their corresponding names
-            var properties = {};
-
-            var StationIdValue = url.searchParams.get("stationId");
-            properties.stationid = StationIdValue;
-
-            var csvValue = url.searchParams.get("csv");
-            properties.csv = csvValue;
+            //globals object stores global variables to avoid cluttering namespace
+            globals = Object();
+            globals.configurationFile = "./data-files/config1.json";
+            globals.properties = {};  //Create a properties object to store different values from the URL under their corresponding names
+            globals.url = new URL(window.location.href);
+            globals.StationIdValue = globals.url.searchParams.get("stationId");
+            globals.properties.stationid = globals.StationIdValue;
+            globals.csvValue = globals.url.searchParams.get("csv");
+            globals.properties.csv = globals.csvValue;
 
             //Parse a title from the JSON file for values inside '${ }' and replace with values from the URL
             //If the value inside the delimiters does not appear in the URL, it is ignored and not updated
@@ -85,7 +80,6 @@
                     }
                 }
 
-
                 return b;
 
             }
@@ -97,7 +91,7 @@
             //Performs an AJAX XMLHttpRequest
             $.ajax({
                 //set the url that ajax sends the request to  (in this case, a local .json file with configuration properties)
-                url: configurationFile,
+                url: globals.configurationFile,
                 //async is true by default. 
                 async: false,
                 //tells jQuery what data type to expect
@@ -148,7 +142,7 @@
 
                             //Update title based on URL data
                             var newTitle = data.Properties.title.text;
-                            newTitle = expand_parameter_value(newTitle, properties);
+                            newTitle = expand_parameter_value(newTitle, globals.properties);
                             myChart.update({
                                 title: {
                                     text: newTitle
